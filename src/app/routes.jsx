@@ -50,6 +50,7 @@ import Errors from './views/functions/Errors';
 import Login from './views/login/Login';
 import LoginTFA from './views/login/Login2FA';
 import LogoutView from './views/Logout';
+import WalletView from './views/wallet/Wallet';
 
 import { authenticated } from './actions/auth';
 
@@ -375,6 +376,11 @@ const RoutesX = function (props) {
           path="/settings"
           element={<Settings />}
         />
+        <Route
+          path="/wallet"
+          element={<WalletView />}
+        />
+
 
       </Route>
 

@@ -4,7 +4,10 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
-import { connect } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Navbar,
@@ -16,9 +19,13 @@ import {
   Menu,
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AccountBalanceWallet from '@mui/icons-material/AccountBalanceWallet';
 import IconButton from '@mui/material/IconButton';
 import { Trans } from '@lingui/macro'
 import { ReactComponent as MobileNav } from '../assets/images/mobilenav.svg';
+import {
+  fetchUserData,
+} from '../actions/user';
 
 const Header = function (props) {
   const {
@@ -36,6 +43,13 @@ const Header = function (props) {
   const openFunctions = Boolean(anchorElFunctions);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (authenticated) {
+      dispatch(fetchUserData());
+    }
+  }, [authenticated]);
 
   const handleWindowResize = useCallback((event) => {
     if (height !== heightRef.current.clientHeight) {
@@ -368,6 +382,20 @@ const Header = function (props) {
                 aria-label="account of current user"
                 aria-controls="primary-search-account-menu"
                 aria-haspopup="true"
+                color="inherit"
+                component={Link}
+                to="/wallet"
+              >
+                <AccountBalanceWallet />
+              </IconButton>
+            </li>
+            <li>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
@@ -445,6 +473,7 @@ const Header = function (props) {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
+    user: state.user.data,
   };
 }
 
