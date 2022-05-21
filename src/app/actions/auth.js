@@ -29,6 +29,7 @@ export function signupUser(
         });
         dispatch(navigate(`/register/verify-register?email=${props.email}`));
       }).catch((error) => {
+        console.log(error);
         notistackErrorAdd(
           dispatch,
           error,

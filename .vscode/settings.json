@@ -7,5 +7,6 @@
   ],
   "editor.tabSize": 2,
   "eslint.alwaysShowStatus": true,
+  "editor.autoIndent": "none",
   //"editor.detectIndentation": false
 }

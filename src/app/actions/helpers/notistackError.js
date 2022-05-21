@@ -6,10 +6,34 @@ export const notistackErrorAdd = (
   dispatch,
   error,
 ) => {
+  console.log(error.response);
+  console.log(error.message);
+  // ${error.response.statusText}
   const errorMessage = (error && error.response && error.response.data && error.response.data.error && error.response.data.error)
-  || (error && error.message)
-  || (error && error.response && error.response.data);
-  if (error.response) {
+    || (error && error.message)
+    || (error && error.response && error.response.data);
+  if (errorMessage === 'EMAIL_NOT_VERIFIED') {
+    dispatch({
+      type: ENQUEUE_SNACKBAR,
+      notification: {
+        message: `${error.response.status}: ${errorMessage}`,
+        key: new Date().getTime() + Math.random(),
+        options: {
+          variant: 'error',
+        },
+      },
+    });
+    dispatch({
+      type: ENQUEUE_SNACKBAR,
+      notification: {
+        message: `New verification email sent to ${error.response.data.email}`,
+        key: new Date().getTime() + Math.random(),
+        options: {
+          variant: 'warning',
+        },
+      },
+    });
+  } else if (error.response) {
     // client received an error response (5xx, 4xx)
     dispatch({
       type: ENQUEUE_SNACKBAR,

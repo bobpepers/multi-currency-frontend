@@ -21,7 +21,7 @@ const WalletView = function (props) {
 
   useEffect(() => {
     if (auth.authenticated) {
-      //dispatch(fetchBotSettings());
+      // dispatch(fetchBotSettings());
     }
   }, [
     auth,
@@ -43,17 +43,12 @@ const WalletView = function (props) {
         {
           user
           && user.wallets
-          && user.wallets.map((e) => {
-            return (
-              <WalletRow
-                data={e}
-              />
-            );
-          })
+          && user.wallets.map((e) => (
+            <WalletRow
+              data={e}
+            />
+          ))
         }
-        <Grid container item xs={12}>
-
-        </Grid>
       </Grid>
     </div>
   )

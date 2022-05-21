@@ -10,6 +10,7 @@ import {
   Grid,
   Button,
 } from '@mui/material';
+import DepositDialog from './dialogs/DepositDialog';
 
 const WalletRow = function (props) {
   const {
@@ -89,7 +90,11 @@ const WalletRow = function (props) {
         direction="column"
       >
         <Grid item xs={12}>
-          <Button variant="contained">Deposit</Button>
+          <DepositDialog
+            name={data.coin && data.coin.name}
+            ticker={data.coin && data.coin.ticker}
+            address={data.address && data.address.address}
+          />
         </Grid>
       </Grid>
       <Grid
@@ -105,7 +110,7 @@ const WalletRow = function (props) {
         </Grid>
       </Grid>
 
-    </Grid >
+    </Grid>
   )
 }
 
