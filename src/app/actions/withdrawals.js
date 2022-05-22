@@ -10,7 +10,7 @@ import {
   ACCEPT_WITHDRAWAL_SUCCESS,
   ACCEPT_WITHDRAWAL_BEGIN,
   UPDATE_WITHDRAWAL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function acceptWithdrawalAction(id) {

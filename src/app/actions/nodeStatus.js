@@ -3,7 +3,7 @@ import {
   FETCH_NODESTATUS_BEGIN,
   FETCH_NODESTATUS_SUCCESS,
   FETCH_NODESTATUS_FAIL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchNodeStatusAction() {

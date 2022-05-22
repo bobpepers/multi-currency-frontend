@@ -3,7 +3,7 @@ import {
   FETCH_BLOCKNUMBER_BEGIN,
   FETCH_BLOCKNUMBER_SUCCESS,
   FETCH_BLOCKNUMBER_FAIL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchBlockNumberAction() {

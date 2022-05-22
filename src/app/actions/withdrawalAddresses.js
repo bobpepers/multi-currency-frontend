@@ -6,7 +6,7 @@ import {
   FETCH_WITHDRAWALADDRESS_BEGIN,
   FETCH_WITHDRAWALADDRESS_SUCCESS,
   FETCH_WITHDRAWALADDRESS_FAIL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchWithdrawalAddressesAction(

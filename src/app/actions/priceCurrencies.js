@@ -7,7 +7,7 @@ import {
   REMOVE_PRICECURRENCIES,
   ADD_PRICECURRENCIES,
   ENQUEUE_SNACKBAR,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchPriceCurrenciesAction() {

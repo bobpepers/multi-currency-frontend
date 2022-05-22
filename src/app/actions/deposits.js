@@ -3,7 +3,7 @@ import {
   FETCH_DEPOSITS_BEGIN,
   FETCH_DEPOSITS_SUCCESS,
   FETCH_DEPOSITS_FAIL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchDepositsAction(

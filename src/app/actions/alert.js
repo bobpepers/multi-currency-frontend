@@ -1,6 +1,6 @@
 import {
   REMOVE_SNACKBAR,
-} from './types/index';
+} from './types/user/index';
 
 export const removeSnackbar = (key) => ({
   type: REMOVE_SNACKBAR,

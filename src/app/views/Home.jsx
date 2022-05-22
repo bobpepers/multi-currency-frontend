@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import Button from '@mui/material/Button';
 
-import ActivityContainer from '../containers/Activity';
+import ActivityContainer from '../containers/user/Activity';
 import ActivityFilter from '../containers/filters/ActivityFilter';
 
 import { withRouter } from '../hooks/withRouter';
@@ -39,7 +39,7 @@ import {
 
 import {
   fetchBalanceAction,
-} from '../actions/balance';
+} from '../actions/admin/balance';
 
 import {
   fetchFaucetBalanceAction,

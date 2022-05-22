@@ -4,7 +4,7 @@ import {
   START_SYNCBLOCKS_SUCCESS,
   START_SYNCBLOCKS_FAIL,
   ENQUEUE_SNACKBAR,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function startSyncAction() {

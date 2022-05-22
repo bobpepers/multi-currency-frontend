@@ -3,7 +3,7 @@ import {
   FETCH_USER_BEGIN,
   FETCH_USER_FAIL,
   FETCH_USER_SUCCESS,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 /**

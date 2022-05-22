@@ -1,42 +1,32 @@
 import { reducer as form } from 'redux-form';
 import { configureStore } from '@reduxjs/toolkit'
 import auth from './auth';
-import tfa from './tfa';
-import resetPassword from './resetPassword';
 import theme from './changeTheme';
 import alert from './alert';
-import nodeStatus from './nodeStatus';
-import servers from './servers';
-import activity from './activity';
-import users from './users';
-import deposits from './deposits';
-import withdrawals from './withdrawals';
-import dashboardUsers from './dashboardUsers';
-import liability from './liability';
-import balance from './balance';
-import channels from './channels';
-import features from './features';
-import botSettings from './botSettings';
-
-import acceptWithdrawal from './acceptWithdrawal';
-import declineWithdrawal from './declineWithdrawal';
-import patchDeposits from './patchDeposits';
 import faucetBalance from './faucetBalance';
-import blockNumber from './blockNumber';
-import startSync from './startSync';
-import triviaQuestions from './triviaQuestions';
-import insertTrivia from './insertTrivia';
-import removeTrivia from './removeTrivia';
-import switchTrivia from './switchTrivia';
-import errors from './errors';
-import user from './user';
-import priceCurrencies from './priceCurrencies';
-import userInfo from './userInfo';
-import withdrawalAddresses from './withdrawalAddresses';
-import withdrawalAddress from './withdrawalAddress';
 
-import botFunctions from './botFunctions';
-import botFunction from './botFunction';
+import activity from './user/activity';
+import tfa from './user/tfa';
+import resetPassword from './user/resetPassword';
+import user from './user/user';
+import transactions from './user/transactions';
+
+import deposits from './admin/deposits';
+import withdrawals from './admin/withdrawals';
+import liability from './admin/liability';
+import balance from './admin/balance';
+import nodeStatus from './admin/nodeStatus';
+import acceptWithdrawal from './admin/acceptWithdrawal';
+import declineWithdrawal from './admin/declineWithdrawal';
+import patchDeposits from './admin/patchDeposits';
+import blockNumber from './admin/blockNumber';
+import startSync from './admin/startSync';
+import errors from './admin/errors';
+import priceCurrencies from './admin/priceCurrencies';
+import userInfo from './admin/userInfo';
+import withdrawalAddresses from './admin/withdrawalAddresses';
+import withdrawalAddress from './admin/withdrawalAddress';
+import users from './admin/users';
 
 const store = configureStore({
   reducer: {
@@ -46,39 +36,28 @@ const store = configureStore({
     tfa,
     theme,
     alert,
-
-    nodeStatus,
     user,
-    servers,
-    channels,
     activity,
-    users,
-    deposits,
-    withdrawals,
-    dashboardUsers,
-    liability,
-    balance,
-    features,
-    acceptWithdrawal,
-    declineWithdrawal,
-    botSettings,
-    patchDeposits,
+    transactions,
+
     faucetBalance,
     blockNumber,
-    startSync,
-    triviaQuestions,
-    insertTrivia,
-    removeTrivia,
-    switchTrivia,
-    priceCurrencies,
-    errors,
-    userInfo,
 
+    nodeStatus,
+    users,
+    userInfo,
     withdrawalAddresses,
     withdrawalAddress,
-
-    botFunctions,
-    botFunction,
+    liability,
+    balance,
+    priceCurrencies,
+    errors,
+    deposits,
+    withdrawals,
+    acceptWithdrawal,
+    declineWithdrawal,
+    patchDeposits,
+    startSync,
   },
 })
 

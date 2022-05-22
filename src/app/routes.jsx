@@ -14,43 +14,28 @@ import { connect, useDispatch } from 'react-redux';
 import toggleTheme from './helpers/toggleTheme';
 
 import Home from './views/Home';
+import Activity from './views/user/Activity';
+import Settings from './views/user/Settings';
+import Register from './views/user/register/Register';
+import RegisterVerify from './views/user/register/RegisterVerify';
+import VerifyEmail from './views/user/register/VerifyEmail';
+import RegisterVerified from './views/user/register/RegisterVerified';
+import ResetPassword from './views/user/resetPassword/ResetPassword';
+import ResetPasswordVerify from './views/user/resetPassword/ResetPasswordVerify';
+import ResetPasswordNew from './views/user/resetPassword/ResetPasswordNew';
+import Login from './views/user/login/Login';
+import LoginTFA from './views/user/login/Login2FA';
+import LogoutView from './views/user/Logout';
+import WalletView from './views/user/Wallet';
 
-// import Activity from './views/Activity';
-import Settings from './views/Settings';
-
-import Register from './views/register/Register';
-import RegisterVerify from './views/register/RegisterVerify';
-import VerifyEmail from './views/register/VerifyEmail';
-import RegisterVerified from './views/register/RegisterVerified';
-
-import ResetPassword from './views/resetPassword/ResetPassword';
-import ResetPasswordVerify from './views/resetPassword/ResetPasswordVerify';
-import ResetPasswordNew from './views/resetPassword/ResetPasswordNew';
-
-import Servers from './views/management/Servers';
-import UserView from './views/management/User';
-
-import Channels from './views/management/Channels';
-import TriviaManagement from './views/management/TriviaManagement';
-import Users from './views/management/Users';
-import BotSettings from './views/management/BotSettings';
-import Features from './views/management/Features';
-import DashboardUsers from './views/management/DashboardUsers';
-import PriceCurrenciesManagement from './views/management/PriceCurrencies';
-import WithdrawalAddressesView from './views/management/WithdrawalAddresses';
-import WithdrawalAddressView from './views/management/WithdrawalAddress';
-
-import FunctionsView from './views/functions/Functions';
-import FunctionView from './views/functions/Function';
-
-import Deposits from './views/functions/Deposits';
-import Withdrawals from './views/functions/Withdrawals';
-import Errors from './views/functions/Errors';
-
-import Login from './views/login/Login';
-import LoginTFA from './views/login/Login2FA';
-import LogoutView from './views/Logout';
-import WalletView from './views/wallet/Wallet';
+import UserView from './views/admin/User';
+import Users from './views/admin/Users';
+import PriceCurrenciesManagement from './views/admin/PriceCurrencies';
+import WithdrawalAddressesView from './views/admin/WithdrawalAddresses';
+import WithdrawalAddressView from './views/admin/WithdrawalAddress';
+import Deposits from './views/admin/Deposits';
+import Withdrawals from './views/admin/Withdrawals';
+import Errors from './views/admin/Errors';
 
 import { authenticated } from './actions/auth';
 
@@ -102,275 +87,10 @@ const RoutesX = function (props) {
       <Route
         element={<RequireAuth {...props} />}
       >
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route
-          path="/management/users"
-          element={<Users />}
-        />
-        <Route
-          path="/management/user/:userId"
-          element={<UserView />}
-        />
-        <Route
-          path="/management/bot/settings"
-          element={<BotSettings />}
-        />
-        <Route
-          path="/management/features"
-          element={<Features />}
-        />
-        <Route
-          path="/management/servers"
-          element={<Servers />}
-        />
-        <Route
-          path="/management/channels"
-          element={<Channels />}
-        />
-        <Route
-          path="/management/withdrawaladdresses"
-          element={<WithdrawalAddressesView />}
-        />
-        <Route
-          path="/management/withdrawaladdress/:addressId"
-          element={<WithdrawalAddressView />}
-        />
 
         <Route
-          path="/functions/rains"
-          element={(
-            <FunctionsView
-              functionName="rain"
-            />
-          )}
-        />
-        <Route
-          path="/functions/rain/:functionId"
-          element={(
-            <FunctionView
-              functionName="rain"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/floods"
-          element={(
-            <FunctionsView
-              functionName="flood"
-            />
-          )}
-        />
-        <Route
-          path="/functions/flood/:functionId"
-          element={(
-            <FunctionView
-              functionName="flood"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/sleets"
-          element={(
-            <FunctionsView
-              functionName="sleet"
-            />
-          )}
-        />
-        <Route
-          path="/functions/sleet/:sleetId"
-          element={(
-            <FunctionView
-              functionName="sleet"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/soaks"
-          element={(
-            <FunctionsView
-              functionName="soak"
-            />
-          )}
-        />
-        <Route
-          path="/functions/soak/:functionId"
-          element={(
-            <FunctionView
-              functionName="soak"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/tips"
-          element={(
-            <FunctionsView
-              functionName="tip"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/tip/:functionId"
-          element={(
-            <FunctionView
-              functionName="tip"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/voicerains"
-          element={(
-            <FunctionsView
-              functionName="voicerain"
-            />
-          )}
-        />
-        <Route
-          path="/functions/voicerain/:functionId"
-          element={(
-            <FunctionView
-              functionName="voicerain"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/thunders"
-          element={(
-            <FunctionsView
-              functionName="thunder"
-            />
-          )}
-        />
-        <Route
-          path="/functions/thunder/:functionId"
-          element={(
-            <FunctionView
-              functionName="thunder"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/hurricanes"
-          element={(
-            <FunctionsView
-              functionName="hurricane"
-            />
-          )}
-        />
-        <Route
-          path="/functions/hurricane/:functionId"
-          element={(
-            <FunctionView
-              functionName="hurricane"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/thunderstorms"
-          element={(
-            <FunctionsView
-              functionName="thunderstorm"
-            />
-          )}
-        />
-        <Route
-          path="/functions/thunderstorm/:functionId"
-          element={(
-            <FunctionView
-              functionName="thunderstorm"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/trivias"
-          element={(
-            <FunctionsView
-              functionName="trivia"
-            />
-          )}
-        />
-        <Route
-          path="/functions/trivia/:functionId"
-          element={(
-            <FunctionView
-              functionName="trivia"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/reactdrops"
-          element={(
-            <FunctionsView
-              functionName="reactdrop"
-            />
-          )}
-        />
-        <Route
-          path="/functions/reactdrop/:functionId"
-          element={(
-            <FunctionView
-              functionName="reactdrop"
-            />
-          )}
-        />
-
-        <Route
-          path="/functions/trivias"
-          element={(
-            <FunctionsView
-              functionName="trivia"
-            />
-          )}
-        />
-        <Route
-          path="/functions/trivia/:functionId"
-          element={(
-            <FunctionView
-              functionName="trivia"
-            />
-          )}
-        />
-
-        {/* <Route
           path="/activity"
           element={<Activity />}
-        /> */}
-        <Route
-          path="/functions/deposits"
-          element={<Deposits />}
-        />
-        <Route
-          path="/functions/withdrawals"
-          element={<Withdrawals />}
-        />
-        <Route
-          path="/functions/errors"
-          element={<Errors />}
-        />
-        <Route
-          path="/management/dashboardusers"
-          element={<DashboardUsers />}
-        />
-        <Route
-          path="/management/trivia"
-          element={<TriviaManagement />}
-        />
-        <Route
-          path="/management/pricecurrencies"
-          element={<PriceCurrenciesManagement />}
         />
         <Route
           path="/settings"
@@ -381,9 +101,46 @@ const RoutesX = function (props) {
           element={<WalletView />}
         />
 
+        <Route
+          path="/admin/users"
+          element={<Users />}
+        />
+        <Route
+          path="/admin/user/:userId"
+          element={<UserView />}
+        />
+        <Route
+          path="/admin/withdrawaladdresses"
+          element={<WithdrawalAddressesView />}
+        />
+        <Route
+          path="/admin/withdrawaladdress/:addressId"
+          element={<WithdrawalAddressView />}
+        />
+
+        <Route
+          path="/admin/deposits"
+          element={<Deposits />}
+        />
+        <Route
+          path="/admin/withdrawals"
+          element={<Withdrawals />}
+        />
+        <Route
+          path="/admin/errors"
+          element={<Errors />}
+        />
+        <Route
+          path="/admin/management/pricecurrencies"
+          element={<PriceCurrenciesManagement />}
+        />
 
       </Route>
 
+      <Route
+        path="/"
+        element={<Home />}
+      />
       <Route
         path="/register"
         element={<Register />}

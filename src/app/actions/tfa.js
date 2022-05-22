@@ -10,7 +10,7 @@ import {
   DISABLE_2FA_FAIL,
   CHANGE_USER_TFA_STATE,
   AUTH_USER_TFA,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function idleDisabletfa() {

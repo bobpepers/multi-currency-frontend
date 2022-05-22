@@ -4,7 +4,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAIL,
   UPDATE_USER,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchUsersAction(

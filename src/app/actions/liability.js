@@ -3,7 +3,7 @@ import {
   FETCH_LIABILITY_BEGIN,
   FETCH_LIABILITY_SUCCESS,
   FETCH_LIABILITY_FAIL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchLiabilityAction() {

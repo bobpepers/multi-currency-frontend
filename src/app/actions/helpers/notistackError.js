@@ -1,6 +1,6 @@
 import {
   ENQUEUE_SNACKBAR,
-} from '../types/index';
+} from '../types/user/index';
 
 export const notistackErrorAdd = (
   dispatch,

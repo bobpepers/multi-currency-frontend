@@ -22,7 +22,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import AccountBalanceWallet from '@mui/icons-material/AccountBalanceWallet';
 import IconButton from '@mui/material/IconButton';
 import { Trans } from '@lingui/macro'
+import GamesIcon from '@mui/icons-material/Games';
 import { ReactComponent as MobileNav } from '../assets/images/mobilenav.svg';
+import { ReactComponent as RunesX } from '../assets/images/runesx.svg';
 import {
   fetchUserData,
 } from '../actions/user';
@@ -37,8 +39,8 @@ const Header = function (props) {
   const heightRef = useRef(null);
   const [menu, setMenu] = useState(false);
   const [height, setHeight] = useState(0);
-  const [anchorElManagement, setAnchorElManagement] = useState(null);
-  const openManagement = Boolean(anchorElManagement);
+  const [anchorElGames, setanchorElGames] = useState(null);
+  const openGames = Boolean(anchorElGames);
   const [anchorElFunctions, setAnchorElFunctions] = useState(null);
   const openFunctions = Boolean(anchorElFunctions);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -74,10 +76,10 @@ const Header = function (props) {
   };
 
   const handleClickManagement = (event) => {
-    setAnchorElManagement(event.currentTarget);
+    setanchorElGames(event.currentTarget);
   };
-  const handleCloseManagement = () => {
-    setAnchorElManagement(null);
+  const handleCloseGames = () => {
+    setanchorElGames(null);
   };
 
   const handleClickFunctions = (event) => {
@@ -131,7 +133,13 @@ const Header = function (props) {
               aria-controls="basic-menu"
               aria-haspopup="true"
             >
-              <Trans>Dashboard</Trans>
+              <RunesX
+                style={{
+                  height: '20px',
+                  marginRight: '10px',
+                }}
+              />
+              <Trans>RunesX</Trans>
             </Button>
             {/*
             <Link
@@ -145,7 +153,7 @@ const Header = function (props) {
             <Button
               aria-controls="basic-menu"
               aria-haspopup="true"
-              aria-expanded={openManagement ? 'true' : undefined}
+              aria-expanded={openGames ? 'true' : undefined}
               onClick={handleClickManagement}
               variant="outlined"
               style={{
@@ -154,12 +162,15 @@ const Header = function (props) {
                 marginRight: '10px',
               }}
             >
-              <Trans>Management</Trans>
+              <GamesIcon
+                style={{ marginRight: '10px' }}
+              />
+              <Trans>Games</Trans>
             </Button>
             <Menu
-              anchorEl={anchorElManagement}
-              open={openManagement}
-              onClose={handleCloseManagement}
+              anchorEl={anchorElGames}
+              open={openGames}
+              onClose={handleCloseGames}
               MenuListProps={{
                 //  'aria-labelledby': 'basic-button',
               }}
@@ -168,7 +179,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/bot/settings"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Bot Settings
                 </MenuItem>
               </Link>
@@ -176,7 +187,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/features"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Feature Settings
                 </MenuItem>
               </Link>
@@ -184,7 +195,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/servers"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Servers
                 </MenuItem>
               </Link>
@@ -192,7 +203,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/channels"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Channels
                 </MenuItem>
               </Link>
@@ -200,7 +211,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/users"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Users
                 </MenuItem>
               </Link>
@@ -208,7 +219,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/trivia"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Trivia
                 </MenuItem>
               </Link>
@@ -216,7 +227,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/pricecurrencies"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   Price Currencies
                 </MenuItem>
               </Link>
@@ -224,7 +235,7 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/dashboardusers"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   DashboardUsers
                 </MenuItem>
               </Link>
@@ -232,13 +243,13 @@ const Header = function (props) {
                 className="nav-link"
                 to="/management/withdrawaladdresses"
               >
-                <MenuItem onClick={handleCloseManagement}>
+                <MenuItem onClick={handleCloseGames}>
                   WithdrawalAddresses
                 </MenuItem>
               </Link>
             </Menu>
 
-            <Button
+            {/* <Button
               aria-controls="basic-menu"
               aria-haspopup="true"
               aria-expanded={openFunctions ? 'true' : undefined}
@@ -276,106 +287,13 @@ const Header = function (props) {
                   Withdrawals
                 </MenuItem>
               </Link>
-              <Link
-                className="nav-link"
-                to="/functions/errors"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Errors
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/tips"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Tips
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/rains"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Rains
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/soaks"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Soaks
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/floods"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Floods
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/sleets"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Sleets
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/voicerains"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Voicerains
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/thunders"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Thunders
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/thunderstorms"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Thunderstorms
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/hurricanes"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Hurricanes
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/reactdrops"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Reactdrops
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/functions/trivias"
-              >
-                <MenuItem onClick={handleCloseFunctions}>
-                  Trivias
-                </MenuItem>
-              </Link>
-            </Menu>
+
+            </Menu> */}
           </Nav>
           <ul>
-            <li>
+            <li
+              style={{ marginRight: '15px' }}
+            >
               <IconButton
                 size="large"
                 edge="end"
@@ -420,6 +338,14 @@ const Header = function (props) {
                   authenticated
                     ? (
                       <div>
+                        <MenuItem onClick={handleMenuClose}>
+                          <Link
+                            className="nav-link"
+                            to="/activity"
+                          >
+                            activity
+                          </Link>
+                        </MenuItem>
                         <MenuItem onClick={handleMenuClose}>
                           <Link
                             className="nav-link"

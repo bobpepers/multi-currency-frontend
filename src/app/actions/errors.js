@@ -3,7 +3,7 @@ import {
   FETCH_ERRORS_BEGIN,
   FETCH_ERRORS_SUCCESS,
   FETCH_ERRORS_FAIL,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 export function fetchErrorsAction(

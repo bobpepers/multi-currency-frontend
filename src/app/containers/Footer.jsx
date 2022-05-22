@@ -69,7 +69,7 @@ function Footer(props) {
   }
 
   return (
-    <div className="infoBar footer">
+    <div className="footer">
       <Grid
         container
         // className="height100 d-flex justify-content-around justify-content-md-center Grid itemst-unstyled categories ng-scope"
@@ -84,8 +84,8 @@ function Footer(props) {
           sm={4}
           md={2}
           align="center"
-          // alignItems="center"
-          // direction="row"
+        // alignItems="center"
+        // direction="row"
         >
           <ThemeToggle />
         </Grid>
@@ -98,8 +98,8 @@ function Footer(props) {
           style={{
             marginBottom: 'auto',
           }}
-          // alignItems="center"
-          // direction="row"
+        // alignItems="center"
+        // direction="row"
         >
           <Button
             // aria-controls="simple-menu"

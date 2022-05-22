@@ -3,7 +3,7 @@ import {
   FETCH_USERINFO_BEGIN,
   FETCH_USERINFO_FAIL,
   FETCH_USERINFO_SUCCESS,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 /**

@@ -6,7 +6,7 @@ import {
   VERIFY_RESET_PASSWORD_FAILURE,
   // AUTH_USER,
   ENQUEUE_SNACKBAR,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 /**

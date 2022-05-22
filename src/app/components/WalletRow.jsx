@@ -37,6 +37,7 @@ const WalletRow = function (props) {
         <img
           src={`/static/coins/${(data.coin.ticker).toLowerCase()}.png`}
           className="walletCoinImage"
+          alt={`${data.coin.name} logo`}
         />
         <p>{data.coin.ticker}</p>
         <p>{data.coin.name}</p>
@@ -51,7 +52,7 @@ const WalletRow = function (props) {
       >
         <Grid item xs={12}>
           <p>available</p>
-          <p>{data.available}</p>
+          <p>{data.available / 1e8}</p>
         </Grid>
       </Grid>
       <Grid
@@ -64,7 +65,7 @@ const WalletRow = function (props) {
       >
         <Grid item xs={12}>
           <p>locked</p>
-          <p>{data.locked}</p>
+          <p>{data.locked / 1e8}</p>
         </Grid>
 
       </Grid>
@@ -78,7 +79,7 @@ const WalletRow = function (props) {
       >
         <Grid item xs={12}>
           <p>total</p>
-          <p>{data.available + data.locked}</p>
+          <p>{(data.available / 1e8) + (data.locked / 1e8)}</p>
         </Grid>
       </Grid>
       <Grid

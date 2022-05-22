@@ -9,7 +9,7 @@ import {
   UNAUTH_USER,
   // EMAIL_NOT_VERIFIED,
   AUTH_USER_TFA,
-} from './types/index';
+} from './types/user/index';
 import { notistackErrorAdd } from './helpers/notistackError';
 
 /**

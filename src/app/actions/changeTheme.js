@@ -1,6 +1,6 @@
 import {
   THEME_TOGGLE,
-} from './types/index';
+} from './types/user/index';
 
 export function changeTheme(payload) {
   return function (dispatch) {

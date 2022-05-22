@@ -63,6 +63,18 @@ export default function DepositDialog(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
+            <div
+              style={{
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
+              <img
+                className="walletCoinImage"
+                src={`/static/coins/${ticker.toLowerCase()}.png`}
+                alt={`${name} logo`}
+              />
+            </div>
             <Typography variant="subtitle2" align="center">
               Deposit Address
             </Typography>
@@ -72,7 +84,10 @@ export default function DepositDialog(props) {
                 textAlign: 'center',
               }}
             >
-              <img src={imagePath} alt="2FA QR Code" />
+              <img
+                src={imagePath}
+                alt={`${ticker} Deposit 2FA QR Code`}
+              />
             </div>
             <Typography variant="subtitle2" align="center">
               {address}
