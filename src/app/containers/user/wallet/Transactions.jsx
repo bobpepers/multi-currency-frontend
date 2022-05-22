@@ -12,22 +12,18 @@ import {
 
 const TransactionsContainer = function (props) {
   const {
-    auth,
+    authenticated,
     user,
   } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (auth.authenticated) {
+    if (authenticated) {
       // dispatch(fetchBotSettings());
     }
   }, [
-    auth,
+    authenticated,
   ]);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   return (
     <Grid
@@ -41,7 +37,7 @@ const TransactionsContainer = function (props) {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth,
+    auth: state.auth.authenticated,
     user: state.user.data,
     transactions: state.transactions.data,
   };

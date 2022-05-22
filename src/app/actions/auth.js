@@ -139,7 +139,7 @@ export function signoutUser() {
 /**
  * Check if user is authenticated
  */
-export function authenticated() {
+export function authenticatedAction() {
   return function (dispatch) {
     axios.get(`${window.myConfig.apiUrl}/authenticated`)
       .then((response) => {

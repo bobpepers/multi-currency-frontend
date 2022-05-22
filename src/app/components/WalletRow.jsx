@@ -17,8 +17,6 @@ const WalletRow = function (props) {
     data,
   } = props;
   const dispatch = useDispatch();
-  console.log(data);
-
   return (
     <Grid
       className="walletRow"

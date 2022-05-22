@@ -18,16 +18,26 @@ import {
   MenuItem,
   Menu,
 } from '@mui/material';
+import { Trans } from '@lingui/macro'
+
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import AccountBalanceWallet from '@mui/icons-material/AccountBalanceWallet';
 import IconButton from '@mui/material/IconButton';
-import { Trans } from '@lingui/macro'
 import GamesIcon from '@mui/icons-material/Games';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import AddRoadIcon from '@mui/icons-material/AddRoad';
+import SettingsIcon from '@mui/icons-material/Settings';
+
 import { ReactComponent as MobileNav } from '../assets/images/mobilenav.svg';
 import { ReactComponent as RunesX } from '../assets/images/runesx.svg';
+
 import {
   fetchUserData,
 } from '../actions/user';
+import { authenticatedAction } from '../actions/auth';
 
 const Header = function (props) {
   const {
@@ -41,8 +51,8 @@ const Header = function (props) {
   const [height, setHeight] = useState(0);
   const [anchorElGames, setanchorElGames] = useState(null);
   const openGames = Boolean(anchorElGames);
-  const [anchorElFunctions, setAnchorElFunctions] = useState(null);
-  const openFunctions = Boolean(anchorElFunctions);
+  const [anchorElAdmin, setanchorElAdmin] = useState(null);
+  const openAdmin = Boolean(anchorElAdmin);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
@@ -52,6 +62,10 @@ const Header = function (props) {
       dispatch(fetchUserData());
     }
   }, [authenticated]);
+
+  useEffect(() => {
+    dispatch(authenticatedAction());
+  }, []);
 
   const handleWindowResize = useCallback((event) => {
     if (height !== heightRef.current.clientHeight) {
@@ -75,25 +89,25 @@ const Header = function (props) {
     setMenu(!menu);
   };
 
-  const handleClickManagement = (event) => {
+  const handleClickGames = (event) => {
     setanchorElGames(event.currentTarget);
   };
   const handleCloseGames = () => {
     setanchorElGames(null);
   };
 
-  const handleClickFunctions = (event) => {
-    setAnchorElFunctions(event.currentTarget);
+  const handleClickAdmin = (event) => {
+    setanchorElAdmin(event.currentTarget);
   };
-  const handleCloseFunctions = () => {
-    setAnchorElFunctions(null);
+  const handleCloseAdmin = () => {
+    setanchorElAdmin(null);
   };
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleMenuClose = () => {
     setAnchorEl(null);
-    // handleMobileMenuClose();
   };
 
   const show = (menu) ? 'show' : '';
@@ -141,20 +155,11 @@ const Header = function (props) {
               />
               <Trans>RunesX</Trans>
             </Button>
-            {/*
-            <Link
-              className="nav-link"
-              to="/activity"
-            >
-              Activity
-            </Link>
-            */}
-
             <Button
               aria-controls="basic-menu"
               aria-haspopup="true"
               aria-expanded={openGames ? 'true' : undefined}
-              onClick={handleClickManagement}
+              onClick={handleClickGames}
               variant="outlined"
               style={{
                 fontSize: '14px',
@@ -177,77 +182,74 @@ const Header = function (props) {
             >
               <Link
                 className="nav-link"
-                to="/management/bot/settings"
+                to="/gameOne"
               >
                 <MenuItem onClick={handleCloseGames}>
-                  Bot Settings
+                  Game One
                 </MenuItem>
               </Link>
               <Link
                 className="nav-link"
-                to="/management/features"
+                to="/gameTwo"
               >
                 <MenuItem onClick={handleCloseGames}>
-                  Feature Settings
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/servers"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  Servers
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/channels"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  Channels
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/users"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  Users
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/trivia"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  Trivia
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/pricecurrencies"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  Price Currencies
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/dashboardusers"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  DashboardUsers
-                </MenuItem>
-              </Link>
-              <Link
-                className="nav-link"
-                to="/management/withdrawaladdresses"
-              >
-                <MenuItem onClick={handleCloseGames}>
-                  WithdrawalAddresses
+                  Game Two
                 </MenuItem>
               </Link>
             </Menu>
+
+            {
+              authenticated
+              && user
+              && user.role
+              && user.role === 4
+              && (
+                <>
+                  <Button
+                    aria-controls="basic-menu"
+                    aria-haspopup="true"
+                    aria-expanded={openAdmin ? 'true' : undefined}
+                    onClick={handleClickAdmin}
+                    variant="outlined"
+                    style={{
+                      fontSize: '14px',
+                      fontWeight: 200,
+                      marginRight: '10px',
+                    }}
+                  >
+                    <AdminPanelSettingsIcon
+                      style={{ marginRight: '10px' }}
+                    />
+                    <Trans>Admin</Trans>
+                  </Button>
+                  <Menu
+                    anchorEl={anchorElAdmin}
+                    open={openAdmin}
+                    onClose={handleCloseAdmin}
+                    MenuListProps={{
+                      //  'aria-labelledby': 'basic-button',
+                    }}
+                  >
+                    <Link
+                      className="nav-link"
+                      to="/admin/deposits"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Deposits
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
+                      to="/admin/withdrawals"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Withdrawals
+                      </MenuItem>
+                    </Link>
+                  </Menu>
+                </>
+              )
+            }
 
             {/* <Button
               aria-controls="basic-menu"
@@ -343,7 +345,10 @@ const Header = function (props) {
                             className="nav-link"
                             to="/activity"
                           >
-                            activity
+                            <AddRoadIcon
+                              style={{ marginRight: '10px' }}
+                            />
+                            <Trans>Activity</Trans>
                           </Link>
                         </MenuItem>
                         <MenuItem onClick={handleMenuClose}>
@@ -351,7 +356,10 @@ const Header = function (props) {
                             className="nav-link"
                             to="/settings"
                           >
-                            settings
+                            <SettingsIcon
+                              style={{ marginRight: '10px' }}
+                            />
+                            <Trans>Settings</Trans>
                           </Link>
                         </MenuItem>
                         <MenuItem onClick={handleMenuClose}>
@@ -359,7 +367,10 @@ const Header = function (props) {
                             className="nav-link"
                             to="/logout"
                           >
-                            logout
+                            <LogoutIcon
+                              style={{ marginRight: '10px' }}
+                            />
+                            <Trans>Logout</Trans>
                           </Link>
                         </MenuItem>
                       </div>
@@ -371,7 +382,10 @@ const Header = function (props) {
                             className="nav-link"
                             to="/login"
                           >
-                            login
+                            <LoginIcon
+                              style={{ marginRight: '10px' }}
+                            />
+                            <Trans>Login</Trans>
                           </Link>
                         </MenuItem>
                         <MenuItem onClick={handleMenuClose}>
@@ -379,7 +393,10 @@ const Header = function (props) {
                             className="nav-link"
                             to="/register"
                           >
-                            register
+                            <AppRegistrationIcon
+                              style={{ marginRight: '10px' }}
+                            />
+                            <Trans>Register</Trans>
                           </Link>
                         </MenuItem>
                       </div>
@@ -403,4 +420,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, null)(Header);
