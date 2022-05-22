@@ -37,7 +37,7 @@ import Deposits from './views/admin/Deposits';
 import Withdrawals from './views/admin/Withdrawals';
 import Errors from './views/admin/Errors';
 
-import { authenticated } from './actions/auth';
+import { authenticatedAction } from './actions/auth';
 
 const RequireAuth = function (props) {
   const {
@@ -49,7 +49,7 @@ const RequireAuth = function (props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authenticated());
+    dispatch(authenticatedAction());
   }, []);
 
   useEffect(() => {
