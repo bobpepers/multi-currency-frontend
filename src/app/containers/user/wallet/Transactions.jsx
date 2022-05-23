@@ -6,41 +6,78 @@ import {
   connect,
   useDispatch,
 } from 'react-redux';
+
 import {
   Grid,
+  CircularProgress,
 } from '@mui/material';
+import { withRouter } from '../../../hooks/withRouter';
+
+import {
+  fetchTransactionsAction,
+} from '../../../actions/user/transactions';
+import TransactionsTable from '../../../components/user/TransactionsTable';
 
 const TransactionsContainer = function (props) {
   const {
-    authenticated,
-    user,
+    auth,
+    transactions,
   } = props;
   const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
+
+  useEffect(() => dispatch(fetchTransactionsAction(
+    page * rowsPerPage,
+    rowsPerPage,
+  )), [
+    auth,
+    page,
+    rowsPerPage,
+  ]);
 
   useEffect(() => {
-    if (authenticated) {
-      // dispatch(fetchBotSettings());
-    }
+    console.log(transactions);
   }, [
-    authenticated,
+    transactions,
   ]);
 
   return (
-    <Grid
-      item
-      xs={12}
-    >
-      Transactions
-    </Grid>
+    <div className="height100 content">
+      <Grid container>
+        <Grid item xs={12}>
+          <h3>Transactions</h3>
+        </Grid>
+        <Grid item xs={12}>
+          {
+            transactions
+              && transactions.loading
+              ? (<CircularProgress />)
+              : (
+                <TransactionsTable
+                  defaultPageSize={50}
+                  page={page}
+                  setPage={setPage}
+                  rowsPerPage={rowsPerPage}
+                  setRowsPerPage={setRowsPerPage}
+                  totalCount={transactions && transactions.count && transactions.count}
+                  deposits={transactions
+                    && transactions.data
+                    ? transactions.data
+                    : []}
+                />
+              )
+          }
+
+        </Grid>
+      </Grid>
+    </div>
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    auth: state.auth.authenticated,
-    user: state.user.data,
-    transactions: state.transactions.data,
-  };
-}
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  transactions: state.transactions,
+})
 
-export default connect(mapStateToProps, null)(TransactionsContainer);
+export default withRouter(connect(mapStateToProps, null)(TransactionsContainer));

@@ -6,12 +6,7 @@ import {
 } from '../types/user/index';
 import { notistackErrorAdd } from '../helpers/notistackError';
 
-export function fetchTransactionAction(
-  id,
-  spender,
-  earner,
-  type,
-  amount,
+export function fetchTransactionsAction(
   offset,
   limit,
 ) {
@@ -20,11 +15,6 @@ export function fetchTransactionAction(
       type: FETCH_TRANSACTIONS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/transactions`, {
-      id,
-      spender,
-      earner,
-      type,
-      amount,
       offset,
       limit,
     }).then((response) => {

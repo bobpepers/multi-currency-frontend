@@ -11,6 +11,7 @@ import {
   Button,
 } from '@mui/material';
 import DepositDialog from './dialogs/DepositDialog';
+import WithdrawDialog from './dialogs/WithdrawDialog';
 
 const WalletRow = function (props) {
   const {
@@ -105,7 +106,13 @@ const WalletRow = function (props) {
         direction="column"
       >
         <Grid item xs={12}>
-          <Button variant="contained">Withdraw</Button>
+          <WithdrawDialog
+            name={data.coin && data.coin.name}
+            ticker={data.coin && data.coin.ticker}
+            address={data.address && data.address.address}
+            walletId={data.id}
+            WalletAddressExternals={data.WalletAddressExternals && data.WalletAddressExternals}
+          />
         </Grid>
       </Grid>
 

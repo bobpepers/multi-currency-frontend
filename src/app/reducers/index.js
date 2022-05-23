@@ -27,6 +27,8 @@ import userInfo from './admin/userInfo';
 import withdrawalAddresses from './admin/withdrawalAddresses';
 import withdrawalAddress from './admin/withdrawalAddress';
 import users from './admin/users';
+import addWithdrawalAddress from './user/addWithdrawalAddress';
+import removeWithdrawalAddress from './user/removeWithdrawalAddress'
 
 const store = configureStore({
   reducer: {
@@ -39,6 +41,8 @@ const store = configureStore({
     user,
     activity,
     transactions,
+    addWithdrawalAddress,
+    removeWithdrawalAddress,
 
     faucetBalance,
     blockNumber,

@@ -1,7 +1,7 @@
 import {
-  FETCH_TRANSACTIONS_BEGIN,
-  FETCH_TRANSACTIONS_SUCCESS,
-  FETCH_TRANSACTIONS_FAIL,
+  REMOVE_WITHDRAWAL_ADDRESS_BEGIN,
+  REMOVE_WITHDRAWAL_ADDRESS_SUCCESS,
+  REMOVE_WITHDRAWAL_ADDRESS_FAIL,
 } from '../../actions/types/user/index';
 
 const initialState = {
@@ -14,25 +14,23 @@ export default function userReducer(
   action,
 ) {
   switch (action.type) {
-    case FETCH_TRANSACTIONS_BEGIN:
+    case REMOVE_WITHDRAWAL_ADDRESS_BEGIN:
       return {
         ...state,
         loading: true,
         error: null,
         data: null,
       };
-    case FETCH_TRANSACTIONS_SUCCESS:
+    case REMOVE_WITHDRAWAL_ADDRESS_SUCCESS:
       return {
         ...state,
         data: action.payload.result,
-        count: action.payload.count,
         loading: false,
       };
-    case FETCH_TRANSACTIONS_FAIL:
+    case REMOVE_WITHDRAWAL_ADDRESS_FAIL:
       return {
         ...state,
         data: null,
-        count: 0,
         error: action.error,
         loading: false,
       };
