@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import {
   connect,
   useDispatch,
@@ -45,6 +47,12 @@ const AddNewWithdrawalAddressDialog = function (props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    setOpen(false);
+  }, [
+    addWithdrawalAddress,
+  ]);
 
   return (
     <div>

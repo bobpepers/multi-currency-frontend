@@ -3,6 +3,7 @@ import {
   ADD_WITHDRAWAL_ADDRESS_BEGIN,
   ADD_WITHDRAWAL_ADDRESS_SUCCESS,
   ADD_WITHDRAWAL_ADDRESS_FAIL,
+  ADD_WITHDRAWAL_ADDRESS,
 } from '../types/user/index';
 import { notistackErrorAdd } from '../helpers/notistackError';
 
@@ -21,6 +22,10 @@ export function addWithdrawalAddressAction(
       dispatch({
         type: ADD_WITHDRAWAL_ADDRESS_SUCCESS,
         payload: response.data,
+      });
+      dispatch({
+        type: ADD_WITHDRAWAL_ADDRESS,
+        payload: response.data.result,
       });
     }).catch((error) => {
       notistackErrorAdd(

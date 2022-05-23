@@ -1,6 +1,11 @@
 import React, {
   useEffect,
+  useState,
 } from 'react';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import {
   Button,
   Dialog,
@@ -22,17 +27,19 @@ import Countdown from 'react-countdown';
 import AddNewWithdrawalAddressDialog from './AddNewWithdrawalAddress';
 import RemoveWithdrawalAddressDialog from './RemoveWithdrawalAddress';
 
-export default function WithdrawDialog(props) {
+const WithdrawDialog = function (props) {
   const {
     name,
     ticker,
     walletId,
     WalletAddressExternals,
+    removeWithdrawalAddress,
+    addWithdrawalAddress,
   } = props;
-  const [open, setOpen] = React.useState(false);
-  const [addressId, setAddressId] = React.useState(false);
-  const [addressObject, setAddressObject] = React.useState(false);
-  const [tokenExpired, setTokenExpired] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [addressId, setAddressId] = useState(false);
+  const [addressObject, setAddressObject] = useState(false);
+  const [tokenExpired, setTokenExpired] = useState(false);
 
   const handleChange = (event) => {
     setAddressId(event.target.value);
@@ -54,6 +61,26 @@ export default function WithdrawDialog(props) {
   }, [
     addressId,
     addressObject,
+  ]);
+
+  useEffect(() => {
+    setAddressId(false);
+    setAddressObject(false);
+  }, [
+    removeWithdrawalAddress,
+  ]);
+
+  useEffect(() => {
+    if (addWithdrawalAddress) {
+      const exist = WalletAddressExternals.find((e) => e.id === addWithdrawalAddress.id);
+      if (exist) {
+        setAddressId(addWithdrawalAddress.id);
+        setAddressObject(exist);
+        setTokenExpired(false);
+      }
+    }
+  }, [
+    addWithdrawalAddress,
   ]);
 
   return (
@@ -234,3 +261,12 @@ export default function WithdrawDialog(props) {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    addWithdrawalAddress: state.addWithdrawalAddress.data,
+    removeWithdrawalAddress: state.removeWithdrawalAddress.data,
+  };
+}
+
+export default connect(mapStateToProps, null)(WithdrawDialog);

@@ -15,6 +15,7 @@ import { SnackbarProvider } from 'notistack';
 import Button from '@mui/material/Button';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
+import SocketWrapper from './SocketWrapper';
 import store from './reducers'
 import { messages as enMessages } from './locales/en/messages'
 import { messages as nlMessages } from './locales/nl/messages'
@@ -64,29 +65,31 @@ function App() {
       <I18nProvider i18n={i18n}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <SnackbarProvider
-              ref={notistackRef}
-              classes={{
-                root: styles.snack,
-              }}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
-              action={(key) => <DismissAction id={key} />}
-            >
-              <BrowserRouter>
-                <Suspense fallback={<LoadingContainer />}>
-                  <Notifier />
-                  <ParticlesRunebase />
-                  <Header />
-                  <Routes />
-                  <Footer
-                    i18n={i18n}
-                  />
-                </Suspense>
-              </BrowserRouter>
-            </SnackbarProvider>
+            <SocketWrapper>
+              <SnackbarProvider
+                ref={notistackRef}
+                classes={{
+                  root: styles.snack,
+                }}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+                action={(key) => <DismissAction id={key} />}
+              >
+                <BrowserRouter>
+                  <Suspense fallback={<LoadingContainer />}>
+                    <Notifier />
+                    <ParticlesRunebase />
+                    <Header />
+                    <Routes />
+                    <Footer
+                      i18n={i18n}
+                    />
+                  </Suspense>
+                </BrowserRouter>
+              </SnackbarProvider>
+            </SocketWrapper>
           </Provider>
         </ThemeProvider>
       </I18nProvider>
