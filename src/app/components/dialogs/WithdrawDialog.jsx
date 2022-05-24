@@ -11,8 +11,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
-  DialogTitle,
   Typography,
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -27,6 +25,8 @@ import Countdown from 'react-countdown';
 import AddNewWithdrawalAddressDialog from './AddNewWithdrawalAddress';
 import RemoveWithdrawalAddressDialog from './RemoveWithdrawalAddress';
 
+import { resendWithdrawalAddressVerificationAction } from '../../actions/user/resendWithdrawalAddressVerification';
+
 const WithdrawDialog = function (props) {
   const {
     name,
@@ -35,16 +35,28 @@ const WithdrawDialog = function (props) {
     WalletAddressExternals,
     removeWithdrawalAddress,
     addWithdrawalAddress,
+    resendWithdrawalAddressVerification,
   } = props;
   const [open, setOpen] = useState(false);
   const [addressId, setAddressId] = useState(false);
   const [addressObject, setAddressObject] = useState(false);
   const [tokenExpired, setTokenExpired] = useState(false);
+  const [resend, setResend] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (WalletAddressExternals && addressId) {
+      setAddressObject(WalletAddressExternals.find((e) => e.id === addressId));
+    }
+  }, [
+    resendWithdrawalAddressVerification,
+  ]);
 
   const handleChange = (event) => {
     setAddressId(event.target.value);
     setAddressObject(WalletAddressExternals.find((e) => e.id === event.target.value));
     setTokenExpired(false);
+    setResend(false);
   };
 
   const handleClickOpen = () => {
@@ -55,12 +67,30 @@ const WithdrawDialog = function (props) {
     setOpen(false);
   };
 
+  const handleResendAddressVerification = () => {
+    if (addressObject) {
+      setResend(true);
+      dispatch(resendWithdrawalAddressVerificationAction(
+        walletId,
+        addressObject.id,
+      ));
+    }
+  };
+
   useEffect(() => {
     console.log(WalletAddressExternals);
     console.log(addressObject);
   }, [
     addressId,
     addressObject,
+  ]);
+
+  useEffect(() => {
+    if (WalletAddressExternals && addressId) {
+      setAddressObject(WalletAddressExternals.find((e) => e.id === addressId));
+    }
+  }, [
+    WalletAddressExternals,
   ]);
 
   useEffect(() => {
@@ -94,101 +124,124 @@ const WithdrawDialog = function (props) {
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>
-          <Typography variant="h5" align="center">
-            Withdraw
-            {' '}
-            {name}
-            {' '}
-            (
-            {ticker}
-            )
-          </Typography>
-        </DialogTitle>
+        <Typography
+          style={{
+            padding: '16px 24px',
+          }}
+          variant="h5"
+          align="center"
+        >
+          Withdraw
+          {' '}
+          {name}
+          {' '}
+          (
+          {ticker}
+          )
+        </Typography>
         <DialogContent>
-          <DialogContentText>
-            <div
-              style={{
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
-              <img
-                className="walletCoinImage"
-                src={`/static/coins/${ticker.toLowerCase()}.png`}
-                alt={`${name} logo`}
+
+          <div
+            style={{
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
+            <img
+              className="walletCoinImage"
+              src={`/static/coins/${ticker.toLowerCase()}.png`}
+              alt={`${name} logo`}
+            />
+          </div>
+          {
+            WalletAddressExternals && WalletAddressExternals.length < 5 && (
+              <AddNewWithdrawalAddressDialog
+                name={name}
+                ticker={ticker}
+                walletId={walletId}
               />
-            </div>
-            {
-              WalletAddressExternals && WalletAddressExternals.length < 5 && (
-                <AddNewWithdrawalAddressDialog
-                  name={name}
-                  ticker={ticker}
-                  walletId={walletId}
-                />
-              )
-            }
+            )
+          }
 
-            <Typography variant="subtitle2" align="center">
-              Address Selection (
-              {WalletAddressExternals.length}
-              /5)
-            </Typography>
-            <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id="address-select-label">Withdrawal Address</InputLabel>
-                <Select
-                  labelId="address-select-label"
-                  id="address-select"
-                  value={addressId}
-                  label="Withdrawal Address"
-                  onChange={handleChange}
-                >
-                  {WalletAddressExternals.map((item) => (
-                    <MenuItem
-                      key={item.id}
-                      value={item.id}
-                    >
-                      {!item.confirmed && (
-                        <WarningAmberIcon
-                          style={{
-                            color: '#ff9966',
-                            marginRight: '5px',
-                          }}
-                        />
-                      )}
-                      <span>
-                        {item.addressExternal.address}
-                      </span>
+          <Typography variant="subtitle2" align="center">
+            Address Selection (
+            {WalletAddressExternals.length}
+            /5)
+          </Typography>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="address-select-label">Withdrawal Address</InputLabel>
+              <Select
+                labelId="address-select-label"
+                id="address-select"
+                value={addressId}
+                label="Withdrawal Address"
+                onChange={handleChange}
+              >
+                {WalletAddressExternals.map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    value={item.id}
+                  >
+                    {!item.confirmed && (
+                      <WarningAmberIcon
+                        style={{
+                          color: '#ff9966',
+                          marginRight: '5px',
+                        }}
+                      />
+                    )}
+                    <span>
+                      {item.addressExternal.address}
+                    </span>
 
-                    </MenuItem>
-                  ))}
-                </Select>
-                {
-                  addressObject && (
-                    <div>
-                      {
-                        !addressObject.confirmed ? (
-                          <div>
-                            <p className="text-center">
-                              {addressObject.addressExternal.address}
-                              <RemoveWithdrawalAddressDialog
-                                name={name}
-                                address={addressObject.addressExternal.address}
-                                id={addressObject.id}
-                              />
+                  </MenuItem>
+                ))}
+              </Select>
+              {
+                addressObject && (
+                  <div>
+                    <p className="text-center">
+                      {addressObject.addressExternal.address}
+                      <RemoveWithdrawalAddressDialog
+                        name={name}
+                        address={addressObject.addressExternal.address}
+                        id={addressObject.id}
+                      />
+                    </p>
+                    {
+                      !addressObject.confirmed ? (
+                        <div>
+                          <p
+                            className="text-center"
+                            style={{
+                              color: '#ff9966',
+                            }}
+                          >
+                            Withdrawal Address not confirmed yet
+                          </p>
+                          {
+                            !tokenExpired ? (
+                              <>
+                                <p
+                                  className="text-center"
+                                  style={{
+                                    marginBottom: '0px',
+                                    paddingBottom: '0px',
+                                  }}
+                                >
+                                  Verification token expires in
+                                </p>
+                                <div className="text-center">
+                                  <Countdown
+                                    onComplete={() => setTokenExpired(true)}
+                                    date={addressObject.tokenExpires}
+                                  />
+                                </div>
+                              </>
 
-                            </p>
-                            <p
-                              className="text-center"
-                              style={{
-                                color: '#ff9966',
-                              }}
-                            >
-                              Withdrawal Address not confirmed yet
-                            </p>
-                            {
-                              !tokenExpired ? (
+                            )
+                              : (
                                 <>
                                   <p
                                     className="text-center"
@@ -197,62 +250,59 @@ const WithdrawDialog = function (props) {
                                       paddingBottom: '0px',
                                     }}
                                   >
-                                    Verification token expires in
+                                    Verification token expired
                                   </p>
-                                  <div className="text-center">
-                                    <Countdown
-                                      onComplete={() => setTokenExpired(true)}
-                                      date={addressObject.tokenExpires}
-                                    />
-                                  </div>
+                                  <p
+                                    className="text-center"
+                                    style={{
+                                      marginTop: '0px',
+                                      paddingTop: '0px',
+                                    }}
+                                  >
+                                    Please request a new verification token
+                                  </p>
                                 </>
-
                               )
-                                : (
-                                  <>
-                                    <p
-                                      className="text-center"
-                                      style={{
-                                        marginBottom: '0px',
-                                        paddingBottom: '0px',
-                                      }}
-                                    >
-                                      Verification token expired
-                                    </p>
-                                    <p
-                                      className="text-center"
-                                      style={{
-                                        marginTop: '0px',
-                                        paddingTop: '0px',
-                                      }}
-                                    >
-                                      Please request a new verification token
-                                    </p>
-                                  </>
-                                )
+                          }
+
+                          <div
+                            style={{
+                              marginTop: '15px',
+                            }}
+                            className="text-center"
+                          >
+                            {
+                              resend && resendWithdrawalAddressVerification.data ? (
+                                <p>Verification email sent</p>
+                              ) : (
+                                <div>
+                                  {
+                                    resendWithdrawalAddressVerification.loading ? (
+                                      <CircularProgress />
+                                    ) : (
+                                      <Button
+                                        variant="contained"
+                                        onClick={handleResendAddressVerification}
+                                      >
+                                        Resend Verification email
+                                      </Button>
+                                    )
+                                  }
+                                </div>
+                              )
                             }
 
-                            <div
-                              style={{
-                                marginTop: '15px',
-                              }}
-                              className="text-center"
-                            >
-                              <Button variant="contained">
-                                Resend Verification email
-                              </Button>
-                            </div>
                           </div>
-                        ) : (
-                          <div>address been confirmed</div>
-                        )
-                      }
-                    </div>
-                  )
-                }
-              </FormControl>
-            </Box>
-          </DialogContentText>
+                        </div>
+                      ) : (
+                        <div>address been confirmed</div>
+                      )
+                    }
+                  </div>
+                )
+              }
+            </FormControl>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
@@ -266,6 +316,7 @@ function mapStateToProps(state) {
   return {
     addWithdrawalAddress: state.addWithdrawalAddress.data,
     removeWithdrawalAddress: state.removeWithdrawalAddress.data,
+    resendWithdrawalAddressVerification: state.resendWithdrawalAddressVerification,
   };
 }
 

@@ -6,11 +6,10 @@ import {
 } from 'react-redux';
 import { io } from 'socket.io-client';
 import {
-  INSERT_ACTIVITY,
+  CONFIRM_WITHDRAWAL_ADDRESS,
 } from './actions/types/user/index';
 
 const SocketWrapper = function ({ children }) {
-  // const SocketWrapper = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,19 +17,11 @@ const SocketWrapper = function ({ children }) {
       path: '/socket.io',
     });
 
-    socket.on('updateActivity', (data) => {
+    socket.on('confirmNewWithdrawalAddress', (data) => {
       dispatch({
-        type: INSERT_ACTIVITY,
-        payload: data.activity,
+        type: CONFIRM_WITHDRAWAL_ADDRESS,
+        payload: data.result,
       });
-    });
-
-    socket.on('insertNewWithdrawalAddress', (data) => {
-      console.log(data);
-    });
-
-    socket.on('removeWithdrawalAddress', (data) => {
-      console.log(data);
     });
 
     return () => socket.disconnect();

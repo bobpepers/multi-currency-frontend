@@ -36,6 +36,8 @@ import WithdrawalAddressView from './views/admin/WithdrawalAddress';
 import Deposits from './views/admin/Deposits';
 import Withdrawals from './views/admin/Withdrawals';
 import Errors from './views/admin/Errors';
+import WithdrawalAddressVerify from './views/user/withdrawalAddressVerify/WithdrawalAddressVerify';
+import WithdrawalAddressVerified from './views/user/withdrawalAddressVerify/WithdrawalAddressVerified';
 
 import { authenticatedAction } from './actions/auth';
 
@@ -185,6 +187,15 @@ const RoutesX = function (props) {
         path="/register/verified"
         element={<RegisterVerified />}
       />
+      <Route
+        path="/withdraw/address/verify"
+        element={<WithdrawalAddressVerify />}
+      />
+      <Route
+        path="/withdraw/address/verified"
+        element={<WithdrawalAddressVerified />}
+      />
+
     </Routes>
   )
 }

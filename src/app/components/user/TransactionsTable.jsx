@@ -117,7 +117,7 @@ const EnhancedTableHead = function (props) {
             key={headCell.id}
             align="right"
             // align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'default'}
+            padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
@@ -295,7 +295,7 @@ const TransactionsTable = function (props) {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row.id}
                     selected={isItemSelected}
                   >
                     <TableCell component="th" id={labelId} scope="row" padding="none">
@@ -335,7 +335,7 @@ const TransactionsTable = function (props) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
-        count={totalCount}
+        count={totalCount || 0}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

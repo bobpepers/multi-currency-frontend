@@ -348,7 +348,7 @@ const Header = function (props) {
                             <AddRoadIcon
                               style={{ marginRight: '10px' }}
                             />
-                            <Trans>Activity</Trans>
+                            <Trans>activity</Trans>
                           </Link>
                         </MenuItem>
                         <MenuItem onClick={handleMenuClose}>

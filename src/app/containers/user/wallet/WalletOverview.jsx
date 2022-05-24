@@ -44,6 +44,7 @@ const WalletOverviewContainer = function (props) {
         && user.wallets
         && user.wallets.map((e) => (
           <WalletRow
+            key={e.id}
             data={e}
           />
         ))

@@ -5,6 +5,8 @@ import {
   CHANGE_USER_TFA_STATE,
   ADD_WITHDRAWAL_ADDRESS,
   REMOVE_WITHDRAWAL_ADDRESS,
+  UPDATE_WITHDRAWAL_ADDRESS,
+  CONFIRM_WITHDRAWAL_ADDRESS,
 } from '../../actions/types/user/index';
 
 const initialState = {
@@ -93,6 +95,64 @@ export default function userReducer(
 
                   },
                 ],
+              }
+              : wallet),
+          ),
+        },
+        loading: false,
+        error: null,
+      };
+    }
+    case UPDATE_WITHDRAWAL_ADDRESS: {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          wallets: state.data.wallets.map(
+            (wallet) => (wallet.id === action.payload.walletId
+              ? {
+                ...wallet,
+                WalletAddressExternals: wallet.WalletAddressExternals.map(
+                  (WalletAddressExternal) => (WalletAddressExternal.id === action.payload.id
+                    ? {
+                      ...action.payload,
+                    }
+                    : WalletAddressExternal),
+                ),
+              }
+              : wallet),
+          ),
+        },
+        loading: false,
+        error: null,
+      };
+    }
+    case CONFIRM_WITHDRAWAL_ADDRESS: {
+      console.log(action.payload);
+      console.log('action.payload');
+      console.log('action.payload');
+      console.log('action.payload');
+      console.log('action.payload');
+      console.log('action.payload');
+      console.log('action.payload');
+      console.log('action.payload');
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          wallets: state.data.wallets.map(
+            (wallet) => (wallet.id === action.payload.walletId
+              ? {
+                ...wallet,
+                WalletAddressExternals: wallet.WalletAddressExternals.map(
+                  (WalletAddressExternal) => (WalletAddressExternal.id === action.payload.id
+                    ? {
+                      ...WalletAddressExternal,
+                      confirmed: true,
+                    }
+                    : WalletAddressExternal),
+                ),
               }
               : wallet),
           ),

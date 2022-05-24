@@ -1,25 +1,30 @@
 import axios from '../../axios';
 import {
-  ADD_WITHDRAWAL_ADDRESS_BEGIN,
-  ADD_WITHDRAWAL_ADDRESS_SUCCESS,
-  ADD_WITHDRAWAL_ADDRESS_FAIL,
+  RESEND_WITHDRAWAL_ADDRESS_BEGIN,
+  RESEND_WITHDRAWAL_ADDRESS_SUCCESS,
+  RESEND_WITHDRAWAL_ADDRESS_FAIL,
+  UPDATE_WITHDRAWAL_ADDRESS,
 } from '../types/user/index';
 import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function resendWithdrawalAddressVerificationAction(
   walletId,
-  address,
+  walletAddressExternalId,
 ) {
   return function (dispatch) {
     dispatch({
-      type: ADD_WITHDRAWAL_ADDRESS_BEGIN,
+      type: RESEND_WITHDRAWAL_ADDRESS_BEGIN,
     });
     axios.post(`${window.myConfig.apiUrl}/withdraw/address/verify/resend`, {
       walletId,
-      address,
+      walletAddressExternalId,
     }).then((response) => {
       dispatch({
-        type: ADD_WITHDRAWAL_ADDRESS_SUCCESS,
+        type: UPDATE_WITHDRAWAL_ADDRESS,
+        payload: response.data.result,
+      });
+      dispatch({
+        type: RESEND_WITHDRAWAL_ADDRESS_SUCCESS,
         payload: response.data,
       });
     }).catch((error) => {
@@ -28,7 +33,7 @@ export function resendWithdrawalAddressVerificationAction(
         error,
       );
       dispatch({
-        type: ADD_WITHDRAWAL_ADDRESS_FAIL,
+        type: RESEND_WITHDRAWAL_ADDRESS_FAIL,
         payload: error,
       });
     });
