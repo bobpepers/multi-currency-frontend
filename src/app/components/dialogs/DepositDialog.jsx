@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import QRCode from 'qrcode';
+import { capitalize } from '../../helpers/utils';
 
 export default function DepositDialog(props) {
   const {
@@ -20,6 +21,7 @@ export default function DepositDialog(props) {
   } = props;
   const [open, setOpen] = React.useState(false);
   const [imagePath, setImagePath] = React.useState('');
+  const [copied, setCopied] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,6 +29,14 @@ export default function DepositDialog(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickCopyAddress = () => {
+    navigator.clipboard.writeText(address)
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 5000)
   };
 
   useEffect(() => {
@@ -89,6 +99,32 @@ export default function DepositDialog(props) {
                 alt={`${ticker} Deposit 2FA QR Code`}
               />
             </div>
+            <div
+              style={{
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
+              <Button variant="outlined" onClick={handleClickCopyAddress}>
+                Copy address to clipboard
+              </Button>
+            </div>
+
+            {copied && (
+              <div>
+                <Typography
+                  variant="subtitle2"
+                  align="center"
+                  style={{ color: '#00adb5' }}
+                >
+                  Successfully Copied
+                  {' '}
+                  {capitalize(name)}
+                  {' '}
+                  Address
+                </Typography>
+              </div>
+            )}
             <Typography variant="subtitle2" align="center">
               {address}
             </Typography>

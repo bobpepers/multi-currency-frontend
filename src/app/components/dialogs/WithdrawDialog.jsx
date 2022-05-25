@@ -20,10 +20,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import TextField from '@mui/material/TextField';
 
 import Countdown from 'react-countdown';
 import AddNewWithdrawalAddressDialog from './AddNewWithdrawalAddress';
 import RemoveWithdrawalAddressDialog from './RemoveWithdrawalAddress';
+import { createWithdrawalAction } from '../../actions/user/createWithdrawal';
 
 import { resendWithdrawalAddressVerificationAction } from '../../actions/user/resendWithdrawalAddressVerification';
 
@@ -31,17 +33,79 @@ const WithdrawDialog = function (props) {
   const {
     name,
     ticker,
-    walletId,
+    wallet,
     WalletAddressExternals,
     removeWithdrawalAddress,
     addWithdrawalAddress,
     resendWithdrawalAddressVerification,
+    createWithdrawal,
   } = props;
   const [open, setOpen] = useState(false);
   const [addressId, setAddressId] = useState(false);
   const [addressObject, setAddressObject] = useState(false);
   const [tokenExpired, setTokenExpired] = useState(false);
   const [resend, setResend] = useState(false);
+  const [withdrawalAmount, setWithdrawalAmount] = React.useState(0);
+  const [withdrawalButtonEnabled, setWithdrawalButtonEnabled] = React.useState(false);
+  const onlyNumbers = /^[0-9]*\.?[0-9]*$/;
+  const maxDecimal = /^\d+\.\d{0,8}$/;
+
+  useEffect(() => {
+    setWithdrawalAmount(0);
+    setTokenExpired(false);
+    setAddressObject(false);
+    setWithdrawalAmount(0);
+    setWithdrawalButtonEnabled(false);
+    setAddressId(false);
+  }, [
+    open,
+  ]);
+
+  const handleChangeWithdrawalAmount = (event) => {
+    console.log(maxDecimal.test(event.target.value));
+    if (Number(event.target.value) % 1 !== 0) {
+      if (event.target.value.match(onlyNumbers) && maxDecimal.test(event.target.value)) {
+        setWithdrawalAmount(`${event.target.value}`);
+        setWithdrawalButtonEnabled(true);
+      }
+    }
+    if (Number(event.target.value) % 1 === 0) {
+      if (event.target.value.match(onlyNumbers)) {
+        setWithdrawalAmount(`${event.target.value}`);
+        setWithdrawalButtonEnabled(true);
+      }
+    }
+
+    if (Number(event.target.value) < (wallet.coin.withdrawalSetting.min / 1e8)) {
+      setWithdrawalAmount(`${String(wallet.coin.withdrawalSetting.min / 1e8)}`)
+      setWithdrawalButtonEnabled(true);
+    }
+    if (Number(event.target.value) === 0) {
+      setWithdrawalAmount('0');
+      setWithdrawalButtonEnabled(false);
+    }
+    if (event.target.value === '0.') {
+      setWithdrawalAmount('0.');
+      setWithdrawalButtonEnabled(false);
+    }
+    if (event.target.value === '0.0') {
+      setWithdrawalAmount('0.0')
+      setWithdrawalButtonEnabled(false);
+    }
+    if (event.target.value === '.') {
+      setWithdrawalAmount('.')
+      setWithdrawalButtonEnabled(false);
+    }
+    if (event.target.value === '') {
+      setWithdrawalAmount('')
+      setWithdrawalButtonEnabled(false);
+    }
+    if (event.target.value.match(onlyNumbers) && Number(event.target.value) > (wallet.available / 1e8)) {
+      setWithdrawalAmount(`${wallet.available / 1e8}`);
+      setWithdrawalButtonEnabled(true);
+    }
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,11 +116,19 @@ const WithdrawDialog = function (props) {
     resendWithdrawalAddressVerification,
   ]);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [
+    createWithdrawal,
+  ]);
+
   const handleChange = (event) => {
     setAddressId(event.target.value);
     setAddressObject(WalletAddressExternals.find((e) => e.id === event.target.value));
     setTokenExpired(false);
     setResend(false);
+    setWithdrawalAmount(0);
+    setWithdrawalButtonEnabled(false);
   };
 
   const handleClickOpen = () => {
@@ -67,11 +139,19 @@ const WithdrawDialog = function (props) {
     setOpen(false);
   };
 
+  const handleWithdrawal = () => {
+    dispatch(createWithdrawalAction(
+      withdrawalAmount,
+      wallet.id,
+      addressId,
+    ));
+  };
+
   const handleResendAddressVerification = () => {
     if (addressObject) {
       setResend(true);
       dispatch(resendWithdrawalAddressVerificationAction(
-        walletId,
+        wallet.id,
         addressObject.id,
       ));
     }
@@ -158,7 +238,7 @@ const WithdrawDialog = function (props) {
               <AddNewWithdrawalAddressDialog
                 name={name}
                 ticker={ticker}
-                walletId={walletId}
+                walletId={wallet.id}
               />
             )
           }
@@ -295,7 +375,81 @@ const WithdrawDialog = function (props) {
                           </div>
                         </div>
                       ) : (
-                        <div>address been confirmed</div>
+                        <>
+                          <div>
+                            <Typography variant="subtitle2" align="center">
+                              available:
+                              {' '}
+                              {wallet.available / 1e8}
+                              {' '}
+                              {ticker}
+                            </Typography>
+                            <Typography variant="subtitle2" align="center">
+                              minimum:
+                              {' '}
+                              {wallet.coin.withdrawalSetting.min / 1e8}
+                              {' '}
+                              {ticker}
+                            </Typography>
+                            <Typography variant="subtitle2" align="center">
+                              Fee:
+                              {' '}
+                              {wallet.coin.withdrawalSetting.fee / 1e2}
+                              %
+                            </Typography>
+                            <TextField
+                              id="outlined-withdrawal-amount"
+                              fullWidth
+                              label="Amount"
+                              type="text"
+                              value={withdrawalAmount}
+                              onChange={handleChangeWithdrawalAmount}
+                              inputProps={{
+                                step: 0.00000001,
+                                min: 0.1,
+                                max: (wallet.available / 1e8),
+                              }}
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                            />
+                          </div>
+                          <div>
+                            <Typography variant="subtitle2" align="center">
+                              Amount:
+                              {' '}
+                              {withdrawalAmount}
+                              {' '}
+                              {ticker}
+
+                            </Typography>
+                            <Typography variant="subtitle2" align="center">
+                              Fee amount:
+                              {' '}
+                              {Number(((((Number(withdrawalAmount) * 1e8) / 100) * (wallet.coin.withdrawalSetting.fee / 1e2)).toFixed(0)) / 1e8)}
+                              {' '}
+                              {ticker}
+
+                            </Typography>
+                            <Typography variant="subtitle2" align="center">
+                              Amount - Fee:
+                              {' '}
+                              {Number(withdrawalAmount) - Number(((((Number(withdrawalAmount) * 1e8) / 100) * (wallet.coin.withdrawalSetting.fee / 1e2)).toFixed(0)) / 1e8)}
+                              {' '}
+                              {ticker}
+                              %
+                            </Typography>
+                            <Button
+                              variant="contained"
+                              size="large"
+                              disabled={!withdrawalButtonEnabled}
+                              fullWidth
+                              onClick={handleWithdrawal}
+                            >
+                              Withdraw
+                            </Button>
+                          </div>
+                        </>
                       )
                     }
                   </div>
@@ -317,6 +471,7 @@ function mapStateToProps(state) {
     addWithdrawalAddress: state.addWithdrawalAddress.data,
     removeWithdrawalAddress: state.removeWithdrawalAddress.data,
     resendWithdrawalAddressVerification: state.resendWithdrawalAddressVerification,
+    createWithdrawal: state.createWithdrawal.data,
   };
 }
 

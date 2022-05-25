@@ -31,6 +31,7 @@ import addWithdrawalAddress from './user/addWithdrawalAddress';
 import removeWithdrawalAddress from './user/removeWithdrawalAddress'
 import verifyWithdrawalAddress from './verifyWithdrawalAddress';
 import resendWithdrawalAddressVerification from './resendWithdrawalAddressVerification';
+import createWithdrawal from './user/createWithdrawal';
 
 const store = configureStore({
   reducer: {
@@ -47,6 +48,7 @@ const store = configureStore({
     removeWithdrawalAddress,
     resendWithdrawalAddressVerification,
     verifyWithdrawalAddress,
+    createWithdrawal,
 
     faucetBalance,
     blockNumber,

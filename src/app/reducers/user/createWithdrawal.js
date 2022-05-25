@@ -1,9 +1,7 @@
 import {
-  FETCH_TRANSACTIONS_BEGIN,
-  FETCH_TRANSACTIONS_SUCCESS,
-  FETCH_TRANSACTIONS_FAIL,
-  INSERT_TRANSACTION,
-  UPDATE_TRANSACTION,
+  CREATE_WITHDRAWAL_BEGIN,
+  CREATE_WITHDRAWAL_SUCCESS,
+  CREATE_WITHDRAWAL_FAIL,
 } from '../../actions/types/user/index';
 
 const initialState = {
@@ -16,35 +14,23 @@ export default function userReducer(
   action,
 ) {
   switch (action.type) {
-    case FETCH_TRANSACTIONS_BEGIN:
+    case CREATE_WITHDRAWAL_BEGIN:
       return {
         ...state,
         loading: true,
         error: null,
         data: null,
       };
-    case FETCH_TRANSACTIONS_SUCCESS:
+    case CREATE_WITHDRAWAL_SUCCESS:
       return {
         ...state,
         data: action.payload.result,
-        count: action.payload.count,
         loading: false,
       };
-    case INSERT_TRANSACTION:
-      return {
-        ...state,
-        data: [
-          action.payload,
-          ...state.data,
-        ],
-        count: state.count + 1,
-        loading: false,
-      };
-    case FETCH_TRANSACTIONS_FAIL:
+    case CREATE_WITHDRAWAL_FAIL:
       return {
         ...state,
         data: null,
-        count: 0,
         error: action.error,
         loading: false,
       };

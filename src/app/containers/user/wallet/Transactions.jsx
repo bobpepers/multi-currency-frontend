@@ -37,9 +37,11 @@ const TransactionsContainer = function (props) {
   ]);
 
   useEffect(() => {
+    console.log('useEffect Transactions');
     console.log(transactions);
   }, [
     transactions,
+    transactions.data,
   ]);
 
   return (

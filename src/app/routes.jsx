@@ -89,7 +89,6 @@ const RoutesX = function (props) {
       <Route
         element={<RequireAuth {...props} />}
       >
-
         <Route
           path="/activity"
           element={<Activity />}
@@ -102,7 +101,6 @@ const RoutesX = function (props) {
           path="/wallet"
           element={<WalletView />}
         />
-
         <Route
           path="/admin/users"
           element={<Users />}
@@ -119,7 +117,6 @@ const RoutesX = function (props) {
           path="/admin/withdrawaladdress/:addressId"
           element={<WithdrawalAddressView />}
         />
-
         <Route
           path="/admin/deposits"
           element={<Deposits />}
@@ -136,7 +133,6 @@ const RoutesX = function (props) {
           path="/admin/management/pricecurrencies"
           element={<PriceCurrenciesManagement />}
         />
-
       </Route>
 
       <Route
@@ -155,17 +151,14 @@ const RoutesX = function (props) {
         path="/logout"
         element={<LogoutView />}
       />
-
       <Route
         path="/login/2fa"
         element={<LoginTFA />}
       />
-
       <Route
         path="/reset-password"
         element={<ResetPassword />}
       />
-
       <Route
         path="/reset-password/verify"
         element={<ResetPasswordVerify />}
@@ -174,7 +167,6 @@ const RoutesX = function (props) {
         path="/reset-password/new"
         element={<ResetPasswordNew />}
       />
-
       <Route
         path="/register/verify-register"
         element={<RegisterVerify />}
@@ -195,7 +187,6 @@ const RoutesX = function (props) {
         path="/withdraw/address/verified"
         element={<WithdrawalAddressVerified />}
       />
-
     </Routes>
   )
 }

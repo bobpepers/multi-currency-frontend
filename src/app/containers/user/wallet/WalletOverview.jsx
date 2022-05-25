@@ -30,6 +30,9 @@ const WalletOverviewContainer = function (props) {
   useEffect(() => { }, [
     user,
   ]);
+  useEffect(() => { }, [
+    user.wallets,
+  ]);
 
   return (
     <Grid container>
@@ -54,6 +57,7 @@ const WalletOverviewContainer = function (props) {
 }
 
 function mapStateToProps(state) {
+  console.log('state.user.data');
   console.log(state.user.data);
   return {
     authenticated: state.auth.authenticated,

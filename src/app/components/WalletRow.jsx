@@ -111,7 +111,7 @@ const WalletRow = function (props) {
             name={data.coin && data.coin.name}
             ticker={data.coin && data.coin.ticker}
             address={data.address && data.address.address}
-            walletId={data.id}
+            wallet={data}
             WalletAddressExternals={data.WalletAddressExternals && data.WalletAddressExternals}
           />
         </Grid>

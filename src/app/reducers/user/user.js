@@ -7,6 +7,7 @@ import {
   REMOVE_WITHDRAWAL_ADDRESS,
   UPDATE_WITHDRAWAL_ADDRESS,
   CONFIRM_WITHDRAWAL_ADDRESS,
+  UPDATE_WALLET,
 } from '../../actions/types/user/index';
 
 const initialState = {
@@ -45,6 +46,28 @@ export default function userReducer(
         loading: false,
         error: action.payload.error,
         data: null,
+      };
+
+    case UPDATE_WALLET:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          wallets: state.data.wallets.map(
+            (wallet) => (wallet.id === action.payload.id
+              ? {
+                ...wallet,
+                available: action.payload.available,
+                locked: action.payload.locked,
+                WalletAddressExternals: [
+                  ...wallet.WalletAddressExternals,
+                ],
+              }
+              : wallet),
+          ),
+        },
+        loading: false,
+        error: null,
       };
 
     case CHANGE_USER_TFA_STATE:
