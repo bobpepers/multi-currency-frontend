@@ -40,6 +40,21 @@ export default function userReducer(
         count: state.count + 1,
         loading: false,
       };
+    case UPDATE_TRANSACTION:
+      return {
+        ...state,
+        data: state.data.map(
+          (transaction) => (transaction.id === action.payload.id
+            ? {
+              ...transaction,
+              confirmations: action.payload.confirmations,
+              phase: action.payload.phase,
+            }
+            : transaction),
+        ),
+        count: state.count,
+        loading: false,
+      };
     case FETCH_TRANSACTIONS_FAIL:
       return {
         ...state,

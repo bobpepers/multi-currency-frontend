@@ -1,4 +1,4 @@
-import axios from '../axios';
+import axios from '../../axios';
 import {
   FETCH_WITHDRAWALS_BEGIN,
   FETCH_WITHDRAWALS_SUCCESS,
@@ -10,15 +10,15 @@ import {
   ACCEPT_WITHDRAWAL_SUCCESS,
   ACCEPT_WITHDRAWAL_BEGIN,
   UPDATE_WITHDRAWAL,
-} from './types/user/index';
-import { notistackErrorAdd } from './helpers/notistackError';
+} from '../types/user/index';
+import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function acceptWithdrawalAction(id) {
   return function (dispatch) {
     dispatch({
       type: ACCEPT_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/functions/withdrawal/accept`, {
+    axios.post(`${window.myConfig.apiUrl}/admin/withdrawal/accept`, {
       id,
     }).then((response) => {
       dispatch({
@@ -47,7 +47,7 @@ export function declineWithdrawalAction(id) {
     dispatch({
       type: DECLINE_WITHDRAWAL_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/functions/withdrawal/decline`, {
+    axios.post(`${window.myConfig.apiUrl}/admin/withdrawal/decline`, {
       id,
     }).then((response) => {
       dispatch({
@@ -84,7 +84,7 @@ export function fetchWithdrawalsAction(
     dispatch({
       type: FETCH_WITHDRAWALS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/functions/withdrawals`, {
+    axios.post(`${window.myConfig.apiUrl}/admin/withdrawals`, {
       id,
       txId,
       userId,

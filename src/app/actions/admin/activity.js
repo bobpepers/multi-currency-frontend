@@ -1,10 +1,10 @@
-import axios from '../axios';
+import axios from '../../axios';
 import {
   FETCH_ACTIVITY_BEGIN,
   FETCH_ACTIVITY_SUCCESS,
   FETCH_ACTIVITY_FAIL,
-} from './types/user/index';
-import { notistackErrorAdd } from './helpers/notistackError';
+} from '../types/user/index';
+import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function fetchActivityAction(
   id,

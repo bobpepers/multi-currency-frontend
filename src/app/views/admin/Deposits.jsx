@@ -15,7 +15,7 @@ import { withRouter } from '../../hooks/withRouter';
 
 import {
   fetchDepositsAction,
-} from '../../actions/deposits';
+} from '../../actions/admin/deposits';
 import DepositsTable from '../../components/functions/DepositsTable';
 
 const useStyles = makeStyles((theme) => ({

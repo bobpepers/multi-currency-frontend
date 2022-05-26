@@ -28,10 +28,10 @@ import {
   fetchWithdrawalsAction,
   acceptWithdrawalAction,
   declineWithdrawalAction,
-} from '../../actions/withdrawals';
+} from '../../actions/admin/withdrawals';
 import {
   fetchDepositsAction,
-} from '../../actions/deposits';
+} from '../../actions/admin/deposits';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
 
 const styles = {

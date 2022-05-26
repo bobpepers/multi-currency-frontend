@@ -13,7 +13,7 @@ import {
 import { io } from 'socket.io-client';
 import {
   fetchActivityAction,
-} from '../../actions/activity';
+} from '../../actions/user/activity';
 import ActivityComponent from '../../components/Activity';
 import { withRouter } from '../../hooks/withRouter';
 

@@ -232,6 +232,14 @@ const Header = function (props) {
                   >
                     <Link
                       className="nav-link"
+                      to="/admin/activity"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Activity
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
                       to="/admin/deposits"
                     >
                       <MenuItem onClick={handleCloseAdmin}>
@@ -244,6 +252,38 @@ const Header = function (props) {
                     >
                       <MenuItem onClick={handleCloseAdmin}>
                         Withdrawals
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
+                      to="/admin/pricecurrencies"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Price Currencies
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
+                      to="/admin/withdrawal/settings"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Withdrawal settings
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
+                      to="/admin/withdrawal/addresses"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Withdrawal addresses
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
+                      to="/admin/errors"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Errors
                       </MenuItem>
                     </Link>
                   </Menu>

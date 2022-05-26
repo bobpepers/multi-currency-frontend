@@ -1,10 +1,10 @@
-import axios from '../axios';
+import axios from '../../axios';
 import {
   FETCH_DEPOSITS_BEGIN,
   FETCH_DEPOSITS_SUCCESS,
   FETCH_DEPOSITS_FAIL,
-} from './types/user/index';
-import { notistackErrorAdd } from './helpers/notistackError';
+} from '../types/user/index';
+import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function fetchDepositsAction(
   id,
@@ -19,7 +19,7 @@ export function fetchDepositsAction(
     dispatch({
       type: FETCH_DEPOSITS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/functions/deposits`, {
+    axios.post(`${window.myConfig.apiUrl}/admin/deposits`, {
       id,
       txId,
       userId,

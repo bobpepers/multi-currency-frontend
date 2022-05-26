@@ -25,7 +25,7 @@ import {
 import {
   acceptWithdrawalAction,
   declineWithdrawalAction,
-} from '../../actions/withdrawals';
+} from '../../actions/admin/withdrawals';
 import {
   banUserAction,
 } from '../../actions/users';
@@ -209,7 +209,7 @@ const WithdrawalAddressView = function (props) {
         <Grid item xs={12}>
           {
             withdrawalAddress
-            && withdrawalAddress.isFetching
+              && withdrawalAddress.isFetching
               ? (<CircularProgress />)
               : (
                 <WithdrawalsTable

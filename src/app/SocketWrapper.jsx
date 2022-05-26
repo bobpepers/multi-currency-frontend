@@ -41,6 +41,13 @@ const SocketWrapper = function ({ children }) {
       });
     });
 
+    socket.on('updateTransaction', (data) => {
+      dispatch({
+        type: UPDATE_TRANSACTION,
+        payload: data.result,
+      });
+    });
+
     return () => socket.disconnect();
   }, []);
 

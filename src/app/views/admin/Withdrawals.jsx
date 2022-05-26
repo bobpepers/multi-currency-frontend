@@ -15,7 +15,7 @@ import {
   fetchWithdrawalsAction,
   acceptWithdrawalAction,
   declineWithdrawalAction,
-} from '../../actions/withdrawals';
+} from '../../actions/admin/withdrawals';
 import WithdrawalsTable from '../../components/functions/WithdrawalsTable';
 
 const useStyles = makeStyles((theme) => ({
@@ -166,7 +166,7 @@ const WithdrawalsView = function (props) {
         <Grid item xs={12}>
           {
             withdrawals
-            && withdrawals.isFetching
+              && withdrawals.isFetching
               ? (<CircularProgress />)
               : (
                 <WithdrawalsTable

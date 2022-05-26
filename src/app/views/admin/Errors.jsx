@@ -175,7 +175,7 @@ const Errors = function (props) {
             <Grid container item xs={12} className="shadow-w pl-20 glassHeader">
               {
                 errors
-                && errors.data
+                  && errors.data
                   ? renderItems(errors.data)
                   : <CircularProgress />
               }
