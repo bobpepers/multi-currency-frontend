@@ -18,6 +18,7 @@ export default function DepositDialog(props) {
     name,
     ticker,
     address,
+    memo,
   } = props;
   const [open, setOpen] = React.useState(false);
   const [imagePath, setImagePath] = React.useState('');
@@ -128,6 +129,47 @@ export default function DepositDialog(props) {
             <Typography variant="subtitle2" align="center">
               {address}
             </Typography>
+            {memo && (
+              <div
+                style={{
+                  border: '1px solid black',
+                }}
+              >
+                <Typography variant="subtitle2" align="center">
+                  Your MEMO Number
+                </Typography>
+                <Typography
+                  variant="subtitle2"
+                  align="center"
+                  style={{
+                    fontWeight: 'bold',
+                    marginBottom: '10px',
+                  }}
+                >
+                  {memo}
+                </Typography>
+                <Typography
+                  variant="subtitle2"
+                  align="center"
+                  style={{
+                    fontWeight: 'bold',
+                    color: '#c08a3e',
+                  }}
+                >
+                  WARNING
+                </Typography>
+                <Typography
+                  variant="subtitle2"
+                  align="center"
+                  style={{
+                    fontWeight: 'bold',
+                    color: '#c08a3e',
+                  }}
+                >
+                  MEMO IS REQUIRED OR COINS WILL BE LOST
+                </Typography>
+              </div>
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

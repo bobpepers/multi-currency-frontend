@@ -18,7 +18,6 @@ const WalletRow = function (props) {
     data,
   } = props;
   const dispatch = useDispatch();
-
   return (
     <Grid
       className="walletRow"
@@ -95,6 +94,7 @@ const WalletRow = function (props) {
             name={data.coin && data.coin.name}
             ticker={data.coin && data.coin.ticker}
             address={data.address && data.address.address}
+            memo={data.address && data.address.memo ? data.address.memo : false}
           />
         </Grid>
       </Grid>
