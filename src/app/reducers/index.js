@@ -13,8 +13,9 @@ import transactions from './user/transactions';
 
 import deposits from './admin/deposits';
 import withdrawals from './admin/withdrawals';
-import liability from './admin/liability';
-import balance from './admin/balance';
+import adminLiability from './admin/adminLiability';
+import adminBalance from './admin/adminBalance';
+import adminFaucetBalance from './admin/adminFaucetBalance';
 import nodeStatus from './admin/nodeStatus';
 import acceptWithdrawal from './admin/acceptWithdrawal';
 import declineWithdrawal from './admin/declineWithdrawal';
@@ -58,8 +59,9 @@ const store = configureStore({
     userInfo,
     withdrawalAddresses,
     withdrawalAddress,
-    liability,
-    balance,
+    adminLiability,
+    adminBalance,
+    adminFaucetBalance,
     priceCurrencies,
     errors,
     deposits,

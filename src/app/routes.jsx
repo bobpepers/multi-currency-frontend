@@ -28,6 +28,7 @@ import LoginTFA from './views/user/login/Login2FA';
 import LogoutView from './views/user/Logout';
 import WalletView from './views/user/Wallet';
 
+import AdminWalletView from './views/admin/AdminWallet';
 import UserView from './views/admin/User';
 import Users from './views/admin/Users';
 import PriceCurrenciesManagement from './views/admin/PriceCurrencies';
@@ -100,6 +101,10 @@ const RoutesX = function (props) {
         <Route
           path="/wallet"
           element={<WalletView />}
+        />
+        <Route
+          path="/admin/wallet"
+          element={<AdminWalletView />}
         />
         <Route
           path="/admin/users"

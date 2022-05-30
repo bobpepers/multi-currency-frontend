@@ -1,34 +1,33 @@
 import {
-  FETCH_BALANCE_BEGIN,
-  FETCH_BALANCE_SUCCESS,
-  FETCH_BALANCE_FAIL,
-} from '../../actions/types/user/index';
+  FETCH_ADMIN_BALANCE_BEGIN,
+  FETCH_ADMIN_BALANCE_SUCCESS,
+  FETCH_ADMIN_BALANCE_FAIL,
+} from '../../actions/types/admin/index';
 
 const initialState = {
-  isFetching: false, // Default to fetching..
+  loading: false, // Default to fetching..
   error: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_BALANCE_BEGIN:
+    case FETCH_ADMIN_BALANCE_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        loading: true,
         error: null,
       };
-    case FETCH_BALANCE_SUCCESS:
+    case FETCH_ADMIN_BALANCE_SUCCESS:
       return {
         ...state,
         data: action.payload,
-        isFetching: false,
+        loading: false,
       };
-    case FETCH_BALANCE_FAIL:
-      console.log('Error: ', action.error);
+    case FETCH_ADMIN_BALANCE_FAIL:
       return {
         ...state,
         error: action.error,
-        isFetching: false,
+        loading: false,
       };
     default:
       return state;

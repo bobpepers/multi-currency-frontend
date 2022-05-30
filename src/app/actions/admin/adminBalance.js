@@ -1,20 +1,20 @@
 import axios from '../../axios';
 import {
-  FETCH_BALANCE_BEGIN,
-  FETCH_BALANCE_SUCCESS,
-  FETCH_BALANCE_FAIL,
-} from '../types/user/index';
+  FETCH_ADMIN_BALANCE_BEGIN,
+  FETCH_ADMIN_BALANCE_SUCCESS,
+  FETCH_ADMIN_BALANCE_FAIL,
+} from '../types/admin/index';
 import { notistackErrorAdd } from '../helpers/notistackError';
 
-export function fetchBalanceAction() {
+export function fetchAdminBalanceAction() {
   return function (dispatch) {
     dispatch({
-      type: FETCH_BALANCE_BEGIN,
+      type: FETCH_ADMIN_BALANCE_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/balance`)
+    axios.get(`${window.myConfig.apiUrl}/admin/balance`)
       .then((response) => {
         dispatch({
-          type: FETCH_BALANCE_SUCCESS,
+          type: FETCH_ADMIN_BALANCE_SUCCESS,
           payload: response.data.result,
         });
       }).catch((error) => {
@@ -23,7 +23,7 @@ export function fetchBalanceAction() {
           error,
         );
         dispatch({
-          type: FETCH_BALANCE_FAIL,
+          type: FETCH_ADMIN_BALANCE_FAIL,
           payload: error,
         });
       });

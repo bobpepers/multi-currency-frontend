@@ -31,15 +31,15 @@ import {
 } from '../actions/startSync';
 
 import {
-  fetchLiabilityAction,
-} from '../actions/liability';
+  fetchAdminLiabilityAction,
+} from '../actions/admin/adminLiability';
 import {
   patchDepositsAction,
 } from '../actions/patchDeposits';
 
 import {
-  fetchBalanceAction,
-} from '../actions/admin/balance';
+  fetchAdminBalanceAction,
+} from '../actions/admin/adminBalance';
 
 import {
   fetchFaucetBalanceAction,
@@ -67,8 +67,8 @@ const Home = function (props) {
   const {
     auth,
     nodeStatus,
-    liability,
-    balance,
+    adminLiability,
+    adminBalance,
     patchDeposits,
     faucetBalance,
     blockNumber,
@@ -80,8 +80,8 @@ const Home = function (props) {
   const refreshStats = () => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
-      dispatch(fetchLiabilityAction());
-      dispatch(fetchBalanceAction());
+      dispatch(fetchAdminLiabilityAction());
+      dispatch(fetchAdminBalanceAction());
       dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
     }
@@ -90,8 +90,8 @@ const Home = function (props) {
   useEffect(() => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
-      dispatch(fetchLiabilityAction());
-      dispatch(fetchBalanceAction());
+      dispatch(fetchAdminLiabilityAction());
+      dispatch(fetchAdminBalanceAction());
       dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
     }
@@ -107,8 +107,8 @@ const Home = function (props) {
     [
       auth,
       nodeStatus,
-      liability,
-      balance,
+      adminLiability,
+      adminBalance,
       faucetBalance,
       blockNumber,
     ],
@@ -195,10 +195,10 @@ const Home = function (props) {
             component="div"
             align="center"
           >
-            {liability.data
-              && liability.data
-              && liability.data.amount
-              ? `${liability.data.amount / 1e8} ${window.myConfig.ticker}`
+            {adminLiability.data
+              && adminLiability.data
+              && adminLiability.data.amount
+              ? `${adminLiability.data.amount / 1e8} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -226,10 +226,10 @@ const Home = function (props) {
             component="div"
             align="center"
           >
-            {balance.data
-              && balance.data
-              && balance.data.amount
-              ? `${balance.data.amount} ${window.myConfig.ticker}`
+            {adminBalance.data
+              && adminBalance.data
+              && adminBalance.data.amount
+              ? `${adminBalance.data.amount} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -257,11 +257,11 @@ const Home = function (props) {
             component="div"
             align="center"
           >
-            {balance.data
-              && balance.data.amount
-              && liability.data
-              && liability.data.amount
-              ? `${((Number(balance.data.amount) - (Number(liability.data.amount) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
+            {adminBalance.data
+              && adminBalance.data.amount
+              && adminLiability.data
+              && adminLiability.data.amount
+              ? `${((Number(adminBalance.data.amount) - (Number(adminLiability.data.amount) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
               : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
@@ -480,8 +480,8 @@ Home.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   nodeStatus: state.nodeStatus,
-  liability: state.liability,
-  balance: state.balance,
+  adminLiability: state.adminLiability,
+  adminBalance: state.adminBalance,
   patchDeposits: state.patchDeposits,
   faucetBalance: state.faucetBalance,
   blockNumber: state.blockNumber,

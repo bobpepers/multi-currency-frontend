@@ -232,6 +232,14 @@ const Header = function (props) {
                   >
                     <Link
                       className="nav-link"
+                      to="/admin/wallet"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Wallet
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
                       to="/admin/activity"
                     >
                       <MenuItem onClick={handleCloseAdmin}>
