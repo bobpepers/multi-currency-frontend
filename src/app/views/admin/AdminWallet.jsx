@@ -463,7 +463,6 @@ const AdminWalletView = function (props) {
             </Grid>
           </>
         )}
-
     </div>
   )
 }

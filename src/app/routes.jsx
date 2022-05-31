@@ -27,18 +27,19 @@ import Login from './views/user/login/Login';
 import LoginTFA from './views/user/login/Login2FA';
 import LogoutView from './views/user/Logout';
 import WalletView from './views/user/Wallet';
+import WithdrawalAddressVerify from './views/user/withdrawalAddressVerify/WithdrawalAddressVerify';
+import WithdrawalAddressVerified from './views/user/withdrawalAddressVerify/WithdrawalAddressVerified';
 
 import AdminWalletView from './views/admin/AdminWallet';
 import UserView from './views/admin/User';
 import Users from './views/admin/Users';
 import PriceCurrenciesManagement from './views/admin/PriceCurrencies';
+import AdminWithdrawalSettingsView from './views/admin/WithdrawalSettings';
 import WithdrawalAddressesView from './views/admin/WithdrawalAddresses';
 import WithdrawalAddressView from './views/admin/WithdrawalAddress';
 import Deposits from './views/admin/Deposits';
 import Withdrawals from './views/admin/Withdrawals';
 import Errors from './views/admin/Errors';
-import WithdrawalAddressVerify from './views/user/withdrawalAddressVerify/WithdrawalAddressVerify';
-import WithdrawalAddressVerified from './views/user/withdrawalAddressVerify/WithdrawalAddressVerified';
 
 import { authenticatedAction } from './actions/auth';
 
@@ -129,6 +130,10 @@ const RoutesX = function (props) {
         <Route
           path="/admin/withdrawals"
           element={<Withdrawals />}
+        />
+        <Route
+          path="/admin/withdrawal/settings"
+          element={<AdminWithdrawalSettingsView />}
         />
         <Route
           path="/admin/errors"

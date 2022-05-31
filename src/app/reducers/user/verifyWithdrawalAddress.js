@@ -1,7 +1,7 @@
 import {
   VERIFY_WITHDRAWAL_ADDRESS_ERROR,
   VERIFY_WITHDRAWAL_ADDRESS_BEGIN,
-} from '../actions/types/user/index';
+} from '../../actions/types/user/index';
 
 const initialState = {
   loading: false,

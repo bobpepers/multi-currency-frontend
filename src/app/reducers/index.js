@@ -10,6 +10,11 @@ import tfa from './user/tfa';
 import resetPassword from './user/resetPassword';
 import user from './user/user';
 import transactions from './user/transactions';
+import addWithdrawalAddress from './user/addWithdrawalAddress';
+import removeWithdrawalAddress from './user/removeWithdrawalAddress'
+import verifyWithdrawalAddress from './user/verifyWithdrawalAddress';
+import resendWithdrawalAddressVerification from './user/resendWithdrawalAddressVerification';
+import createWithdrawal from './user/createWithdrawal';
 
 import deposits from './admin/deposits';
 import withdrawals from './admin/withdrawals';
@@ -24,15 +29,11 @@ import blockNumber from './admin/blockNumber';
 import startSync from './admin/startSync';
 import errors from './admin/errors';
 import priceCurrencies from './admin/priceCurrencies';
+import adminWithdrawalSettings from './admin/adminWithdrawalSettings';
 import userInfo from './admin/userInfo';
 import withdrawalAddresses from './admin/withdrawalAddresses';
 import withdrawalAddress from './admin/withdrawalAddress';
 import users from './admin/users';
-import addWithdrawalAddress from './user/addWithdrawalAddress';
-import removeWithdrawalAddress from './user/removeWithdrawalAddress'
-import verifyWithdrawalAddress from './verifyWithdrawalAddress';
-import resendWithdrawalAddressVerification from './resendWithdrawalAddressVerification';
-import createWithdrawal from './user/createWithdrawal';
 
 const store = configureStore({
   reducer: {
@@ -62,6 +63,7 @@ const store = configureStore({
     adminLiability,
     adminBalance,
     adminFaucetBalance,
+    adminWithdrawalSettings,
     priceCurrencies,
     errors,
     deposits,

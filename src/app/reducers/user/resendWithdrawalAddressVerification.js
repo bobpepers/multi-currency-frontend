@@ -2,7 +2,7 @@ import {
   RESEND_WITHDRAWAL_ADDRESS_BEGIN,
   RESEND_WITHDRAWAL_ADDRESS_SUCCESS,
   RESEND_WITHDRAWAL_ADDRESS_FAIL,
-} from '../actions/types/user/index';
+} from '../../actions/types/user/index';
 
 const initialState = {
   loading: false, // Default to fetching..
