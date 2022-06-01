@@ -35,12 +35,14 @@ export function updateAdminWithdrawalSettingsAction(
   id,
   min,
   fee,
+  enabled,
 ) {
   return function (dispatch) {
     axios.post(`${window.myConfig.apiUrl}/admin/withdrawal/setting/update`, {
       id,
       min,
       fee,
+      enabled,
     })
       .then((response) => {
         dispatch({

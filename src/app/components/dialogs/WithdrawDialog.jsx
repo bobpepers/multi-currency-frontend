@@ -437,7 +437,6 @@ const WithdrawDialog = function (props) {
                               {Number(withdrawalAmount) - Number(((((Number(withdrawalAmount) * 1e8) / 100) * (wallet.coin.withdrawalSetting.fee / 1e2)).toFixed(0)) / 1e8)}
                               {' '}
                               {ticker}
-                              %
                             </Typography>
                             <Button
                               variant="contained"

@@ -16,6 +16,8 @@ import {
   TableHead,
   TableRow,
   TextField,
+  Select,
+  MenuItem,
 } from '@mui/material';
 
 import {
@@ -35,11 +37,13 @@ const AdminWithdrawalSettingsView = function (props) {
   });
   const [unitMin, setUnitMin] = useState(null);
   const [unitFee, setUnitFee] = useState(null);
+  const [unitEnabled, setUnitEnabled] = useState(null);
 
   const onEdit = ({
     id,
     currentUnitMin,
     currentUnitFee,
+    currentUnitEnabled,
   }) => {
     setInEditMode({
       status: true,
@@ -47,6 +51,7 @@ const AdminWithdrawalSettingsView = function (props) {
     })
     setUnitMin(currentUnitMin);
     setUnitFee(currentUnitFee);
+    setUnitEnabled(currentUnitEnabled);
   }
 
   const onSave = async ({ id }) => {
@@ -55,6 +60,7 @@ const AdminWithdrawalSettingsView = function (props) {
         id,
         unitMin,
         unitFee,
+        unitEnabled,
       ),
     );
     setInEditMode({
@@ -63,6 +69,7 @@ const AdminWithdrawalSettingsView = function (props) {
     })
     setUnitMin(null);
     setUnitFee(null);
+    setUnitEnabled(null);
   }
 
   const onCancel = () => {
@@ -72,6 +79,7 @@ const AdminWithdrawalSettingsView = function (props) {
     })
     setUnitMin(null);
     setUnitFee(null);
+    setUnitEnabled(null);
   }
 
   useEffect(() => {
@@ -102,7 +110,9 @@ const AdminWithdrawalSettingsView = function (props) {
                   <TableCell align="right">Coin</TableCell>
                   <TableCell align="right">Minimum</TableCell>
                   <TableCell align="right">Fee</TableCell>
-                  <TableCell align="right">last updated</TableCell>
+                  <TableCell align="right">Enabled</TableCell>
+                  <TableCell align="right">Last updated</TableCell>
+                  <TableCell align="right">By</TableCell>
                   <TableCell align="right">edit</TableCell>
                 </TableRow>
               </TableHead>
@@ -151,7 +161,31 @@ const AdminWithdrawalSettingsView = function (props) {
                           }
                         </TableCell>
                         <TableCell component="th" scope="row" align="right">
+                          {
+                            inEditMode.status && inEditMode.rowKey === withdrawalSetting.id ? (
+                              <Select
+                                label="Enabled"
+                                // defaultValue={unitEnabled}
+                                value={unitEnabled}
+                                onChange={(event) => setUnitEnabled(event.target.value)}
+                              >
+                                <MenuItem key="enabled" value="true">
+                                  Enabled
+                                </MenuItem>
+                                <MenuItem key="disabled" value="false">
+                                  Disabled
+                                </MenuItem>
+                              </Select>
+                            ) : (
+                              <span>{withdrawalSetting.enabled ? 'Enabled' : 'Disabled'}</span>
+                            )
+                          }
+                        </TableCell>
+                        <TableCell component="th" scope="row" align="right">
                           {withdrawalSetting.updatedAt}
+                        </TableCell>
+                        <TableCell component="th" scope="row" align="right">
+                          {withdrawalSetting.user && withdrawalSetting.user.username}
                         </TableCell>
 
                         <TableCell align="right">
@@ -166,6 +200,7 @@ const AdminWithdrawalSettingsView = function (props) {
                                     id: withdrawalSetting.id,
                                     min: unitMin,
                                     fee: unitFee,
+                                    enabled: unitEnabled,
                                   })}
                                 >
                                   Save
@@ -190,6 +225,7 @@ const AdminWithdrawalSettingsView = function (props) {
                                   id: withdrawalSetting.id,
                                   currentUnitMin: withdrawalSetting.min / 1e8,
                                   currentUnitFee: withdrawalSetting.fee / 1e2,
+                                  currentUnitEnabled: withdrawalSetting.enabled ? 'true' : 'false',
                                 })}
                               >
                                 Edit
