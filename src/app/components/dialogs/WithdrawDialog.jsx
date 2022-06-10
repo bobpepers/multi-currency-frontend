@@ -195,9 +195,27 @@ const WithdrawDialog = function (props) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        disabled={!wallet.coin.withdrawalSetting.enabled}
+      >
         Withdraw
       </Button>
+
+      {
+        !wallet.coin.withdrawalSetting.enabled && (
+          <Typography
+            variant="subtitle2"
+            align="center"
+          >
+            {wallet.coin.ticker}
+            {' '}
+            withdrawals disabled
+          </Typography>
+        )
+      }
+
       <Dialog
         fullWidth
         maxWidth="xs"

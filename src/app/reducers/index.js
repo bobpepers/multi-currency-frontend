@@ -15,6 +15,7 @@ import removeWithdrawalAddress from './user/removeWithdrawalAddress'
 import verifyWithdrawalAddress from './user/verifyWithdrawalAddress';
 import resendWithdrawalAddressVerification from './user/resendWithdrawalAddressVerification';
 import createWithdrawal from './user/createWithdrawal';
+import coinInfo from './user/coinInfo';
 
 import deposits from './admin/deposits';
 import withdrawals from './admin/withdrawals';
@@ -44,6 +45,7 @@ const store = configureStore({
     theme,
     alert,
     user,
+    coinInfo,
     activity,
     transactions,
     addWithdrawalAddress,

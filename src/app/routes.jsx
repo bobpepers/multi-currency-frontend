@@ -27,6 +27,7 @@ import Login from './views/user/login/Login';
 import LoginTFA from './views/user/login/Login2FA';
 import LogoutView from './views/user/Logout';
 import WalletView from './views/user/Wallet';
+import CoinInfoView from './views/user/CoinInfo';
 import WithdrawalAddressVerify from './views/user/withdrawalAddressVerify/WithdrawalAddressVerify';
 import WithdrawalAddressVerified from './views/user/withdrawalAddressVerify/WithdrawalAddressVerified';
 
@@ -148,6 +149,10 @@ const RoutesX = function (props) {
       <Route
         path="/"
         element={<Home />}
+      />
+      <Route
+        path="/coin/:urlTickerParam"
+        element={<CoinInfoView />}
       />
       <Route
         path="/register"
