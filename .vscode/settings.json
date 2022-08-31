@@ -9,7 +9,8 @@
   "eslint.alwaysShowStatus": true,
   "editor.autoIndent": "none",
   "conventionalCommits.scopes": [
-    "webpack"
+    "webpack",
+    "footer"
   ],
   //"editor.detectIndentation": false
 }
