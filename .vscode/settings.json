@@ -8,5 +8,8 @@
   "editor.tabSize": 2,
   "eslint.alwaysShowStatus": true,
   "editor.autoIndent": "none",
+  "conventionalCommits.scopes": [
+    "webpack"
+  ],
   //"editor.detectIndentation": false
 }

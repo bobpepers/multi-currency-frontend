@@ -31,8 +31,8 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import AddRoadIcon from '@mui/icons-material/AddRoad';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-import { ReactComponent as MobileNav } from '../assets/images/mobilenav.svg';
-import { ReactComponent as RunesX } from '../assets/images/runesx.svg';
+import MobileNav from '../assets/images/mobilenav.svg';
+import RunesX from '../assets/images/runesx.svg';
 
 import {
   fetchUserData,
