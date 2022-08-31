@@ -176,7 +176,10 @@ function Register(props) {
   );
 
   const handleFormSubmit = async (formProps) => {
-    await signupUser(formProps, navigate);
+    await signupUser(
+      formProps,
+      navigate,
+    );
   }
 
   return (

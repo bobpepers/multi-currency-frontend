@@ -22,23 +22,24 @@ export function signupUser(
   const { captchaResponse } = props;
 
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/signup`, { props, captchaResponse })
-      .then(() => {
-        dispatch({
-          type: SIGNUP_SUCCESS,
-        });
-        dispatch(navigate(`/register/verify-register?email=${props.email}`));
-      }).catch((error) => {
-        console.log(error);
-        notistackErrorAdd(
-          dispatch,
-          error,
-        );
-        dispatch({
-          type: SIGNUP_FAILURE,
-          payload: error.reponse.data.console.error,
-        });
+    axios.post(`${window.myConfig.apiUrl}/signup`, {
+      props,
+      captchaResponse,
+    }).then(() => {
+      dispatch({
+        type: SIGNUP_SUCCESS,
       });
+      dispatch(navigate(`/register/verify-register?email=${props.email}`));
+    }).catch((error) => {
+      notistackErrorAdd(
+        dispatch,
+        error,
+      );
+      dispatch({
+        type: SIGNUP_FAILURE,
+        payload: error.message || error.reponse.data.console.error,
+      });
+    });
   }
 }
 

@@ -10,8 +10,9 @@ export const notistackErrorAdd = (
   console.log(error.message);
   // ${error.response.statusText}
   const errorMessage = (error && error.response && error.response.data && error.response.data.error && error.response.data.error)
-    || (error && error.message)
-    || (error && error.response && error.response.data);
+  || (error && error.message && error.message)
+  || (error && error.response && error.response.message && error.response.message)
+  || (error && error.response && error.response.data);
   if (errorMessage === 'EMAIL_NOT_VERIFIED') {
     dispatch({
       type: ENQUEUE_SNACKBAR,

@@ -10,7 +10,8 @@
   "editor.autoIndent": "none",
   "conventionalCommits.scopes": [
     "webpack",
-    "footer"
+    "footer",
+    "Header"
   ],
   //"editor.detectIndentation": false
 }
