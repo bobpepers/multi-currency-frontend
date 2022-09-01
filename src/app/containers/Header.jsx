@@ -39,8 +39,6 @@ function Header(
     authenticated,
     user,
   } = props;
-  console.log(authenticated);
-  console.log('authenticated log')
   const heightRef = useRef(null);
   const [menu, setMenu] = useState(false);
   const [anchorElGames, setanchorElGames] = useState(null);
@@ -105,7 +103,9 @@ function Header(
             marginRight: '10px',
           }}
         />
-        <Trans>RunesX</Trans>
+        <Trans>
+          RunesX
+        </Trans>
       </Button>
       <Button
         aria-controls="basic-menu"
@@ -124,7 +124,9 @@ function Header(
         <GamesIcon
           style={{ marginRight: '10px' }}
         />
-        <Trans>Games</Trans>
+        <Trans>
+          Games
+        </Trans>
       </Button>
       <Menu
         anchorEl={anchorElGames}
@@ -306,7 +308,9 @@ function Header(
                       <AddRoadIcon
                         style={{ marginRight: '10px' }}
                       />
-                      <Trans>activity</Trans>
+                      <Trans>
+                        Activity
+                      </Trans>
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={handleMenuClose}>
@@ -317,7 +321,9 @@ function Header(
                       <SettingsIcon
                         style={{ marginRight: '10px' }}
                       />
-                      <Trans>Settings</Trans>
+                      <Trans>
+                        Settings
+                      </Trans>
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={handleMenuClose}>
@@ -328,7 +334,9 @@ function Header(
                       <LogoutIcon
                         style={{ marginRight: '10px' }}
                       />
-                      <Trans>Logout</Trans>
+                      <Trans>
+                        Logout
+                      </Trans>
                     </Link>
                   </MenuItem>
                 </div>
@@ -343,7 +351,9 @@ function Header(
                       <LoginIcon
                         style={{ marginRight: '10px' }}
                       />
-                      <Trans>Login</Trans>
+                      <Trans>
+                        Login
+                      </Trans>
                     </Link>
                   </MenuItem>
                   <MenuItem onClick={handleMenuClose}>
@@ -354,7 +364,9 @@ function Header(
                       <AppRegistrationIcon
                         style={{ marginRight: '10px' }}
                       />
-                      <Trans>Register</Trans>
+                      <Trans>
+                        Register
+                      </Trans>
                     </Link>
                   </MenuItem>
                 </div>
@@ -482,7 +494,7 @@ function Header(
 
 Header.propTypes = {
   user: PropTypes.shape({
-    role: PropTypes.number.isRequired,
+    role: PropTypes.number,
   }).isRequired,
   authenticated: PropTypes.bool.isRequired,
 };

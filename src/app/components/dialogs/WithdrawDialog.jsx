@@ -21,6 +21,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import TextField from '@mui/material/TextField';
+import PropTypes from 'prop-types';
 
 import Countdown from 'react-countdown';
 import AddNewWithdrawalAddressDialog from './AddNewWithdrawalAddress';
@@ -247,7 +248,7 @@ const WithdrawDialog = function (props) {
           >
             <img
               className="walletCoinImage"
-              src={`/static/coins/${ticker.toLowerCase()}.png`}
+              src={`/assets/images/coins/${ticker.toLowerCase()}.png`}
               alt={`${name} logo`}
             />
           </div>
@@ -491,5 +492,21 @@ function mapStateToProps(state) {
     createWithdrawal: state.createWithdrawal.data,
   };
 }
+
+WithdrawDialog.propTypes = {
+  resendWithdrawalAddressVerification: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
+  wallet: PropTypes.shape({
+    available: PropTypes.number.isRequired,
+    coin: PropTypes.shape({
+      ticker: PropTypes.string.isRequired,
+      withdrawalSetting: PropTypes.shape({
+        fee: PropTypes.number.isRequired,
+        min: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, null)(WithdrawDialog);

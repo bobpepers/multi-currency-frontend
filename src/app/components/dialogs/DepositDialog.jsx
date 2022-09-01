@@ -82,7 +82,7 @@ export default function DepositDialog(props) {
             >
               <img
                 className="walletCoinImage"
-                src={`/static/coins/${ticker.toLowerCase()}.png`}
+                src={`/assets/images/coins/${ticker.toLowerCase()}.png`}
                 alt={`${name} logo`}
               />
             </div>

@@ -1,15 +1,8 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
-import {
-  connect,
-  useDispatch,
-} from 'react-redux';
+import React from 'react';
 import {
   Grid,
-  Button,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import DepositDialog from './dialogs/DepositDialog';
 import WithdrawDialog from './dialogs/WithdrawDialog';
 
@@ -120,5 +113,21 @@ const WalletRow = function (props) {
     </Grid>
   )
 }
+
+WalletRow.propTypes = {
+  data: PropTypes.shape({
+    available: PropTypes.number.isRequired,
+    locked: PropTypes.number.isRequired,
+    address: PropTypes.shape({
+      address: PropTypes.string.isRequired,
+      memo: PropTypes.string.isRequired,
+    }).isRequired,
+    coin: PropTypes.shape({
+      ticker: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    WalletAddressExternals: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default WalletRow;

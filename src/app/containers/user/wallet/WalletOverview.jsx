@@ -9,6 +9,7 @@ import {
 import {
   Grid,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import WalletRow from '../../../components/WalletRow';
 
@@ -17,7 +18,7 @@ const WalletOverviewContainer = function (props) {
     authenticated,
     user,
   } = props;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (authenticated) {
@@ -27,12 +28,15 @@ const WalletOverviewContainer = function (props) {
     authenticated,
   ]);
 
-  useEffect(() => { }, [
-    user,
-  ]);
-  useEffect(() => { }, [
-    user.wallets,
-  ]);
+  // useEffect(() => { }, [
+  //   user,
+  // ]);
+
+  // useEffect(() => {
+  //   console.log(user.wallets);
+  // }, [
+  //   user.wallets,
+  // ]);
 
   return (
     <Grid container>
@@ -55,6 +59,15 @@ const WalletOverviewContainer = function (props) {
     </Grid>
   )
 }
+
+WalletOverviewContainer.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  user: PropTypes.shape({
+    wallets: PropTypes.arrayOf(PropTypes.shape({
+
+    })),
+  }).isRequired,
+};
 
 function mapStateToProps(state) {
   return {
