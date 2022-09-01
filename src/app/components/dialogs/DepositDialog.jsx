@@ -11,9 +11,10 @@ import {
   Typography,
 } from '@mui/material';
 import QRCode from 'qrcode';
+import PropTypes from 'prop-types';
 import { capitalize } from '../../helpers/utils';
 
-export default function DepositDialog(props) {
+function DepositDialog(props) {
   const {
     name,
     ticker,
@@ -179,3 +180,12 @@ export default function DepositDialog(props) {
     </>
   );
 }
+
+DepositDialog.propTypes = {
+  ticker: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  memo: PropTypes.string.isRequired,
+};
+
+export default DepositDialog;

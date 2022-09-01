@@ -13,10 +13,11 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
-  Typography,
+  // Typography,
 } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PropTypes from 'prop-types';
 import { removeWithdrawalAddressAction } from '../../actions/user/removeWithdrawalAddress';
 
 const RemoveWithdrawalAddressDialog = function (props) {
@@ -110,5 +111,13 @@ function mapStateToProps(state) {
     removeWithdrawalAddress: state.removeWithdrawalAddress,
   };
 }
+
+RemoveWithdrawalAddressDialog.propTypes = {
+  id: PropTypes.number.isRequired,
+  address: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  removeWithdrawalAddress: PropTypes.arrayOf(PropTypes.shape({
+  })).isRequired,
+};
 
 export default connect(mapStateToProps, null)(RemoveWithdrawalAddressDialog);

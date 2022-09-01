@@ -13,6 +13,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import CircularProgress from '@mui/material/CircularProgress';
+import PropTypes from 'prop-types';
 import { addWithdrawalAddressAction } from '../../actions/user/addNewWithdrawalAddress';
 
 import { capitalize } from '../../helpers/utils';
@@ -20,7 +21,7 @@ import { capitalize } from '../../helpers/utils';
 const AddNewWithdrawalAddressDialog = function (props) {
   const {
     name,
-    ticker,
+    // ticker,
     addWithdrawalAddress,
     walletId,
   } = props;
@@ -33,7 +34,6 @@ const AddNewWithdrawalAddressDialog = function (props) {
   };
 
   const handleAddNewAddress = () => {
-    console.log('clicked');
     dispatch(addWithdrawalAddressAction(
       walletId,
       address,
@@ -116,6 +116,7 @@ const AddNewWithdrawalAddressDialog = function (props) {
     </div>
   );
 }
+
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
@@ -123,5 +124,14 @@ function mapStateToProps(state) {
     addWithdrawalAddress: state.addWithdrawalAddress,
   };
 }
+
+AddNewWithdrawalAddressDialog.propTypes = {
+  walletId: PropTypes.number.isRequired,
+  // ticker: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  addWithdrawalAddress: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, null)(AddNewWithdrawalAddressDialog);
