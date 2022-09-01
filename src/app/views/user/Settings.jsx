@@ -8,7 +8,7 @@ import {
 import {
   Grid,
 } from '@mui/material';
-import { fetchUserData } from '../../actions/user'
+import { fetchUserData } from '../../actions/user';
 import EnableTFA from '../../components/settings/Enable2FA';
 import DisableTFA from '../../components/settings/Disable2FA';
 

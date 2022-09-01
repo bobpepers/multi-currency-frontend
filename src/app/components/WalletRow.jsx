@@ -17,7 +17,7 @@ const WalletRow = function (props) {
   const {
     data,
   } = props;
-  const dispatch = useDispatch();
+
   return (
     <Grid
       className="walletRow"
@@ -34,7 +34,7 @@ const WalletRow = function (props) {
         alignItems="center"
       >
         <img
-          src={`/static/coins/${(data.coin.ticker).toLowerCase()}.png`}
+          src={`/assets/images/coins/${(data.coin.ticker).toLowerCase()}.png`}
           className="walletCoinImage"
           alt={`${data.coin.name} logo`}
         />

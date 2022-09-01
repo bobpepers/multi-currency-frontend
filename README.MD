@@ -44,7 +44,11 @@ server {
     }
     location /static {
         autoindex on;
-        alias /home/bago/RUNES-tip-dashboard/static;
+        alias /home/bago/multi-currency-frontend/static;
+    }
+    location /assets {
+        autoindex on;
+        alias /home/bago/multi-currency-backend/assets;
     }
 }
 

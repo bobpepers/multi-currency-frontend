@@ -2,6 +2,7 @@ import React, {
   Suspense,
   lazy,
   createRef,
+  useEffect,
 } from 'react';
 import {
   ThemeProvider,
@@ -9,12 +10,16 @@ import {
   createTheme,
 } from '@mui/material/styles';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
+import {
+  Provider,
+  useDispatch,
+} from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import Button from '@mui/material/Button';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
+import { fetchUserData } from './actions/user';
 import SocketWrapper from './SocketWrapper';
 import store from './reducers'
 import { messages as enMessages } from './locales/en/messages'
@@ -59,7 +64,7 @@ function DismissAction({ id }) {
   )
 }
 
-function App() {
+function AppWrapper() {
   return (
     <StyledEngineProvider injectFirst>
       <I18nProvider i18n={i18n}>
@@ -79,13 +84,7 @@ function App() {
               >
                 <BrowserRouter>
                   <Suspense fallback={<LoadingContainer />}>
-                    <Notifier />
-                    <ParticlesRunebase />
-                    <Header />
-                    <Routes />
-                    <Footer
-                      i18n={i18n}
-                    />
+                    <App />
                   </Suspense>
                 </BrowserRouter>
               </SnackbarProvider>
@@ -97,8 +96,24 @@ function App() {
   );
 }
 
+function App() {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(fetchUserData()), []);
+  return (
+    <>
+      <Notifier />
+      <ParticlesRunebase />
+      <Header />
+      <Routes />
+      <Footer
+        i18n={i18n}
+      />
+    </>
+  );
+}
+
 createRoot(
   document.getElementById('root'),
 ).render(
-  <App />,
+  <AppWrapper />,
 );
