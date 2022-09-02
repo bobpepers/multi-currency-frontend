@@ -1,7 +1,9 @@
 import React from 'react';
 import {
   connect,
+  useDispatch,
 } from 'react-redux';
+import PropTypes from 'prop-types';
 import withStyles from '@mui/styles/withStyles';
 import {
   Switch,
@@ -29,11 +31,12 @@ function ThemeToggle(props) {
     theme: {
       theme,
     },
-    changeTheme,
   } = props;
 
+  const dispatch = useDispatch();
+
   const handleChangeCurrentStyleMode = (value) => {
-    changeTheme(value);
+    dispatch(changeTheme(value));
   };
 
   return (
@@ -47,6 +50,12 @@ function ThemeToggle(props) {
     </div>
   );
 }
+
+ThemeToggle.propTypes = {
+  theme: PropTypes.shape({
+    theme: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 const mapStateToProps = (state) => ({
   theme: state.theme,

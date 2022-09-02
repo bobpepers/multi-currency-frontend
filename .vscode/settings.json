@@ -12,7 +12,8 @@
     "webpack",
     "footer",
     "Header",
-    "language"
+    "language",
+    "Theme"
   ],
   //"editor.detectIndentation": false
 }
