@@ -221,7 +221,7 @@ function Header(
                     </Link>
                     <Link
                       className="nav-link"
-                      to="/admin/pricecurrencies"
+                      to="/admin/management/pricecurrencies"
                     >
                       <MenuItem onClick={handleCloseAdmin}>
                         Price Currencies

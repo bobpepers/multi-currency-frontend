@@ -1,4 +1,3 @@
-import { reducer as form } from 'redux-form';
 import { configureStore } from '@reduxjs/toolkit'
 import auth from './auth';
 import theme from './changeTheme';
@@ -38,7 +37,6 @@ import users from './admin/users';
 
 const store = configureStore({
   reducer: {
-    form,
     auth,
     resetPass: resetPassword,
     tfa,
