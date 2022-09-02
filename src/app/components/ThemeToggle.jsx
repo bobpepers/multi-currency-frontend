@@ -16,7 +16,7 @@ const PREFIX = 'ThemeToggle';
 const classes = {
   switchBase: `${PREFIX}-switchBase`,
   checked: `${PREFIX}-checked`,
-  track: `${PREFIX}-track`
+  track: `${PREFIX}-track`,
 };
 
 const Root = styled('div')({
@@ -58,8 +58,9 @@ function ThemeToggle(props) {
         classes={{
           switchBase: classes.switchBase,
           checked: classes.checked,
-          track: classes.track
-        }} />
+          track: classes.track,
+        }}
+      />
       <Brightness3 />
     </Root>
   );
