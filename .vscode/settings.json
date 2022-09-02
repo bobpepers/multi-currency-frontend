@@ -11,7 +11,8 @@
   "conventionalCommits.scopes": [
     "webpack",
     "footer",
-    "Header"
+    "Header",
+    "language"
   ],
   //"editor.detectIndentation": false
 }

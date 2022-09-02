@@ -4,5 +4,8 @@
       "path": "src/app/locales/{locale}/messages",
       "include": ["src"]
    }],
-   "format": "po"
+   "format": "po",
+   "fallbackLocales": {
+      "default": "en"
+   }
 }
