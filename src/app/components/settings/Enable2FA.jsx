@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Button,
   Grid,
@@ -14,7 +15,6 @@ import {
   reset,
   initialize,
 } from 'redux-form';
-import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 // import CloseIcon from '@mui/icons-material/Close';
 
@@ -24,6 +24,34 @@ import {
   enabletfa,
   idleEnabletfa,
 } from '../../actions/tfa';
+
+const PREFIX = 'Enable2FA';
+
+const classes = {
+  modal: `${PREFIX}-modal`,
+  paper: `${PREFIX}-paper`
+};
+
+const StyledGrid = styled(Grid)((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.modal}`]: {
+    position: 'fixed !important',
+    height: 'calc(100vh - 80px) !important',
+    top: '60px !important',
+    bottom: '30px !important',
+    overflowY: 'auto',
+  },
+
+  [`& .${classes.paper}`]: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  }
+}));
 
 const options = {
   issuer: window.myConfig.name,
@@ -44,22 +72,6 @@ QRCode.toDataURL(otpauth_url, (err, imageUrl) => {
   }
   imagePath = imageUrl;
 });
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: 'fixed !important',
-    height: 'calc(100vh - 80px) !important',
-    top: '60px !important',
-    bottom: '30px !important',
-    overflowY: 'auto',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
 
 const renderNumberField = (
   {
@@ -99,7 +111,7 @@ function Set2FA(props) {
     user,
     initialize,
   } = props;
-  const classes = useStyles();
+
   const [open, setOpen] = useState(false);
 
   console.log(imagePath);
@@ -137,7 +149,7 @@ function Set2FA(props) {
   }
 
   return (
-    <Grid container>
+    <StyledGrid container>
       <Grid container item xs={12}>
         <h2 className="text-center w-100">Enable 2FA</h2>
       </Grid>
@@ -190,7 +202,7 @@ function Set2FA(props) {
         </Grid>
       </form>
 
-    </Grid>
+    </StyledGrid>
   );
 }
 

@@ -2,6 +2,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import { styled } from '@mui/material/styles';
 import {
   Button,
   Grid,
@@ -17,7 +18,6 @@ import {
   formValueSelector,
   reset,
 } from 'redux-form';
-import { makeStyles } from '@mui/styles';
 import { connect } from 'react-redux';
 // import CloseIcon from '@mui/icons-material/Close';
 
@@ -26,20 +26,32 @@ import {
   idleDisabletfa,
 } from '../../actions/tfa';
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
+const PREFIX = 'Disable2FA';
+
+const classes = {
+  modal: `${PREFIX}-modal`,
+  paper: `${PREFIX}-paper`
+};
+
+const StyledGrid = styled(Grid)((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.modal}`]: {
     position: 'fixed !important',
     height: 'calc(100vh - 80px) !important',
     top: '60px !important',
     bottom: '30px !important',
     overflowY: 'auto',
   },
-  paper: {
+
+  [`& .${classes.paper}`]: {
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  },
+  }
 }));
 
 const renderNumberField = (
@@ -78,7 +90,7 @@ function DisableTfa(props) {
     tfa,
     idleDisabletfa,
   } = props;
-  const classes = useStyles();
+
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -104,7 +116,7 @@ function DisableTfa(props) {
   }
 
   return (
-    <Grid
+    <StyledGrid
       container
       alignItems="center"
       justify="center"
@@ -176,7 +188,7 @@ function DisableTfa(props) {
         </form>
 
       </Grid>
-    </Grid>
+    </StyledGrid>
   );
 }
 
