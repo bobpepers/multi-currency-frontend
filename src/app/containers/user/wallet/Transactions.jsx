@@ -45,35 +45,33 @@ const TransactionsContainer = function (props) {
   ]);
 
   return (
-    <div className="height100 content">
-      <Grid container>
-        <Grid item xs={12}>
-          <h3>Transactions</h3>
-        </Grid>
-        <Grid item xs={12}>
-          {
-            transactions
-              && transactions.loading
-              ? (<CircularProgress />)
-              : (
-                <TransactionsTable
-                  defaultPageSize={50}
-                  page={page}
-                  setPage={setPage}
-                  rowsPerPage={rowsPerPage}
-                  setRowsPerPage={setRowsPerPage}
-                  totalCount={transactions && transactions.count && transactions.count}
-                  deposits={transactions
-                    && transactions.data
-                    ? transactions.data
-                    : []}
-                />
-              )
-          }
-
-        </Grid>
+    <Grid container>
+      <Grid item xs={12}>
+        <h3>Transactions</h3>
       </Grid>
-    </div>
+      <Grid item xs={12}>
+        {
+          transactions
+              && transactions.loading
+            ? (<CircularProgress />)
+            : (
+              <TransactionsTable
+                defaultPageSize={50}
+                page={page}
+                setPage={setPage}
+                rowsPerPage={rowsPerPage}
+                setRowsPerPage={setRowsPerPage}
+                totalCount={transactions && transactions.count && transactions.count}
+                deposits={transactions
+                    && transactions.data
+                  ? transactions.data
+                  : []}
+              />
+            )
+        }
+
+      </Grid>
+    </Grid>
   )
 }
 

@@ -16,6 +16,8 @@ body {
   position: relative;
   flex: 1;
   padding-bottom: 50px;
+  padding-left: 1rem;
+  padding-right: 1rem;
   color: var(--textColorGlobal);
 }
 
@@ -43,9 +45,7 @@ svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.previousArrowDisabled.css-i4bv87-M
 }
 // Text
 
-.content {
-  color: var(--textColorGlobal);
-}
+
 
 h2 {
   text-shadow: 0 0 black;

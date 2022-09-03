@@ -18,20 +18,23 @@ import {
   Switch,
   Button,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {
+  useNavigate,
+  Link,
+} from 'react-router-dom';
 
 const PREFIX = 'TransactionsTable';
 
 const classes = {
   root: `${PREFIX}-root`,
   table: `${PREFIX}-table`,
-  visuallyHidden: `${PREFIX}-visuallyHidden`
+  visuallyHidden: `${PREFIX}-visuallyHidden`,
 };
 
 const Root = styled('div')((
   {
-    theme
-  }
+    theme,
+  },
 ) => ({
   [`&.${classes.root}`]: {
     width: '100%',
@@ -51,33 +54,65 @@ const Root = styled('div')((
     position: 'absolute',
     top: 20,
     width: 1,
-  }
+  },
 }));
 
 const headCells = [
   {
-    id: 'dbId', numeric: false, disablePadding: true, label: 'id',
+    id: 'dbId',
+    align: 'left',
+    disablePadding: true,
+    numeric: true,
+    label: 'id',
   },
   {
-    id: 'coin', numeric: false, disablePadding: true, label: 'coin',
+    id: 'coin',
+    align: 'right',
+    disablePadding: false,
+    numeric: false,
+    label: 'coin',
   },
   {
-    id: 'type', numeric: false, disablePadding: true, label: 'type',
+    id: 'type',
+    align: 'right',
+    disablePadding: false,
+    numeric: false,
+    label: 'type',
   },
   {
-    id: 'to', numeric: true, disablePadding: false, label: 'to',
+    id: 'to',
+    align: 'right',
+    disablePadding: false,
+    numeric: false,
+    label: 'to',
   },
   {
-    id: 'txId', numeric: true, disablePadding: false, label: 'tx id',
+    id: 'txId',
+    align: 'right',
+    disablePadding: false,
+    numeric: false,
+    label: 'tx id',
   },
   {
-    id: 'amount', numeric: true, disablePadding: false, label: 'amount',
+    id: 'amount',
+    align: 'right',
+    disablePadding: false,
+    numeric: true,
+    label: 'amount',
   },
   {
-    id: 'confirmations', numeric: true, disablePadding: false, label: 'confirmations',
+    id: 'confirmations',
+    align: 'right',
+    disablePadding: false,
+    numeric: true,
+    label: 'confirmations',
   },
   {
-    id: 'phase', numeric: true, disablePadding: false, label: 'phase',
+    id: 'phase',
+    align: 'right',
+    disablePadding: false,
+    numeric: false,
+    label: 'phase',
   },
 ];
 
@@ -149,8 +184,8 @@ const EnhancedTableHead = function (props) {
         {headCells && headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align="right"
-            // align={headCell.numeric ? 'right' : 'left'}
+            // align="right"
+            align={headCell.align}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -221,7 +256,6 @@ const TransactionsTable = function (props) {
       ),
     );
   });
-
 
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('id');
@@ -319,18 +353,12 @@ const TransactionsTable = function (props) {
 
                     </TableCell>
                     <TableCell align="right">
-                      <Button
-                        onClick={() => navigate(`/user/${row.userRowId}`)}
-                      >
+                      <Link to={`/coin/${row.coin.toLowerCase()}`}>
                         {row.coin}
-                      </Button>
+                      </Link>
                     </TableCell>
                     <TableCell align="right">
-                      <Button
-                        onClick={() => navigate(`/user/${row.userRowId}`)}
-                      >
-                        {row.type}
-                      </Button>
+                      {row.type}
                     </TableCell>
                     <TableCell align="right">{row.to_from}</TableCell>
 
