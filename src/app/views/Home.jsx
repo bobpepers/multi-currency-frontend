@@ -31,15 +31,8 @@ import {
 } from '../actions/startSync';
 
 import {
-  fetchAdminLiabilityAction,
-} from '../actions/admin/adminLiability';
-import {
   patchDepositsAction,
 } from '../actions/patchDeposits';
-
-import {
-  fetchAdminBalanceAction,
-} from '../actions/admin/adminBalance';
 
 import {
   fetchFaucetBalanceAction,
@@ -76,8 +69,6 @@ const Home = function (props) {
   const {
     auth,
     nodeStatus,
-    adminLiability,
-    adminBalance,
     patchDeposits,
     faucetBalance,
     blockNumber,
@@ -89,8 +80,6 @@ const Home = function (props) {
   const refreshStats = () => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
-      dispatch(fetchAdminLiabilityAction());
-      dispatch(fetchAdminBalanceAction());
       dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
     }
@@ -99,8 +88,6 @@ const Home = function (props) {
   useEffect(() => {
     if (auth.authenticated) {
       dispatch(fetchNodeStatusAction());
-      dispatch(fetchAdminLiabilityAction());
-      dispatch(fetchAdminBalanceAction());
       dispatch(fetchFaucetBalanceAction());
       dispatch(fetchBlockNumberAction());
     }
@@ -116,8 +103,6 @@ const Home = function (props) {
     [
       auth,
       nodeStatus,
-      adminLiability,
-      adminBalance,
       faucetBalance,
       blockNumber,
     ],
@@ -128,11 +113,6 @@ const Home = function (props) {
   }
   const startSyncFunction = () => {
     dispatch(startSyncAction())
-  }
-
-  const routeChangeExample = () => {
-    const path = 'bridge';
-    navigate(path);
   }
 
   const [id, setId] = useState('');
@@ -178,38 +158,6 @@ const Home = function (props) {
               && nodeStatus.data.peers
               ? `${nodeStatus.data.peers.length} peers`
               : 'offline'}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Difference
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {adminBalance.data
-              && adminBalance.data.amount
-              && adminLiability.data
-              && adminLiability.data.amount
-              ? `${((Number(adminBalance.data.amount) - (Number(adminLiability.data.amount) / 1e8))).toFixed(8)} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
         <Grid
@@ -427,8 +375,6 @@ Home.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth,
   nodeStatus: state.nodeStatus,
-  adminLiability: state.adminLiability,
-  adminBalance: state.adminBalance,
   patchDeposits: state.patchDeposits,
   faucetBalance: state.faucetBalance,
   blockNumber: state.blockNumber,

@@ -1,20 +1,20 @@
 import axios from '../../axios';
 import {
-  FETCH_ADMIN_BALANCE_BEGIN,
-  FETCH_ADMIN_BALANCE_SUCCESS,
-  FETCH_ADMIN_BALANCE_FAIL,
+  FETCH_ADMIN_WALLET_BEGIN,
+  FETCH_ADMIN_WALLET_SUCCESS,
+  FETCH_ADMIN_WALLET_FAIL,
 } from '../types/admin/index';
 import { notistackErrorAdd } from '../helpers/notistackError';
 
-export function fetchAdminBalanceAction() {
+export function fetchAdminWalletAction() {
   return function (dispatch) {
     dispatch({
-      type: FETCH_ADMIN_BALANCE_BEGIN,
+      type: FETCH_ADMIN_WALLET_BEGIN,
     });
-    axios.get(`${window.myConfig.apiUrl}/admin/balance`)
+    axios.get(`${window.myConfig.apiUrl}/admin/wallet`)
       .then((response) => {
         dispatch({
-          type: FETCH_ADMIN_BALANCE_SUCCESS,
+          type: FETCH_ADMIN_WALLET_SUCCESS,
           payload: response.data.result,
         });
       }).catch((error) => {
@@ -23,7 +23,7 @@ export function fetchAdminBalanceAction() {
           error,
         );
         dispatch({
-          type: FETCH_ADMIN_BALANCE_FAIL,
+          type: FETCH_ADMIN_WALLET_FAIL,
           payload: error,
         });
       });

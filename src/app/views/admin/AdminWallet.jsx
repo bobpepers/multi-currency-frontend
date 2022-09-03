@@ -14,453 +14,120 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { withRouter } from '../../hooks/withRouter';
 
 import {
-  fetchAdminBalanceAction,
-} from '../../actions/admin/adminBalance';
-
-import {
-  fetchAdminLiabilityAction,
-} from '../../actions/admin/adminLiability';
-
-import {
-  fetchAdminFaucetBalanceAction,
-} from '../../actions/admin/adminFaucetBalance';
+  fetchAdminWalletAction,
+} from '../../actions/admin/adminWallet';
 
 const AdminWalletView = function (props) {
   const {
     auth,
-    adminBalance,
-    adminLiability,
-    adminFaucetBalance,
+    adminWallet,
   } = props;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAdminBalanceAction());
-    dispatch(fetchAdminLiabilityAction());
-    dispatch(fetchAdminFaucetBalanceAction());
+    dispatch(fetchAdminWalletAction());
   }, [
   ]);
 
   useEffect(() => { }, [
-    adminBalance,
+    adminWallet,
   ]);
 
   return (
     <div className="height100 content">
-      {(adminBalance.loading || adminLiability.loading || adminFaucetBalance.loading)
+      {adminWallet.loading
         && (
           <CircularProgress />
         )}
-      {adminBalance.data
-        && adminLiability.data
-        && adminFaucetBalance.data
+      {adminWallet.data
         && (
           <>
-            <Grid
-              container
-              style={{
-                marginBottom: '10px',
-                borderBottom: '1px solid black',
-              }}
-            >
-              <Grid item xs={12}>
-                <Typography variant="h5" align="center">
-                  Runebase
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Balance
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
+
+            {
+              adminWallet.data.map((record) => (
+                <Grid
+                  container
                   style={{
-                    fontWeight: 'bold',
+                    marginBottom: '10px',
+                    borderBottom: '1px solid black',
                   }}
                 >
-                  {adminBalance.data.runebase}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Liability
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminLiability.data.runebase / 1e8}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Difference
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {(adminBalance.data.runebase - (adminLiability.data.runebase / 1e8)).toFixed(8)}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Faucet
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminFaucetBalance.data.runebase / 1e8}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              style={{
-                marginBottom: '10px',
-                borderBottom: '1px solid black',
-              }}
-            >
-              <Grid item xs={12}>
-                <Typography variant="h5" align="center">
-                  Pirate
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Balance
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminBalance.data.pirate}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Liability
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminLiability.data.pirate / 1e8}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Difference
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {(adminBalance.data.pirate - (adminLiability.data.pirate / 1e8)).toFixed(8)}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Faucet
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminFaucetBalance.data.pirate / 1e8}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              style={{
-                marginBottom: '10px',
-                borderBottom: '1px solid black',
-              }}
-            >
-              <Grid item xs={12}>
-                <Typography variant="h5" align="center">
-                  Tokel
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Balance
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminBalance.data.tokel}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Liability
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminLiability.data.tokel / 1e8}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Difference
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {(adminBalance.data.tokel - (adminLiability.data.tokel / 1e8)).toFixed(8)}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Faucet
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminFaucetBalance.data.tokel / 1e8}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              style={{
-                marginBottom: '10px',
-                borderBottom: '1px solid black',
-              }}
-            >
-              <Grid item xs={12}>
-                <Typography variant="h5" align="center">
-                  Stellar Lumens
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Balance
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminBalance.data.lumens}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Liability
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminLiability.data.lumens / 1e8}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Difference
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {(adminBalance.data.lumens - (adminLiability.data.lumens / 1e8)).toFixed(8)}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Faucet
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminFaucetBalance.data.lumens / 1e8}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              style={{
-                marginBottom: '10px',
-                borderBottom: '1px solid black',
-              }}
-            >
-              <Grid item xs={12}>
-                <Typography variant="h5" align="center">
-                  Doge Lumens
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Balance
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminBalance.data.dogeLumens}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Liability
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminLiability.data.dogeLumens / 1e8}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Difference
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {(adminBalance.data.dogeLumens - (adminLiability.data.dogeLumens / 1e8)).toFixed(8)}
-                </Typography>
-              </Grid>
-              <Grid item xs={3}>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                >
-                  Faucet
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  align="center"
-                  style={{
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {adminFaucetBalance.data.dogeLumens / 1e8}
-                </Typography>
-              </Grid>
-            </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant="h5" align="center">
+                      {record.name}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                    >
+                      Balance
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                      style={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {record.balance}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                    >
+                      Liability
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                      style={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {record.liability / 1e8}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                    >
+                      Difference
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                      style={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {(record.balance - (record.liability / 1e8)).toFixed(8)}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                    >
+                      Faucet
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      align="center"
+                      style={{
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      {record.faucetBalance.amount / 1e8}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              ))
+            }
           </>
         )}
     </div>
@@ -470,9 +137,7 @@ const AdminWalletView = function (props) {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    adminBalance: state.adminBalance,
-    adminFaucetBalance: state.adminFaucetBalance,
-    adminLiability: state.adminLiability,
+    adminWallet: state.adminWallet,
   };
 }
 

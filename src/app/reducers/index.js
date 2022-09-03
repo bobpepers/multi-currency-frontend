@@ -18,9 +18,7 @@ import coinInfo from './user/coinInfo';
 
 import deposits from './admin/deposits';
 import withdrawals from './admin/withdrawals';
-import adminLiability from './admin/adminLiability';
-import adminBalance from './admin/adminBalance';
-import adminFaucetBalance from './admin/adminFaucetBalance';
+import adminWallet from './admin/adminWallet';
 import nodeStatus from './admin/nodeStatus';
 import acceptWithdrawal from './admin/acceptWithdrawal';
 import declineWithdrawal from './admin/declineWithdrawal';
@@ -60,9 +58,7 @@ const store = configureStore({
     userInfo,
     withdrawalAddresses,
     withdrawalAddress,
-    adminLiability,
-    adminBalance,
-    adminFaucetBalance,
+    adminWallet,
     adminWithdrawalSettings,
     priceCurrencies,
     errors,
