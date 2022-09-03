@@ -1,10 +1,10 @@
-import axios from '../axios';
+import axios from '../../axios';
 import {
   FETCH_ERRORS_BEGIN,
   FETCH_ERRORS_SUCCESS,
   FETCH_ERRORS_FAIL,
-} from './types/user/index';
-import { notistackErrorAdd } from './helpers/notistackError';
+} from '../types/user/index';
+import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function fetchErrorsAction(
   offset,
@@ -14,7 +14,7 @@ export function fetchErrorsAction(
     dispatch({
       type: FETCH_ERRORS_BEGIN,
     });
-    axios.post(`${window.myConfig.apiUrl}/functions/errors`, {
+    axios.post(`${window.myConfig.apiUrl}/admin/errors`, {
       offset,
       limit,
     }).then((response) => {

@@ -16,7 +16,7 @@ import Moment from 'react-moment';
 import { withRouter } from '../../hooks/withRouter';
 import {
   fetchErrorsAction,
-} from '../../actions/errors';
+} from '../../actions/admin/errors';
 
 const PREFIX = 'Errors';
 
@@ -83,7 +83,7 @@ const Errors = function (props) {
     : 0;
 
   useEffect(() => {
-    if (auth.authenticated) {
+    if (auth) {
       dispatch(fetchErrorsAction(
         (page - 1) * rowsPerPage,
         rowsPerPage,
@@ -98,6 +98,7 @@ const Errors = function (props) {
     () => {
       console.log(page);
       console.log(totalPages);
+      console.log(errors);
     },
     [
       auth,
@@ -141,7 +142,7 @@ const Errors = function (props) {
             container
             item
             xs={12}
-            className="shadow-w index600 glassHeaderActivity"
+            className="shadow-w glassHeaderActivity"
             style={{ marginTop: '40px' }}
           >
             <Grid item xs={2} mx="auto">
@@ -181,7 +182,13 @@ const Errors = function (props) {
               />
               <Grid />
             </Grid>
-            <Grid container item xs={12} className="shadow-w pl-20 glassHeader">
+            <Grid
+              container
+              item
+              xs={12}
+              className="shadow-w pl-20 glassHeader"
+              justifyContent="center"
+            >
               {
                 errors
                   && errors.data
@@ -197,11 +204,22 @@ const Errors = function (props) {
 }
 
 Errors.propTypes = {
-  classes: PropTypes.object.isRequired,
+  errors: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({})),
+    count: PropTypes.number,
+  }),
+  auth: PropTypes.bool.isRequired,
+};
+
+Errors.defaultProps = {
+  errors: {
+    data: undefined,
+    count: undefined,
+  },
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  auth: state.auth.authenticated,
   errors: state.errors,
 })
 

@@ -36,7 +36,10 @@ const Notifier = lazy(() => import('./containers/Alert'));
 const Footer = lazy(() => import('./containers/Footer'));
 const Routes = lazy(() => import('./routes'));
 
-const theme = createTheme();
+const theme = createTheme({
+// Theme style options here
+});
+
 const notistackRef = createRef();
 
 const styles = {
