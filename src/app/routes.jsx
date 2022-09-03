@@ -8,8 +8,12 @@ import {
   Navigate,
   Outlet,
 } from 'react-router-dom';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+
 import toggleTheme from './helpers/toggleTheme';
 
 import Home from './views/Home';
@@ -32,7 +36,7 @@ import WithdrawalAddressVerified from './views/user/withdrawalAddressVerify/With
 
 import AdminWalletView from './views/admin/AdminWallet';
 import UserView from './views/admin/User';
-import Users from './views/admin/Users';
+import AdminUsersView from './views/admin/Users';
 import PriceCurrenciesManagement from './views/admin/PriceCurrencies';
 import AdminWithdrawalSettingsView from './views/admin/WithdrawalSettings';
 import WithdrawalAddressesView from './views/admin/WithdrawalAddresses';
@@ -109,7 +113,7 @@ const RoutesX = function (props) {
         />
         <Route
           path="/admin/users"
-          element={<Users />}
+          element={<AdminUsersView />}
         />
         <Route
           path="/admin/user/:userId"

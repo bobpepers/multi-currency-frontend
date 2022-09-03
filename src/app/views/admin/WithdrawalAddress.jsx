@@ -28,7 +28,7 @@ import {
 } from '../../actions/admin/withdrawals';
 import {
   banUserAction,
-} from '../../actions/users';
+} from '../../actions/admin/users';
 
 const PREFIX = 'WithdrawalAddress';
 

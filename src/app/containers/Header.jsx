@@ -197,6 +197,14 @@ function Header(
                     </Link>
                     <Link
                       className="nav-link"
+                      to="/admin/users"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Users
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
                       to="/admin/activity"
                     >
                       <MenuItem onClick={handleCloseAdmin}>

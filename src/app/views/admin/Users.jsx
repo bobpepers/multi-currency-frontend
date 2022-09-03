@@ -18,20 +18,20 @@ import { withRouter } from '../../hooks/withRouter';
 import {
   fetchUsersAction,
   banUserAction,
-} from '../../actions/users';
+} from '../../actions/admin/users';
 import UsersTable from '../../components/management/UsersTable';
 
 const PREFIX = 'Users';
 
 const classes = {
   formControl: `${PREFIX}-formControl`,
-  selectEmpty: `${PREFIX}-selectEmpty`
+  selectEmpty: `${PREFIX}-selectEmpty`,
 };
 
 const Root = styled('div')((
   {
-    theme
-  }
+    theme,
+  },
 ) => ({
   [`& .${classes.formControl}`]: {
     margin: theme.spacing(1),
@@ -41,10 +41,10 @@ const Root = styled('div')((
 
   [`& .${classes.selectEmpty}`]: {
     marginTop: theme.spacing(2),
-  }
+  },
 }));
 
-const UsersView = function (props) {
+const AdminUsersView = function (props) {
   const {
     auth,
     users,
@@ -225,4 +225,4 @@ const mapStateToProps = (state) => ({
   users: state.users,
 })
 
-export default withRouter(connect(mapStateToProps, null)(UsersView));
+export default withRouter(connect(mapStateToProps, null)(AdminUsersView));
