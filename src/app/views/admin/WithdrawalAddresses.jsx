@@ -20,13 +20,13 @@ const PREFIX = 'WithdrawalAddresses';
 
 const classes = {
   formControl: `${PREFIX}-formControl`,
-  selectEmpty: `${PREFIX}-selectEmpty`
+  selectEmpty: `${PREFIX}-selectEmpty`,
 };
 
 const Root = styled('div')((
   {
-    theme
-  }
+    theme,
+  },
 ) => ({
   [`& .${classes.formControl}`]: {
     margin: theme.spacing(1),
@@ -36,7 +36,7 @@ const Root = styled('div')((
 
   [`& .${classes.selectEmpty}`]: {
     marginTop: theme.spacing(2),
-  }
+  },
 }));
 
 const WithdrawalAddressesView = function (props) {

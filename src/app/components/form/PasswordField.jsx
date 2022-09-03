@@ -10,6 +10,7 @@ import {
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
+import PropTypes from 'prop-types';
 
 function RenderPasswordField({
   input,
@@ -55,5 +56,21 @@ function RenderPasswordField({
     </div>
   )
 }
+
+RenderPasswordField.propTypes = {
+  input: PropTypes.shape({}).isRequired,
+  mvalues: PropTypes.shape({
+    showPassword: PropTypes.bool.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
+  meta: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    touched: PropTypes.bool.isRequired,
+  }).isRequired,
+  label: PropTypes.string.isRequired,
+  handleClickShowPassword: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleMouseDownPassword: PropTypes.func.isRequired,
+};
 
 export default RenderPasswordField;

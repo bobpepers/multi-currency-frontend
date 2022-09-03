@@ -10,7 +10,8 @@ const WalletRow = function (props) {
   const {
     data,
   } = props;
-
+  console.log(data.WalletAddressExternals);
+  console.log('data.WalletAddressExternals');
   return (
     <Grid
       className="walletRow"
@@ -116,17 +117,19 @@ const WalletRow = function (props) {
 
 WalletRow.propTypes = {
   data: PropTypes.shape({
-    available: PropTypes.number.isRequired,
-    locked: PropTypes.number.isRequired,
+    available: PropTypes.string.isRequired,
+    locked: PropTypes.string.isRequired,
     address: PropTypes.shape({
       address: PropTypes.string.isRequired,
-      memo: PropTypes.string.isRequired,
+      memo: PropTypes.string,
     }).isRequired,
     coin: PropTypes.shape({
       ticker: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired,
-    WalletAddressExternals: PropTypes.string.isRequired,
+    WalletAddressExternals: PropTypes.arrayOf(
+      PropTypes.shape({}).isRequired,
+    ).isRequired,
   }).isRequired,
 };
 

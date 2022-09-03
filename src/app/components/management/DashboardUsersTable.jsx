@@ -21,13 +21,13 @@ const PREFIX = 'DashboardUsersTable';
 const classes = {
   root: `${PREFIX}-root`,
   table: `${PREFIX}-table`,
-  visuallyHidden: `${PREFIX}-visuallyHidden`
+  visuallyHidden: `${PREFIX}-visuallyHidden`,
 };
 
 const Root = styled('div')((
   {
-    theme
-  }
+    theme,
+  },
 ) => ({
   [`&.${classes.root}`]: {
     width: '100%',
@@ -47,7 +47,7 @@ const Root = styled('div')((
     position: 'absolute',
     top: 20,
     width: 1,
-  }
+  },
 }));
 
 const headCells = [
@@ -190,7 +190,6 @@ function DashboardUsersTable(props) {
       ),
     );
   });
-
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('id');

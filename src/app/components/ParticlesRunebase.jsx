@@ -156,7 +156,6 @@ function ParticlesRunebase() {
             }}
           />
         </div>
-
         <div id="particles-js" />
       </section>
     </div>

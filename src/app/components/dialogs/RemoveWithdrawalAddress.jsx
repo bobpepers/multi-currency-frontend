@@ -116,8 +116,7 @@ RemoveWithdrawalAddressDialog.propTypes = {
   id: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  removeWithdrawalAddress: PropTypes.arrayOf(PropTypes.shape({
-  })).isRequired,
+  removeWithdrawalAddress: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 export default connect(mapStateToProps, null)(RemoveWithdrawalAddressDialog);

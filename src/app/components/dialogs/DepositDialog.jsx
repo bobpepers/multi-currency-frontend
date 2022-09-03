@@ -34,7 +34,7 @@ function DepositDialog(props) {
   };
 
   const handleClickCopyAddress = () => {
-    navigator.clipboard.writeText(address)
+    window.navigator.clipboard.writeText(address)
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -185,7 +185,11 @@ DepositDialog.propTypes = {
   ticker: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
-  memo: PropTypes.string.isRequired,
+  memo: PropTypes.string,
+};
+
+DepositDialog.defaultProps = {
+  memo: null,
 };
 
 export default DepositDialog;

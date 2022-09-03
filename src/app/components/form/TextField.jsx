@@ -3,6 +3,7 @@ import {
   FormControl,
   TextField,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 function RenderTextField({
   input,
@@ -13,6 +14,8 @@ function RenderTextField({
   },
   label,
 }) {
+  console.log(type);
+  console.log('type');
   return (
     <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
       <FormControl
@@ -31,5 +34,19 @@ function RenderTextField({
     </div>
   )
 }
+
+RenderTextField.propTypes = {
+  input: PropTypes.shape({}).isRequired,
+  meta: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    touched: PropTypes.bool.isRequired,
+  }).isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+};
+
+RenderTextField.defaultProps = {
+  type: 'text',
+};
 
 export default RenderTextField;

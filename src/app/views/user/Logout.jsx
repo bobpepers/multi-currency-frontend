@@ -1,22 +1,13 @@
 import React, {
   useEffect,
-  useMemo,
 } from 'react';
 import {
   connect,
   useDispatch,
 } from 'react-redux';
 import {
-  useLocation,
-} from 'react-router-dom';
-import {
   signoutUser,
 } from '../../actions/auth';
-
-const useQuery = () => {
-  const { search } = useLocation();
-  return useMemo(() => new URLSearchParams(search), [search]);
-}
 
 function LogoutView(props) {
   const {

@@ -4,6 +4,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 function NumberField({
   input,
@@ -33,5 +34,14 @@ function NumberField({
     </FormControl>
   )
 }
+
+NumberField.propTypes = {
+  input: PropTypes.shape({}).isRequired,
+  meta: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    touched: PropTypes.bool.isRequired,
+  }).isRequired,
+  label: PropTypes.string.isRequired,
+};
 
 export default NumberField;

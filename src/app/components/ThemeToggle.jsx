@@ -54,7 +54,7 @@ function ThemeToggle(props) {
       <WbSunny />
       <ThemeSwitch
         checked={theme !== 'light'}
-        onChange={(e) => handleChangeCurrentStyleMode(theme === 'light' ? 'dark' : 'light')}
+        onChange={() => handleChangeCurrentStyleMode(theme === 'light' ? 'dark' : 'light')}
         classes={{
           switchBase: classes.switchBase,
           checked: classes.checked,

@@ -22,12 +22,10 @@ import Select from '@mui/material/Select';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-
 import Countdown from 'react-countdown';
 import AddNewWithdrawalAddressDialog from './AddNewWithdrawalAddress';
 import RemoveWithdrawalAddressDialog from './RemoveWithdrawalAddress';
 import { createWithdrawalAction } from '../../actions/user/createWithdrawal';
-
 import { resendWithdrawalAddressVerificationAction } from '../../actions/user/resendWithdrawalAddressVerification';
 
 const WithdrawDialog = function (props) {
@@ -41,6 +39,8 @@ const WithdrawDialog = function (props) {
     resendWithdrawalAddressVerification,
     createWithdrawal,
   } = props;
+  console.log(createWithdrawal);
+  console.log('createWithdrawal');
   const [open, setOpen] = useState(false);
   const [addressId, setAddressId] = useState(false);
   const [addressObject, setAddressObject] = useState(false);
@@ -269,7 +269,9 @@ const WithdrawDialog = function (props) {
           </Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <InputLabel id="address-select-label">Withdrawal Address</InputLabel>
+              <InputLabel id="address-select-label">
+                Withdrawal Address
+              </InputLabel>
               <Select
                 labelId="address-select-label"
                 id="address-select"
@@ -390,7 +392,6 @@ const WithdrawDialog = function (props) {
                                 </div>
                               )
                             }
-
                           </div>
                         </div>
                       ) : (
@@ -494,19 +495,37 @@ function mapStateToProps(state) {
 }
 
 WithdrawDialog.propTypes = {
+  createWithdrawal: PropTypes.arrayOf(PropTypes.shape({})),
+  removeWithdrawalAddress: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  name: PropTypes.string.isRequired,
+  addWithdrawalAddress: PropTypes.shape({
+    id: PropTypes.number,
+  }),
+  ticker: PropTypes.string.isRequired,
+  WalletAddressExternals: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   resendWithdrawalAddressVerification: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-  }).isRequired,
+    loading: PropTypes.bool,
+    data: PropTypes.shape({}),
+  }),
   wallet: PropTypes.shape({
-    available: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    available: PropTypes.string.isRequired,
     coin: PropTypes.shape({
       ticker: PropTypes.string.isRequired,
       withdrawalSetting: PropTypes.shape({
         fee: PropTypes.number.isRequired,
-        min: PropTypes.number.isRequired,
+        min: PropTypes.string.isRequired,
+        enabled: PropTypes.bool.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,
 };
 
+WithdrawDialog.defaultProps = {
+  createWithdrawal: null,
+  resendWithdrawalAddressVerification: null,
+  addWithdrawalAddress: {
+    id: null,
+  },
+}
 export default connect(mapStateToProps, null)(WithdrawDialog);

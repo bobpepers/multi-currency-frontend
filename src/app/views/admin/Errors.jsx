@@ -24,7 +24,7 @@ const classes = {
   card: `${PREFIX}-card`,
   bullet: `${PREFIX}-bullet`,
   title: `${PREFIX}-title`,
-  pos: `${PREFIX}-pos`
+  pos: `${PREFIX}-pos`,
 };
 
 const Root = styled('div')({

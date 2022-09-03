@@ -51,7 +51,7 @@ const classes = {
   card: `${PREFIX}-card`,
   bullet: `${PREFIX}-bullet`,
   title: `${PREFIX}-title`,
-  pos: `${PREFIX}-pos`
+  pos: `${PREFIX}-pos`,
 };
 
 const Root = styled('div')({
@@ -178,68 +178,6 @@ const Home = function (props) {
               && nodeStatus.data.peers
               ? `${nodeStatus.data.peers.length} peers`
               : 'offline'}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Liability
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {adminLiability.data
-              && adminLiability.data
-              && adminLiability.data.amount
-              ? `${adminLiability.data.amount / 1e8} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
-          </Typography>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          sm={6}
-          md={4}
-          lg={3}
-          xl={3}
-          className="zindexOne"
-          justifyContent="center"
-        >
-          <Typography
-            variant="h6"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            Balance
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            component="div"
-            align="center"
-          >
-            {adminBalance.data
-              && adminBalance.data
-              && adminBalance.data.amount
-              ? `${adminBalance.data.amount} ${window.myConfig.ticker}`
-              : `0 ${window.myConfig.ticker}`}
           </Typography>
         </Grid>
         <Grid

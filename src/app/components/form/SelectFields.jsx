@@ -5,6 +5,7 @@ import {
   Select,
   FormHelperText,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
 function SelectField({
   input,
@@ -16,6 +17,7 @@ function SelectField({
   children,
   ...custom
 }) {
+  console.log(children);
   return (
     <FormControl className="admin-form-field" style={{ width: '100%' }}>
       <InputLabel error={touched && error}>{label}</InputLabel>
@@ -24,12 +26,25 @@ function SelectField({
         floatingLabelText={label}
         error={touched && error}
         {...input}
-        children={children}
         {...custom}
-      />
+      >
+        {children}
+      </Select>
       <FormHelperText error={touched && error}>{error}</FormHelperText>
     </FormControl>
   )
 }
+
+SelectField.propTypes = {
+  children: PropTypes.arrayOf(
+    PropTypes.shape({}).isRequired,
+  ).isRequired,
+  input: PropTypes.shape({}).isRequired,
+  meta: PropTypes.shape({
+    error: PropTypes.string.isRequired,
+    touched: PropTypes.bool.isRequired,
+  }).isRequired,
+  label: PropTypes.string.isRequired,
+};
 
 export default SelectField;

@@ -63,9 +63,7 @@ const WalletOverviewContainer = function (props) {
 WalletOverviewContainer.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   user: PropTypes.shape({
-    wallets: PropTypes.arrayOf(PropTypes.shape({
-
-    })),
+    wallets: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
 };
 

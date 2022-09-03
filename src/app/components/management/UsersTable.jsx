@@ -24,13 +24,13 @@ const PREFIX = 'UsersTable';
 const classes = {
   root: `${PREFIX}-root`,
   table: `${PREFIX}-table`,
-  visuallyHidden: `${PREFIX}-visuallyHidden`
+  visuallyHidden: `${PREFIX}-visuallyHidden`,
 };
 
 const Root = styled('div')((
   {
-    theme
-  }
+    theme,
+  },
 ) => ({
   [`&.${classes.root}`]: {
     width: '100%',
@@ -50,7 +50,7 @@ const Root = styled('div')((
     position: 'absolute',
     top: 20,
     width: 1,
-  }
+  },
 }));
 
 const headCells = [
@@ -209,7 +209,6 @@ const UsersTable = function (props) {
       ),
     );
   });
-
 
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('id');
