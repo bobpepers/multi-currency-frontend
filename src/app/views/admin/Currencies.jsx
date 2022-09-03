@@ -109,7 +109,7 @@ const PriceCurrenciesManagement = function (props) {
   }
 
   return (
-    <div className="content height100 w-100 transactions transaction">
+    <div className="content">
       <Form
         onSubmit={async (values) => {
           await dispatch(addPriceCurrenciesAction(values));
@@ -171,7 +171,11 @@ const PriceCurrenciesManagement = function (props) {
                   </MenuItem>
                 </Field>
               </Grid>
-              <Grid item xs={6}>
+              <Grid
+                item
+                xs={6}
+                style={{ paddingRight: '5px' }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -179,13 +183,16 @@ const PriceCurrenciesManagement = function (props) {
                   className="btn"
                   fullWidth
                   size="large"
-                  style={{ marginRight: '5px' }}
                   disabled={pristine || submitting}
                 >
                   Add
                 </Button>
               </Grid>
-              <Grid item xs={6}>
+              <Grid
+                item
+                xs={6}
+                style={{ paddingLeft: '5px' }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -193,7 +200,6 @@ const PriceCurrenciesManagement = function (props) {
                   className="btn"
                   fullWidth
                   size="large"
-                  style={{ marginLeft: '5px' }}
                 >
                   Update Prices &amp; Conversions
                 </Button>
