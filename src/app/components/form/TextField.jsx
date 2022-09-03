@@ -14,8 +14,6 @@ function RenderTextField({
   },
   label,
 }) {
-  console.log(type);
-  console.log('type');
   return (
     <div className={`input-group ${touched && error ? 'has-error' : ''}`}>
       <FormControl
@@ -38,7 +36,7 @@ function RenderTextField({
 RenderTextField.propTypes = {
   input: PropTypes.shape({}).isRequired,
   meta: PropTypes.shape({
-    error: PropTypes.string.isRequired,
+    error: PropTypes.string,
     touched: PropTypes.bool.isRequired,
   }).isRequired,
   label: PropTypes.string.isRequired,

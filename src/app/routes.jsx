@@ -37,7 +37,7 @@ import WithdrawalAddressVerified from './views/user/withdrawalAddressVerify/With
 import AdminWalletView from './views/admin/AdminWallet';
 import UserView from './views/admin/User';
 import AdminUsersView from './views/admin/Users';
-import PriceCurrenciesManagement from './views/admin/PriceCurrencies';
+import AdminCurrencies from './views/admin/Currencies';
 import AdminWithdrawalSettingsView from './views/admin/WithdrawalSettings';
 import WithdrawalAddressesView from './views/admin/WithdrawalAddresses';
 import WithdrawalAddressView from './views/admin/WithdrawalAddress';
@@ -144,8 +144,8 @@ const RoutesX = function (props) {
           element={<Errors />}
         />
         <Route
-          path="/admin/management/pricecurrencies"
-          element={<PriceCurrenciesManagement />}
+          path="/admin/management/currencies"
+          element={<AdminCurrencies />}
         />
       </Route>
 

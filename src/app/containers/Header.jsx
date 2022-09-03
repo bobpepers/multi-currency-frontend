@@ -229,10 +229,10 @@ function Header(
                     </Link>
                     <Link
                       className="nav-link"
-                      to="/admin/management/pricecurrencies"
+                      to="/admin/management/currencies"
                     >
                       <MenuItem onClick={handleCloseAdmin}>
-                        Price Currencies
+                        Currencies
                       </MenuItem>
                     </Link>
                     <Link

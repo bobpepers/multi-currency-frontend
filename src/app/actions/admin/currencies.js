@@ -1,45 +1,18 @@
-import axios from '../axios';
+import axios from '../../axios';
 import {
-  FETCH_PRICECURRENCIES_BEGIN,
   FETCH_PRICECURRENCIES_SUCCESS,
-  FETCH_PRICECURRENCIES_FAIL,
+  ENQUEUE_SNACKBAR,
+} from '../types/user/index';
+import {
   UPDATE_PRICECURRENCIES,
   REMOVE_PRICECURRENCIES,
   ADD_PRICECURRENCIES,
-  ENQUEUE_SNACKBAR,
-} from './types/user/index';
-import { notistackErrorAdd } from './helpers/notistackError';
-
-export function fetchPriceCurrenciesAction() {
-  return function (dispatch) {
-    dispatch({
-      type: FETCH_PRICECURRENCIES_BEGIN,
-    });
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies`, {
-      // id,
-      // channelId,
-      // channelName
-    }).then((response) => {
-      dispatch({
-        type: FETCH_PRICECURRENCIES_SUCCESS,
-        payload: response.data,
-      });
-    }).catch((error) => {
-      notistackErrorAdd(
-        dispatch,
-        error,
-      );
-      dispatch({
-        type: FETCH_PRICECURRENCIES_FAIL,
-        payload: error,
-      });
-    });
-  }
-}
+} from '../types/admin/index';
+import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function removePriceCurrenciesAction(id) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/remove`, { id })
+    axios.post(`${window.myConfig.apiUrl}/admin/management/currencies/remove`, { id })
       .then((response) => {
         dispatch({
           type: REMOVE_PRICECURRENCIES,
@@ -56,8 +29,12 @@ export function removePriceCurrenciesAction(id) {
 
 export function updatePricesAndConversionsAction() {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/updateprice`)
+    axios.post(`${window.myConfig.apiUrl}/admin/management/currencies/updateprice`)
       .then((response) => {
+        dispatch({
+          type: FETCH_PRICECURRENCIES_SUCCESS,
+          payload: response.data,
+        });
         dispatch({
           type: ENQUEUE_SNACKBAR,
           notification: {
@@ -68,10 +45,6 @@ export function updatePricesAndConversionsAction() {
             },
           },
         });
-        // dispatch({
-        //   type: ADD_PRICECURRENCIES,
-        //   payload: response.data.currency,
-        // });
       }).catch((error) => {
         notistackErrorAdd(
           dispatch,
@@ -83,7 +56,7 @@ export function updatePricesAndConversionsAction() {
 
 export function addPriceCurrenciesAction(obj) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/add`, obj)
+    axios.post(`${window.myConfig.apiUrl}/admin/management/currencies/add`, obj)
       .then((response) => {
         dispatch({
           type: ADD_PRICECURRENCIES,
@@ -105,7 +78,7 @@ export function updatePriceCurrenciesAction(
   type,
 ) {
   return function (dispatch) {
-    axios.post(`${window.myConfig.apiUrl}/management/pricecurrencies/update`, {
+    axios.post(`${window.myConfig.apiUrl}/admin/management/currencies/update`, {
       id,
       name,
       iso,

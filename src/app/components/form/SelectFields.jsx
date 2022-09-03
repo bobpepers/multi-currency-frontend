@@ -17,20 +17,19 @@ function SelectField({
   children,
   ...custom
 }) {
-  console.log(children);
   return (
     <FormControl className="admin-form-field" style={{ width: '100%' }}>
-      <InputLabel error={touched && error}>{label}</InputLabel>
+      <InputLabel error={!!(touched && error)}>{label}</InputLabel>
       <Select
         style={{ width: '100%' }}
-        floatingLabelText={label}
-        error={touched && error}
+        label={label}
+        error={!!(touched && error)}
         {...input}
         {...custom}
       >
         {children}
       </Select>
-      <FormHelperText error={touched && error}>{error}</FormHelperText>
+      {touched && error && <div className="form-error">{error}</div>}
     </FormControl>
   )
 }

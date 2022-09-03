@@ -2,13 +2,16 @@ import {
   FETCH_PRICECURRENCIES_BEGIN,
   FETCH_PRICECURRENCIES_SUCCESS,
   FETCH_PRICECURRENCIES_FAIL,
+} from '../actions/types/user/index';
+
+import {
   UPDATE_PRICECURRENCIES,
   REMOVE_PRICECURRENCIES,
   ADD_PRICECURRENCIES,
-} from '../../actions/types/user/index';
+} from '../actions/types/admin/index';
 
 const initialState = {
-  isFetching: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   error: null,
 };
 
@@ -23,7 +26,7 @@ export default (state = initialState, action) => {
           },
           ...state.data,
         ],
-        isFetching: false,
+        isLoading: false,
       };
     case REMOVE_PRICECURRENCIES:
       return {
@@ -39,26 +42,26 @@ export default (state = initialState, action) => {
             ? { ...action.payload }
             : channel),
         ),
-        isFetching: false,
+        isLoading: false,
         error: null,
       };
     case FETCH_PRICECURRENCIES_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         error: null,
       };
     case FETCH_PRICECURRENCIES_SUCCESS:
       return {
         ...state,
         data: action.payload.result,
-        isFetching: false,
+        isLoading: false,
       };
     case FETCH_PRICECURRENCIES_FAIL:
       return {
         ...state,
         error: action.error,
-        isFetching: false,
+        isLoading: false,
       };
     default:
       return state;

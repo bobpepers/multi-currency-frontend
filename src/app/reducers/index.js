@@ -26,7 +26,7 @@ import patchDeposits from './admin/patchDeposits';
 import blockNumber from './admin/blockNumber';
 import startSync from './admin/startSync';
 import errors from './admin/errors';
-import priceCurrencies from './admin/priceCurrencies';
+import currencies from './currencies';
 import adminWithdrawalSettings from './admin/adminWithdrawalSettings';
 import userInfo from './admin/userInfo';
 import withdrawalAddresses from './admin/withdrawalAddresses';
@@ -60,7 +60,7 @@ const store = configureStore({
     withdrawalAddress,
     adminWallet,
     adminWithdrawalSettings,
-    priceCurrencies,
+    currencies,
     errors,
     deposits,
     withdrawals,
