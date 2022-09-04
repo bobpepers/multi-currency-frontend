@@ -17,6 +17,7 @@ import createWithdrawal from './user/createWithdrawal';
 import coinInfo from './user/coinInfo';
 import coins from './user/coins';
 import priceSources from './user/priceSources';
+import coinPriceSources from './coinPriceSources';
 
 import deposits from './admin/deposits';
 import withdrawals from './admin/withdrawals';
@@ -45,6 +46,7 @@ const store = configureStore({
     user,
     coins,
     priceSources,
+    coinPriceSources,
     coinInfo,
     activity,
     transactions,
