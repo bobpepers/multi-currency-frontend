@@ -45,6 +45,7 @@ import Deposits from './views/admin/Deposits';
 import Withdrawals from './views/admin/Withdrawals';
 import Errors from './views/admin/Errors';
 import CoinPriceSourcesView from './views/admin/CoinPriceSources';
+import NotFoundView from './views/NotFound';
 
 import { authenticatedAction } from './actions/auth';
 
@@ -209,6 +210,11 @@ const RoutesX = function (props) {
       <Route
         path="/withdraw/address/verified"
         element={<WithdrawalAddressVerified />}
+      />
+
+      <Route
+        path="*"
+        element={<NotFoundView />}
       />
     </Routes>
   )
