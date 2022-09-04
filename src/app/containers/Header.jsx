@@ -51,6 +51,8 @@ function Header(
   const theme = useTheme();
   const mdDown = useMediaQuery(theme.breakpoints.down('md'));
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     setMainMenuHeight(heightRef.current.clientHeight);
   }, [menu]);
@@ -517,7 +519,7 @@ Header.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
+    authenticated: state.auth,
     user: state.user.data,
   };
 }
