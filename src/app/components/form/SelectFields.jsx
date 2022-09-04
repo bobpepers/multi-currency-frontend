@@ -18,8 +18,15 @@ function SelectField({
   ...custom
 }) {
   return (
-    <FormControl className="admin-form-field" style={{ width: '100%' }}>
-      <InputLabel error={!!(touched && error)}>{label}</InputLabel>
+    <FormControl
+      className="admin-form-field"
+      style={{ width: '100%' }}
+    >
+      <InputLabel
+        error={!!(touched && error)}
+      >
+        {label}
+      </InputLabel>
       <Select
         style={{ width: '100%' }}
         label={label}

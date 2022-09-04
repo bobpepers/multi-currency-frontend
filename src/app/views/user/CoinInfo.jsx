@@ -19,6 +19,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {
   fetchCoinInfoAction,
 } from '../../actions/user/coinInfo';
+import PriceTable from '../../components/user/PriceTable';
 
 function CoinInfoView(props) {
   const {
@@ -37,6 +38,7 @@ function CoinInfoView(props) {
   }, []);
 
   useEffect(() => {
+    console.log(data);
     if (
       error
       && error.status === 404
@@ -104,7 +106,10 @@ function CoinInfoView(props) {
                 {data.ticker}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={4}
+            >
               <Divider>
                 <Typography
                   variant="h6"
@@ -122,7 +127,10 @@ function CoinInfoView(props) {
                 0%
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={4}
+            >
               <Divider>
                 <Typography
                   variant="h6"
@@ -141,7 +149,10 @@ function CoinInfoView(props) {
                 %
               </Typography>
             </Grid>
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={4}
+            >
               <Divider>
                 <Typography
                   variant="h6"
@@ -161,7 +172,10 @@ function CoinInfoView(props) {
                 {data.ticker}
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}
+            >
               <Divider>
                 <Typography
                   variant="h6"
@@ -172,13 +186,21 @@ function CoinInfoView(props) {
                 </Typography>
               </Divider>
             </Grid>
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}
+            >
               <Typography
                 variant="h6"
                 gutterBottom
                 align="center"
               >
-                Price Table here
+                <PriceTable
+                  coinPriceSources={data
+                    && data.CoinPriceSources
+                    ? data.CoinPriceSources
+                    : []}
+                />
               </Typography>
             </Grid>
           </Grid>
