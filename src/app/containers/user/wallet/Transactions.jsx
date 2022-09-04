@@ -6,16 +6,12 @@ import {
   connect,
   useDispatch,
 } from 'react-redux';
-
 import {
   Grid,
   CircularProgress,
 } from '@mui/material';
 import { withRouter } from '../../../hooks/withRouter';
-
-import {
-  fetchTransactionsAction,
-} from '../../../actions/user/transactions';
+import { fetchTransactionsAction } from '../../../actions/user/transactions';
 import TransactionsTable from '../../../components/user/TransactionsTable';
 
 const TransactionsContainer = function (props) {

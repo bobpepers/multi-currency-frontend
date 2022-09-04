@@ -5,7 +5,7 @@ import {
 } from '../../actions/types/user/index';
 
 const initialState = {
-  loading: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   error: null,
 };
 
@@ -14,20 +14,27 @@ export default (state = initialState, action) => {
     case FETCH_COIN_INFO_BEGIN:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
         error: null,
       };
     case FETCH_COIN_INFO_SUCCESS:
       return {
         ...state,
         data: action.payload,
-        loading: false,
+        isLoading: false,
       };
     case FETCH_COIN_INFO_FAIL:
       return {
         ...state,
-        error: action.payload,
-        loading: false,
+        isLoading: false,
+        error: {
+          status: action.payload.response.status,
+          message: action.payload.response
+                    && action.payload.response.data
+                    && action.payload.response.data.error
+            ? action.payload.response.data.error
+            : 'unknown',
+        },
       };
     default:
       return state;

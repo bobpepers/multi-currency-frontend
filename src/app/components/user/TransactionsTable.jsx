@@ -16,10 +16,8 @@ import {
   TableSortLabel,
   FormControlLabel,
   Switch,
-  Button,
 } from '@mui/material';
 import {
-  useNavigate,
   Link,
 } from 'react-router-dom';
 
@@ -228,8 +226,6 @@ const TransactionsTable = function (props) {
     setRowsPerPage,
     totalCount,
   } = props;
-
-  const navigate = useNavigate();
 
   useEffect(
     () => { },

@@ -3,6 +3,7 @@ import {
   Grid,
 } from '@mui/material';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import DepositDialog from './dialogs/DepositDialog';
 import WithdrawDialog from './dialogs/WithdrawDialog';
 
@@ -10,8 +11,6 @@ const WalletRow = function (props) {
   const {
     data,
   } = props;
-  console.log(data.WalletAddressExternals);
-  console.log('data.WalletAddressExternals');
   return (
     <Grid
       className="walletRow"
@@ -27,13 +26,20 @@ const WalletRow = function (props) {
         justify="center"
         alignItems="center"
       >
-        <img
-          src={`/assets/images/coins/${(data.coin.ticker).toLowerCase()}.png`}
-          className="walletCoinImage"
-          alt={`${data.coin.name} logo`}
-        />
-        <p>{data.coin.ticker}</p>
-        <p>{data.coin.name}</p>
+        <Link
+          to={`/coin/${data.coin.ticker.toLowerCase()}`}
+          style={{
+            textAlign: 'center',
+          }}
+        >
+          <img
+            src={`/assets/images/coins/${(data.coin.ticker).toLowerCase()}.png`}
+            className="walletCoinImage"
+            alt={`${data.coin.name} logo`}
+          />
+          <p>{data.coin.ticker}</p>
+          <p>{data.coin.name}</p>
+        </Link>
       </Grid>
       <Grid
         container
