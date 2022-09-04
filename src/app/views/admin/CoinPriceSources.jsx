@@ -40,7 +40,7 @@ import {
 import RenderTextField from '../../components/form/TextField';
 import SelectField from '../../components/form/SelectFields';
 
-const PriceCurrenciesManagement = function (props) {
+const CoinPriceSourcesView = function (props) {
   const {
     auth,
     currencies: {
@@ -371,7 +371,7 @@ const PriceCurrenciesManagement = function (props) {
   )
 }
 
-PriceCurrenciesManagement.propTypes = {
+CoinPriceSourcesView.propTypes = {
   auth: PropTypes.bool.isRequired,
   currencies: PropTypes.shape({
     isLoading: PropTypes.bool,
@@ -380,7 +380,7 @@ PriceCurrenciesManagement.propTypes = {
   }),
 };
 
-PriceCurrenciesManagement.defaultProps = {
+CoinPriceSourcesView.defaultProps = {
   currencies: {
     isLoading: false,
     data: null,
@@ -391,8 +391,9 @@ PriceCurrenciesManagement.defaultProps = {
 function mapStateToProps(state) {
   return {
     auth: state.auth.authenticated,
-    currencies: state.currencies,
+    coins: state.coins,
+    priceSources: state.priceSources,
   };
 }
 
-export default connect(mapStateToProps, null)(PriceCurrenciesManagement);
+export default connect(mapStateToProps, null)(CoinPriceSourcesView);

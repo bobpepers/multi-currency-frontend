@@ -237,6 +237,14 @@ function Header(
                     </Link>
                     <Link
                       className="nav-link"
+                      to="/admin/management/coinpricesources"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        CoinPriceSources
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
                       to="/admin/withdrawal/settings"
                     >
                       <MenuItem onClick={handleCloseAdmin}>

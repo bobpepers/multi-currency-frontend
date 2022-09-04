@@ -44,6 +44,7 @@ import WithdrawalAddressView from './views/admin/WithdrawalAddress';
 import Deposits from './views/admin/Deposits';
 import Withdrawals from './views/admin/Withdrawals';
 import Errors from './views/admin/Errors';
+import CoinPriceSourcesView from './views/admin/CoinPriceSources';
 
 import { authenticatedAction } from './actions/auth';
 
@@ -114,6 +115,10 @@ const RoutesX = function (props) {
         <Route
           path="/admin/users"
           element={<AdminUsersView />}
+        />
+        <Route
+          path="/admin/management/coinpricesources"
+          element={<CoinPriceSourcesView />}
         />
         <Route
           path="/admin/user/:userId"
