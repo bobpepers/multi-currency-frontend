@@ -8,6 +8,7 @@ import {
   UPDATE_WITHDRAWAL_ADDRESS,
   CONFIRM_WITHDRAWAL_ADDRESS,
   UPDATE_WALLET,
+  UNAUTH_USER,
 } from '../../actions/types/user/index';
 
 const initialState = {
@@ -151,15 +152,6 @@ export default function userReducer(
       };
     }
     case CONFIRM_WITHDRAWAL_ADDRESS: {
-      console.log(action.payload);
-      console.log('action.payload');
-      console.log('action.payload');
-      console.log('action.payload');
-      console.log('action.payload');
-      console.log('action.payload');
-      console.log('action.payload');
-      console.log('action.payload');
-
       return {
         ...state,
         data: {
@@ -180,6 +172,15 @@ export default function userReducer(
               : wallet),
           ),
         },
+        loading: false,
+        error: null,
+      };
+    }
+
+    case UNAUTH_USER: {
+      return {
+        ...state,
+        data: null,
         loading: false,
         error: null,
       };

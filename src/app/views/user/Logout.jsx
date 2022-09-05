@@ -6,6 +6,9 @@ import {
   useDispatch,
 } from 'react-redux';
 import {
+  useNavigate,
+} from 'react-router-dom';
+import {
   signoutUser,
 } from '../../actions/auth';
 
@@ -15,8 +18,10 @@ function LogoutView(props) {
     auth,
   } = props;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(signoutUser());
+    dispatch(signoutUser(navigate));
   }, []);
 
   useEffect(() => {

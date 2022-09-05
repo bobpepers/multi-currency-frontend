@@ -125,14 +125,14 @@ export function verifyEmail(props, navigate) {
 /**
  * Sign out
  */
-export function signoutUser() {
+export function signoutUser(navigate) {
   return function (dispatch) {
     axios.get(`${window.myConfig.apiUrl}/logout`)
       .then(() => {
         dispatch({
           type: UNAUTH_USER,
         });
-        window.location.href = '/';
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);

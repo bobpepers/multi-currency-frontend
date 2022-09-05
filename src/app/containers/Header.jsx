@@ -52,6 +52,10 @@ function Header(
   const mdDown = useMediaQuery(theme.breakpoints.down('md'));
 
   useEffect(() => {}, []);
+  useEffect(() => {}, [
+    user,
+    authenticated,
+  ]);
 
   useEffect(() => {
     setMainMenuHeight(heightRef.current.clientHeight);
@@ -157,6 +161,7 @@ function Header(
       </Menu>
       {
         authenticated
+              && authenticated.authenticated
               && user
               && user.role
               && user.role === 4
