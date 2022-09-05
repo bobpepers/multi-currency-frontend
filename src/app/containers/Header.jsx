@@ -191,6 +191,14 @@ function Header(
                   >
                     <Link
                       className="nav-link"
+                      to="/admin/blockchains"
+                    >
+                      <MenuItem onClick={handleCloseAdmin}>
+                        Blockchains
+                      </MenuItem>
+                    </Link>
+                    <Link
+                      className="nav-link"
                       to="/admin/wallet"
                     >
                       <MenuItem onClick={handleCloseAdmin}>

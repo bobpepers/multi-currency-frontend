@@ -46,6 +46,7 @@ import Withdrawals from './views/admin/Withdrawals';
 import Errors from './views/admin/Errors';
 import CoinPriceSourcesView from './views/admin/CoinPriceSources';
 import NotFoundView from './views/NotFound';
+import BlockchainsView from './views/admin/Blockchains';
 
 import { authenticatedAction } from './actions/auth';
 
@@ -112,6 +113,10 @@ const RoutesX = function (props) {
         <Route
           path="/admin/wallet"
           element={<AdminWalletView />}
+        />
+        <Route
+          path="/admin/blockchains"
+          element={<BlockchainsView />}
         />
         <Route
           path="/admin/management/users"
