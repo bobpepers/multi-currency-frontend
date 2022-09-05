@@ -18,7 +18,6 @@ import {
   Typography,
 } from '@mui/material';
 import {
-  useNavigate,
   Link,
 } from 'react-router-dom';
 import BanDialog from './BanDialog';
@@ -244,7 +243,6 @@ const UsersTable = function (props) {
   const [orderBy, setOrderBy] = useState('id');
   const [selected, setSelected] = useState([]);
   const [dense, setDense] = useState(false);
-  const navigate = useNavigate();
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -339,7 +337,7 @@ const UsersTable = function (props) {
                           padding="none"
                         >
                           <Link
-                            to={`/management/user/${row.id}`}
+                            to={`/admin/management/user/${row.id}`}
                           >
                             {row.id}
                           </Link>
@@ -348,7 +346,7 @@ const UsersTable = function (props) {
                           align="right"
                         >
                           <Link
-                            to={`/management/user/${row.id}`}
+                            to={`/admin/management/user/${row.id}`}
                           >
                             {row.username}
                           </Link>
@@ -545,7 +543,7 @@ const UsersTable = function (props) {
                           padding="none"
                         >
                           <Link
-                            to={`/management/user/${row.id}`}
+                            to={`/admin/management/user/${row.id}`}
                           >
                             {row.id}
                           </Link>
@@ -554,7 +552,7 @@ const UsersTable = function (props) {
                           align="right"
                         >
                           <Link
-                            to={`/management/user/${row.id}`}
+                            to={`/admin/management/user/${row.id}`}
                           >
                             {row.username}
                           </Link>

@@ -127,7 +127,7 @@ const RoutesX = function (props) {
           element={<CoinPriceSourcesView />}
         />
         <Route
-          path="/admin/user/:userId"
+          path="/admin/management/user/:userId"
           element={<UserView />}
         />
         <Route
