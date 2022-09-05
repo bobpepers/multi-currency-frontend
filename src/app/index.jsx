@@ -135,7 +135,6 @@ function AppContainer(props) {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth,
-    user: state.user.data,
   };
 }
 

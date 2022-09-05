@@ -35,6 +35,7 @@ import userInfo from './admin/userInfo';
 import withdrawalAddresses from './admin/withdrawalAddresses';
 import withdrawalAddress from './admin/withdrawalAddress';
 import users from './admin/users';
+import blockchains from './admin/blockchains';
 
 const store = configureStore({
   reducer: {
@@ -44,6 +45,7 @@ const store = configureStore({
     theme,
     alert,
     user,
+    blockchains,
     coins,
     priceSources,
     coinPriceSources,
