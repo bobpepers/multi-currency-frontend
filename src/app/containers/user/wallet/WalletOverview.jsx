@@ -1,10 +1,6 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React from 'react';
 import {
   connect,
-  useDispatch,
 } from 'react-redux';
 import {
   Grid,
@@ -15,28 +11,8 @@ import WalletRow from '../../../components/WalletRow';
 
 const WalletOverviewContainer = function (props) {
   const {
-    authenticated,
     user,
   } = props;
-  // const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (authenticated) {
-      // dispatch(fetchBotSettings());
-    }
-  }, [
-    authenticated,
-  ]);
-
-  // useEffect(() => { }, [
-  //   user,
-  // ]);
-
-  // useEffect(() => {
-  //   console.log(user.wallets);
-  // }, [
-  //   user.wallets,
-  // ]);
 
   return (
     <Grid container>
@@ -61,7 +37,6 @@ const WalletOverviewContainer = function (props) {
 }
 
 WalletOverviewContainer.propTypes = {
-  authenticated: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     wallets: PropTypes.arrayOf(PropTypes.shape({})),
   }).isRequired,
@@ -69,9 +44,8 @@ WalletOverviewContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
     user: state.user.data,
   };
 }
 
-export default connect(mapStateToProps, null)(WalletOverviewContainer);
+export default connect(mapStateToProps)(WalletOverviewContainer);

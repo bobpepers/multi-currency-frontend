@@ -13,8 +13,10 @@ import { createRoot } from 'react-dom/client';
 import {
   Provider,
   useDispatch,
+  connect,
 } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+
 import { SnackbarProvider } from 'notistack';
 import Button from '@mui/material/Button';
 import { i18n } from '@lingui/core';
@@ -104,9 +106,19 @@ function AppWrapper() {
   );
 }
 
-function App() {
+function AppContainer(props) {
+  const {
+    authenticated,
+  } = props;
   const dispatch = useDispatch();
-  useEffect(() => dispatch(fetchUserData()), []);
+  useEffect(() => {
+    if (authenticated.authenticated && !authenticated.tfaLocked) {
+      dispatch(fetchUserData());
+    }
+  }, [
+    authenticated,
+  ]);
+
   return (
     <>
       <Notifier />
@@ -119,6 +131,15 @@ function App() {
     </>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth,
+    user: state.user.data,
+  };
+}
+
+const App = connect(mapStateToProps)(AppContainer);
 
 createRoot(
   document.getElementById('root'),

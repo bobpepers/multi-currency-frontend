@@ -68,7 +68,7 @@ export function signinUser(
         type: AUTH_USER,
         payload: response.data,
       });
-      navigate('/wallet')
+      navigate('/wallet');
     })
       .catch((error) => {
         notistackErrorAdd(
