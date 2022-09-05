@@ -15,8 +15,12 @@ import {
   TableSortLabel,
   FormControlLabel,
   Switch,
+  Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {
+  useNavigate,
+  Link,
+} from 'react-router-dom';
 import BanDialog from './BanDialog';
 
 const PREFIX = 'UsersTable';
@@ -58,22 +62,25 @@ const headCells = [
     id: 'dbId', numeric: false, disablePadding: true, label: 'id',
   },
   {
-    id: 'userId', numeric: true, disablePadding: false, label: 'user id',
-  },
-  {
     id: 'username', numeric: true, disablePadding: false, label: 'username',
   },
   {
-    id: 'available', numeric: true, disablePadding: false, label: 'available',
+    id: 'runes', numeric: true, disablePadding: false, label: 'RUNES',
   },
   {
-    id: 'locked', numeric: true, disablePadding: false, label: 'locked',
+    id: 'arrr', numeric: true, disablePadding: false, label: 'ARRR',
   },
   {
-    id: 'total', numeric: true, disablePadding: false, label: 'total',
+    id: 'tokel', numeric: true, disablePadding: false, label: 'TKL',
   },
   {
-    id: 'lastActive', numeric: true, disablePadding: false, label: 'last active',
+    id: 'xlm', numeric: true, disablePadding: false, label: 'XLM',
+  },
+  {
+    id: 'dxlm', numeric: true, disablePadding: false, label: 'DXLM',
+  },
+  {
+    id: 'lastseen', numeric: true, disablePadding: false, label: 'Last Seen',
   },
   {
     id: 'banned', numeric: true, disablePadding: false, label: 'banned',
@@ -82,21 +89,33 @@ const headCells = [
 
 function createData(
   id,
-  userId,
   username,
-  available,
-  locked,
-  total,
+  runesWalletAvailable,
+  runesWalletLocked,
+  arrrWalletAvailable,
+  arrrWalletLocked,
+  tklWalletAvailable,
+  tklWalletLocked,
+  xlmWalletAvailable,
+  xlmWalletLocked,
+  dxlmWalletAvailable,
+  dxlmWalletLocked,
   lastActive,
   banned,
 ) {
   return {
     id,
-    userId,
     username,
-    available,
-    locked,
-    total,
+    runesWalletAvailable,
+    runesWalletLocked,
+    arrrWalletAvailable,
+    arrrWalletLocked,
+    tklWalletAvailable,
+    tklWalletLocked,
+    xlmWalletAvailable,
+    xlmWalletLocked,
+    dxlmWalletAvailable,
+    dxlmWalletLocked,
     lastActive,
     banned,
   };
@@ -172,7 +191,7 @@ const EnhancedTableHead = function (props) {
 }
 
 EnhancedTableHead.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.shape({}).isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
@@ -196,14 +215,25 @@ const UsersTable = function (props) {
   const rows = [];
 
   users.forEach((item) => {
+    const runesWallet = item.wallets.find((x) => x.coin.ticker === 'RUNES')
+    const arrrWallet = item.wallets.find((x) => x.coin.ticker === 'ARRR')
+    const tklWallet = item.wallets.find((x) => x.coin.ticker === 'TKL')
+    const xlmWallet = item.wallets.find((x) => x.coin.ticker === 'XLM')
+    const dxlmWallet = item.wallets.find((x) => x.coin.ticker === 'DXLM')
     rows.push(
       createData(
         item.id,
-        item.user_id,
         item.username,
-        item.wallet ? item.wallet.available : 0,
-        item.wallet ? item.wallet.locked : 0,
-        item.wallet ? item.wallet.available + item.wallet.locked : 0,
+        runesWallet ? runesWallet.available : 0,
+        runesWallet ? runesWallet.locked : 0,
+        arrrWallet ? arrrWallet.available : 0,
+        arrrWallet ? arrrWallet.locked : 0,
+        tklWallet ? tklWallet.available : 0,
+        tklWallet ? tklWallet.locked : 0,
+        xlmWallet ? xlmWallet.available : 0,
+        xlmWallet ? xlmWallet.locked : 0,
+        dxlmWallet ? dxlmWallet.available : 0,
+        dxlmWallet ? dxlmWallet.locked : 0,
         item.lastSeen,
         item.banned,
       ),
@@ -296,51 +326,186 @@ const UsersTable = function (props) {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.name)}
+                        onClick={(event) => handleClick(event, row.id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={row.name}
+                        key={row.id}
                         selected={isItemSelected}
                       >
-                        <TableCell component="th" id={labelId} scope="row" padding="none">
-                          <p>
-                            <Button
-                              onClick={() => navigate(`/management/user/${row.id}`)}
-                            >
-                              {row.id}
-                            </Button>
-                          </p>
-
-                        </TableCell>
-                        <TableCell align="right">
-                          <Button
-                            onClick={() => navigate(`/management/user/${row.id}`)}
+                        <TableCell
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          <Link
+                            to={`/management/user/${row.id}`}
                           >
-                            {row.userId}
-                          </Button>
-
+                            {row.id}
+                          </Link>
                         </TableCell>
-                        <TableCell align="right">
-                          <Button
-                            onClick={() => navigate(`/management/user/${row.id}`)}
+                        <TableCell
+                          align="right"
+                        >
+                          <Link
+                            to={`/management/user/${row.id}`}
                           >
                             {row.username}
-                          </Button>
+                          </Link>
                         </TableCell>
-                        <TableCell align="right">{row.available / 1e8}</TableCell>
-                        <TableCell align="right">{row.locked / 1e8}</TableCell>
-                        <TableCell align="right">{row.total / 1e8}</TableCell>
-
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.runesWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.runesWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.runesWalletAvailable) + Number(row.runesWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.arrrWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.arrrWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.arrrWalletAvailable) + Number(row.arrrWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.tklWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.tklWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.tklWalletAvailable) + Number(row.tklWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.xlmWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.xlmWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.xlmWalletAvailable) + Number(row.xlmWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.dxlmWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.dxlmWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.dxlmWalletAvailable) + Number(row.dxlmWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
                           {row.lastActive}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                        >
                           {!row.banned ? (
                             <BanDialog
                               name={row.channelName}
                               confirmBan={banUser}
-                              otherId={row.user_id}
+                              otherId={row.username}
                               id={row.id}
                             />
                           ) : (
@@ -373,44 +538,180 @@ const UsersTable = function (props) {
                         key={row.name}
                         selected={isItemSelected}
                       >
-                        <TableCell component="th" id={labelId} scope="row" padding="none">
-                          <p>
-                            <Button
-                              onClick={() => navigate(`/management/user/${row.id}`)}
-                            >
-                              {row.id}
-                            </Button>
-                          </p>
-
-                        </TableCell>
-                        <TableCell align="right">
-                          <Button
-                            onClick={() => navigate(`/management/user/${row.id}`)}
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          <Link
+                            to={`/management/user/${row.id}`}
                           >
-                            {row.userId}
-                          </Button>
-
+                            {row.id}
+                          </Link>
                         </TableCell>
-                        <TableCell align="right">
-                          <Button
-                            onClick={() => navigate(`/management/user/${row.id}`)}
+                        <TableCell
+                          align="right"
+                        >
+                          <Link
+                            to={`/management/user/${row.id}`}
                           >
                             {row.username}
-                          </Button>
+                          </Link>
                         </TableCell>
-                        <TableCell align="right">{row.available / 1e8}</TableCell>
-                        <TableCell align="right">{row.locked / 1e8}</TableCell>
-                        <TableCell align="right">{row.total / 1e8}</TableCell>
-
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.runesWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.runesWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.runesWalletAvailable) + Number(row.runesWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.arrrWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.arrrWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.arrrWalletAvailable) + Number(row.arrrWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.tklWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.tklWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.tklWalletAvailable) + Number(row.tklWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.xlmWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.xlmWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.xlmWalletAvailable) + Number(row.xlmWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            available:
+                            {' '}
+                            {row.dxlmWalletAvailable / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            locked:
+                            {' '}
+                            {row.dxlmWalletLocked / 1e8}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            gutterBottom
+                          >
+                            total:
+                            {' '}
+                            {(Number(row.dxlmWalletAvailable) + Number(row.dxlmWalletLocked)) / 1e8}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                        >
                           {row.lastActive}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell
+                          align="right"
+                        >
                           {!row.banned ? (
                             <BanDialog
                               name={row.channelName}
                               confirmBan={banUser}
-                              otherId={row.user_id}
+                              otherId={row.username}
                               id={row.id}
                             />
                           ) : (
@@ -447,5 +748,13 @@ const UsersTable = function (props) {
     </Root>
   );
 }
+
+UsersTable.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+UsersTable.defaultProps = {
+  users: null,
+};
 
 export default UsersTable;

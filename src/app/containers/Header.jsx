@@ -199,7 +199,7 @@ function Header(
                     </Link>
                     <Link
                       className="nav-link"
-                      to="/admin/users"
+                      to="/admin/management/users"
                     >
                       <MenuItem onClick={handleCloseAdmin}>
                         Users

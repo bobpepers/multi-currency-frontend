@@ -12,9 +12,10 @@ import {
   CircularProgress,
   TextField,
   MenuItem,
+  Typography,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { withRouter } from '../../hooks/withRouter';
-
 import {
   fetchUsersAction,
   banUserAction,
@@ -46,7 +47,6 @@ const Root = styled('div')((
 
 const AdminUsersView = function (props) {
   const {
-    auth,
     users,
   } = props;
   const dispatch = useDispatch();
@@ -54,17 +54,13 @@ const AdminUsersView = function (props) {
   const [id, setId] = useState('');
   const [username, setUsername] = useState('');
   const [banned, setBanned] = useState('All');
-  const [platform, setPlatform] = useState('All');
-  const [userId, setUserId] = useState('');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [rowsPerPage, setRowsPerPage] = useState(50);
 
   useEffect(() => dispatch(
     fetchUsersAction(
       id,
-      userId,
       username,
-      platform,
       banned,
       page * rowsPerPage,
       rowsPerPage,
@@ -73,9 +69,6 @@ const AdminUsersView = function (props) {
     id,
     username,
     banned,
-    platform,
-    userId,
-    auth,
     page,
     rowsPerPage,
   ]);
@@ -91,14 +84,10 @@ const AdminUsersView = function (props) {
   const handleChangeBanned = (event) => {
     setBanned(event.target.value);
   };
-  const handleChangePlatform = (event) => {
-    setPlatform(event.target.value);
-  };
-  const handleChangeUserId = (event) => {
-    setUserId(event.target.value);
-  };
 
-  useEffect(() => { }, [users]);
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
 
   const banUser = (
     banId,
@@ -109,13 +98,35 @@ const AdminUsersView = function (props) {
 
   return (
     <Root className="height100 content">
-      <Grid container>
-        <Grid item xs={12}>
-          <h3>Users</h3>
+      <Grid
+        container
+      >
+        <Grid
+          item
+          xs={12}
+        >
+          <Typography
+            variant="h6"
+            gutterBottom
+          >
+            Users
+          </Typography>
         </Grid>
-        <Grid container item xs={12}>
-          <Grid container item xs={12} md={4}>
-            <FormControl variant="outlined" className={classes.formControl}>
+        <Grid
+          container
+          item
+          xs={12}
+        >
+          <Grid
+            container
+            item
+            xs={12}
+            md={4}
+          >
+            <FormControl
+              variant="outlined"
+              className={classes.formControl}
+            >
               <TextField
                 name="id"
                 value={id}
@@ -125,20 +136,16 @@ const AdminUsersView = function (props) {
               />
             </FormControl>
           </Grid>
-          <Grid container item xs={12} md={4}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <TextField
-                name="userId"
-                value={userId}
-                label="user id"
-                variant="filled"
-                onChange={handleChangeUserId}
-              />
-            </FormControl>
-          </Grid>
-
-          <Grid container item xs={12} md={4}>
-            <FormControl variant="outlined" className={classes.formControl}>
+          <Grid
+            container
+            item
+            xs={12}
+            md={4}
+          >
+            <FormControl
+              variant="outlined"
+              className={classes.formControl}
+            >
               <TextField
                 name="username"
                 value={username}
@@ -148,34 +155,24 @@ const AdminUsersView = function (props) {
               />
             </FormControl>
           </Grid>
-          <Grid container item xs={12} md={6}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">Platform</InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={platform}
-                onChange={handleChangePlatform}
-                label="Platform"
+          <Grid
+            container
+            item
+            xs={12}
+            md={4}
+          >
+            <FormControl
+              variant="outlined"
+              className={classes.formControl}
+            >
+              <InputLabel
+                id="select-banned-label"
               >
-                <MenuItem value="all">
-                  <em>All</em>
-                </MenuItem>
-                <MenuItem value="telegram">
-                  Telegram
-                </MenuItem>
-                <MenuItem value="discord">
-                  Discord
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid container item xs={12} md={6}>
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">Banned</InputLabel>
+                Banned
+              </InputLabel>
               <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
+                labelId="select-banned-label"
+                id="select-banned-label"
                 value={banned}
                 onChange={handleChangeBanned}
                 label="Banned"
@@ -193,7 +190,10 @@ const AdminUsersView = function (props) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+        >
           {
             users && users.isFetching
               ? (<CircularProgress />)
@@ -220,8 +220,15 @@ const AdminUsersView = function (props) {
   );
 }
 
+AdminUsersView.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+AdminUsersView.defaultProps = {
+  users: null,
+};
+
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   users: state.users,
 })
 

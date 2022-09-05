@@ -9,9 +9,7 @@ import { notistackErrorAdd } from '../helpers/notistackError';
 
 export function fetchUsersAction(
   id,
-  userId,
   username,
-  platform,
   banned,
   offset,
   limit,
@@ -22,9 +20,7 @@ export function fetchUsersAction(
     });
     axios.post(`${window.myConfig.apiUrl}/admin/management/users`, {
       id,
-      userId,
       username,
-      platform,
       banned,
       offset,
       limit,

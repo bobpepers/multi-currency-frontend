@@ -114,7 +114,7 @@ const RoutesX = function (props) {
           element={<AdminWalletView />}
         />
         <Route
-          path="/admin/users"
+          path="/admin/management/users"
           element={<AdminUsersView />}
         />
         <Route
