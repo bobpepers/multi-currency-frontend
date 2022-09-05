@@ -195,7 +195,7 @@ const AdminUsersView = function (props) {
           xs={12}
         >
           {
-            users && users.isFetching
+            users && users.isLoading
               ? (<CircularProgress />)
               : (
                 <UsersTable

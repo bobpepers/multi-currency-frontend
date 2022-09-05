@@ -109,7 +109,7 @@ const WithdrawalAddressesView = function (props) {
         </Grid>
         <Grid item xs={12}>
           {
-            withdrawalAddresses && withdrawalAddresses.isFetching
+            withdrawalAddresses && withdrawalAddresses.isLoading
               ? (<CircularProgress />)
               : (
                 <WithdrawalAddressesTable

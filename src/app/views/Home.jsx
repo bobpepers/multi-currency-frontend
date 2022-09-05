@@ -272,7 +272,7 @@ const Home = function (props) {
           xs={4}
         >
           {
-            patchDeposits.isFetching ? (
+            patchDeposits.isLoading ? (
               <CircularProgress />
             ) : (
               <Button
@@ -291,7 +291,7 @@ const Home = function (props) {
           xs={4}
         >
           {
-            blockNumber.isFetching ? (
+            blockNumber.isLoading ? (
               <CircularProgress />
             ) : (
               <Button
@@ -311,7 +311,7 @@ const Home = function (props) {
           xs={4}
         >
           {
-            startSync.isFetching ? (
+            startSync.isLoading ? (
               <CircularProgress />
             ) : (
               <Button

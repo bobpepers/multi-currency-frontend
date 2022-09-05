@@ -5,7 +5,7 @@ import {
 } from '../../actions/types/user/index';
 
 const initialState = {
-  isFetching: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   error: null,
 };
 
@@ -14,21 +14,21 @@ export default (state = initialState, action) => {
     case START_SYNCBLOCKS_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         error: null,
       };
     case START_SYNCBLOCKS_SUCCESS:
       return {
         ...state,
         data: action.payload,
-        isFetching: false,
+        isLoading: false,
       };
     case START_SYNCBLOCKS_FAIL:
       console.log('Error: ', action.error);
       return {
         ...state,
         error: action.error,
-        isFetching: false,
+        isLoading: false,
       };
     default:
       return state;

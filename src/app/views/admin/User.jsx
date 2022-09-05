@@ -40,7 +40,7 @@ const classes = {
   card: `${PREFIX}-card`,
   bullet: `${PREFIX}-bullet`,
   title: `${PREFIX}-title`,
-  pos: `${PREFIX}-pos`
+  pos: `${PREFIX}-pos`,
 };
 
 const Root = styled('div')({
@@ -538,7 +538,7 @@ const UserView = function (props) {
         <Grid item xs={12}>
           {
             deposits
-              && deposits.isFetching
+              && deposits.isLoading
               ? (<CircularProgress />)
               : (
                 <DepositsTable
@@ -562,7 +562,7 @@ const UserView = function (props) {
         <Grid item xs={12}>
           {
             withdrawals
-              && withdrawals.isFetching
+              && withdrawals.isLoading
               ? (<CircularProgress />)
               : (
                 <WithdrawalsTable

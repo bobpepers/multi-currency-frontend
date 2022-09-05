@@ -5,7 +5,7 @@ import {
 } from '../../actions/types/user/index';
 
 const initialState = {
-  isFetching: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   error: null,
 };
 
@@ -14,21 +14,21 @@ export default (state = initialState, action) => {
     case FETCH_NODESTATUS_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         error: null,
       };
     case FETCH_NODESTATUS_SUCCESS:
       return {
         ...state,
         data: action.payload,
-        isFetching: false,
+        isLoading: false,
       };
     case FETCH_NODESTATUS_FAIL:
       console.log('Error: ', action.error);
       return {
         ...state,
         error: action.error,
-        isFetching: false,
+        isLoading: false,
       };
     default:
       return state;

@@ -19,7 +19,7 @@ export function idleDisabletfa() {
       type: DISABLE_2FA_IDLE,
       payload: {
         data: 0,
-        isFetching: false,
+        isLoading: false,
         phase: 0,
         error: null,
       },
@@ -33,7 +33,7 @@ export function idleEnabletfa() {
       type: ENABLE_2FA_IDLE,
       payload: {
         data: 0,
-        isFetching: false,
+        isLoading: false,
         phase: 0,
         error: null,
       },

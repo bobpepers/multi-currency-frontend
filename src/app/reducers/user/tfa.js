@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   data: 0,
-  isFetching: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   phase: 0,
   error: null,
 };
@@ -22,14 +22,14 @@ export default (state = initialState, action) => {
     case ENABLE_2FA_IDLE:
       return {
         data: 0,
-        isFetching: false,
+        isLoading: false,
         phase: 0,
         error: null,
       };
     case ENABLE_2FA_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         phase: 0,
         error: null,
       };
@@ -38,27 +38,27 @@ export default (state = initialState, action) => {
         ...state,
         data: action.payload.tfa,
         phase: 1,
-        isFetching: false,
+        isLoading: false,
       };
     case ENABLE_2FA_FAIL:
       return {
         ...state,
         error: action.error,
         phase: 2,
-        isFetching: false,
+        isLoading: false,
       };
 
     case DISABLE_2FA_IDLE:
       return {
         data: 0,
-        isFetching: false,
+        isLoading: false,
         phase: 0,
         error: null,
       };
     case DISABLE_2FA_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         phase: 0,
         error: null,
       };
@@ -67,14 +67,14 @@ export default (state = initialState, action) => {
         ...state,
         data: action.payload.tfa,
         phase: 1,
-        isFetching: false,
+        isLoading: false,
       };
     case DISABLE_2FA_FAIL:
       return {
         ...state,
         error: action.error,
         phase: 2,
-        isFetching: false,
+        isLoading: false,
       };
     default:
       return state;

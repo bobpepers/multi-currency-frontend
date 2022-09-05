@@ -178,7 +178,7 @@ const WithdrawalsView = function (props) {
         <Grid item xs={12}>
           {
             withdrawals
-              && withdrawals.isFetching
+              && withdrawals.isLoading
               ? (<CircularProgress />)
               : (
                 <WithdrawalsTable

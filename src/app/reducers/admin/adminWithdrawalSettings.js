@@ -38,7 +38,7 @@ export default (state = initialState, action) => {
             ? { ...action.payload }
             : setting),
         ),
-        isFetching: false,
+        isLoading: false,
         error: null,
       };
     default:

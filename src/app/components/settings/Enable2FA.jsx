@@ -167,7 +167,7 @@ function Set2FA(props) {
                       </div>
                     )}
 
-                {tfa.isFetching
+                {tfa.isLoading
                   ? <CircularProgress disableShrink />
                   : (
                     <Button

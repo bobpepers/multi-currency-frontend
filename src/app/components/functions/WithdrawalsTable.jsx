@@ -361,8 +361,8 @@ const WithdrawalsTable = function (props) {
                               row.phase === 'review'
                             // || row.phase === 'failed'
                             )
-                            && !acceptWithdrawal.isFetching
-                            && !declineWithdrawal.isFetching
+                            && !acceptWithdrawal.isLoading
+                            && !declineWithdrawal.isLoading
                               ? (
                                 <>
                                   <Button
@@ -437,8 +437,8 @@ const WithdrawalsTable = function (props) {
                               row.phase === 'review'
                             // || row.phase === 'failed'
                             )
-                            && !acceptWithdrawal.isFetching
-                            && !declineWithdrawal.isFetching
+                            && !acceptWithdrawal.isLoading
+                            && !declineWithdrawal.isLoading
                               ? (
                                 <>
                                   <Button

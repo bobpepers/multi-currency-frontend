@@ -167,7 +167,7 @@ const DepositsView = function (props) {
         <Grid item xs={12}>
           {
             deposits
-              && deposits.isFetching
+              && deposits.isLoading
               ? (<CircularProgress />)
               : (
                 <DepositsTable

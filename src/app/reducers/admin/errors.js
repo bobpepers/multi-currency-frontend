@@ -5,7 +5,7 @@ import {
 } from '../../actions/types/user/index';
 
 const initialState = {
-  isFetching: false, // Default to fetching..
+  isLoading: false, // Default to fetching..
   error: null,
 };
 
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
     case FETCH_ERRORS_BEGIN:
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         error: null,
       };
     case FETCH_ERRORS_SUCCESS:
@@ -22,13 +22,13 @@ export default (state = initialState, action) => {
         ...state,
         data: action.payload.result,
         count: action.payload.count,
-        isFetching: false,
+        isLoading: false,
       };
     case FETCH_ERRORS_FAIL:
       return {
         ...state,
         error: action.error,
-        isFetching: false,
+        isLoading: false,
       };
     default:
       return state;

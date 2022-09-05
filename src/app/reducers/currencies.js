@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         data: state.data.filter((item) => item.id !== action.payload.id),
-        isFetching: false,
+        isLoading: false,
       };
     case UPDATE_PRICECURRENCIES:
       return {

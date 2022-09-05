@@ -133,7 +133,7 @@ const ActivityContainer = function (props) {
 
       <Grid item xs={12}>
         {
-          activity && activity.isFetching
+          activity && activity.isLoading
             ? (<CircularProgress />)
             : (
               <ActivityComponent
