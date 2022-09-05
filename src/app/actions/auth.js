@@ -47,7 +47,10 @@ export function signupUser(
  * Sign in
  */
 
-export function signinUser(props) {
+export function signinUser(
+  props,
+  navigate,
+) {
   const {
     email,
     password,
@@ -65,7 +68,7 @@ export function signinUser(props) {
         type: AUTH_USER,
         payload: response.data,
       });
-      window.location.href = '/wallet';
+      navigate('/wallet')
     })
       .catch((error) => {
         notistackErrorAdd(

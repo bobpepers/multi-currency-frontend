@@ -5,7 +5,10 @@ import {
   Form,
   Field,
 } from 'react-final-form';
-import { Link } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom';
 import {
   connect,
   useDispatch,
@@ -25,6 +28,7 @@ function Signin(props) {
     errorMessage,
   } = props;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [stateValues, setStateValues] = useState({
     password: '',
@@ -64,7 +68,7 @@ function Signin(props) {
           <h2 className="text-center">Sign in</h2>
           <Form
             onSubmit={async (values) => {
-              await dispatch(signinUser(values));
+              await dispatch(signinUser(values, navigate));
             }}
             validate={(values) => {
               const errors = {};
