@@ -65,7 +65,7 @@ export function signinUser(props) {
         type: AUTH_USER,
         payload: response.data,
       });
-      window.location.href = '/';
+      window.location.href = '/wallet';
     })
       .catch((error) => {
         notistackErrorAdd(

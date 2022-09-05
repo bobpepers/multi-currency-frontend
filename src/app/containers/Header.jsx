@@ -323,7 +323,7 @@ function Header(
           onClose={handleMenuClose}
         >
           {
-            authenticated
+            authenticated && authenticated.authenticated
               ? (
                 <div>
                   <MenuItem onClick={handleMenuClose}>

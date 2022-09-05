@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import {
   Form,
   Field,
 } from 'react-final-form';
-import { connect, useDispatch } from 'react-redux';
+import {
+  connect,
+  useDispatch,
+} from 'react-redux';
 import {
   Button,
   Grid,
@@ -14,10 +19,19 @@ import NumberField from '../../../components/form/NumberField';
 
 function LoginTFA(props) {
   const {
+    authenticated,
     errorMessage,
   } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!authenticated.authenticated) {
+      navigate('/')
+    }
+  }, [
+    authenticated,
+  ]);
 
   return (
     <div className="form-container content">
@@ -100,6 +114,7 @@ function LoginTFA(props) {
 
 const mapStateToProps = (state) => ({
   errorMessage: state.auth.error,
+  authenticated: state.auth,
 })
 
-export default connect(mapStateToProps, null)(LoginTFA);
+export default connect(mapStateToProps)(LoginTFA);
