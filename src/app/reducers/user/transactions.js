@@ -48,6 +48,7 @@ export default function userReducer(
             ? {
               ...transaction,
               confirmations: action.payload.confirmations,
+              txid: action.payload.txid,
               phase: action.payload.phase,
             }
             : transaction),

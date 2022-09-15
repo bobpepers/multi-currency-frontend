@@ -3,7 +3,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  FormHelperText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
